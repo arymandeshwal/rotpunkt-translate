@@ -1,0 +1,865 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Rotpunkt Translate",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/health": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Health",
+        "operationId": "health_api_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "A dependency is unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/languages": {
+      "get": {
+        "tags": [
+          "glossary"
+        ],
+        "summary": "List Languages",
+        "operationId": "list_languages_api_languages_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/LanguageOut"
+                  },
+                  "type": "array",
+                  "title": "Response List Languages Api Languages Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/glossary": {
+      "get": {
+        "tags": [
+          "glossary"
+        ],
+        "summary": "List Glossary Entries",
+        "operationId": "list_glossary_entries_api_glossary_get",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 255
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Search terms in all languages",
+              "title": "Q"
+            },
+            "description": "Search terms in all languages"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/GlossaryCategory"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Category"
+            }
+          },
+          {
+            "name": "do_not_translate",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Do Not Translate"
+            }
+          },
+          {
+            "name": "missing",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "de",
+                    "en",
+                    "fr",
+                    "nl",
+                    "da",
+                    "nb",
+                    "es"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only entries without a term in this language",
+              "title": "Missing"
+            },
+            "description": "Only entries without a term in this language"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "de",
+                "en",
+                "fr",
+                "nl",
+                "da",
+                "nb",
+                "es",
+                "created_at",
+                "updated_at"
+              ],
+              "type": "string",
+              "default": "de",
+              "title": "Sort"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "default": "asc",
+              "title": "Order"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 50,
+              "title": "Page Size"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GlossaryPage"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "glossary"
+        ],
+        "summary": "Create Glossary Entry",
+        "operationId": "create_glossary_entry_api_glossary_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GlossaryEntryCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GlossaryEntryOut"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A term already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DuplicateTermsResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/glossary/{entry_id}": {
+      "get": {
+        "tags": [
+          "glossary"
+        ],
+        "summary": "Get Glossary Entry",
+        "operationId": "get_glossary_entry_api_glossary__entry_id__get",
+        "parameters": [
+          {
+            "name": "entry_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Entry Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GlossaryEntryOut"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Glossary entry not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "glossary"
+        ],
+        "summary": "Update Glossary Entry",
+        "operationId": "update_glossary_entry_api_glossary__entry_id__patch",
+        "parameters": [
+          {
+            "name": "entry_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Entry Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GlossaryEntryUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GlossaryEntryOut"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Glossary entry not found"
+          },
+          "409": {
+            "description": "A term already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DuplicateTermsResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "glossary"
+        ],
+        "summary": "Delete Glossary Entry",
+        "operationId": "delete_glossary_entry_api_glossary__entry_id__delete",
+        "parameters": [
+          {
+            "name": "entry_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Entry Id"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "404": {
+            "description": "Glossary entry not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DuplicateTermsDetail": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "conflicts": {
+            "items": {
+              "$ref": "#/components/schemas/TermConflict"
+            },
+            "type": "array",
+            "title": "Conflicts"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message",
+          "conflicts"
+        ],
+        "title": "DuplicateTermsDetail"
+      },
+      "DuplicateTermsResponse": {
+        "properties": {
+          "detail": {
+            "$ref": "#/components/schemas/DuplicateTermsDetail"
+          }
+        },
+        "type": "object",
+        "required": [
+          "detail"
+        ],
+        "title": "DuplicateTermsResponse"
+      },
+      "GlossaryCategory": {
+        "type": "string",
+        "enum": [
+          "kitchen_term",
+          "product_name",
+          "general"
+        ],
+        "title": "GlossaryCategory"
+      },
+      "GlossaryEntryCreate": {
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/GlossaryCategory",
+            "default": "general"
+          },
+          "do_not_translate": {
+            "type": "boolean",
+            "title": "Do Not Translate",
+            "default": false
+          },
+          "case_sensitive": {
+            "type": "boolean",
+            "title": "Case Sensitive",
+            "default": false
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "terms": {
+            "items": {
+              "$ref": "#/components/schemas/TermIn"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Terms"
+          }
+        },
+        "type": "object",
+        "required": [
+          "terms"
+        ],
+        "title": "GlossaryEntryCreate"
+      },
+      "GlossaryEntryOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "category": {
+            "$ref": "#/components/schemas/GlossaryCategory"
+          },
+          "do_not_translate": {
+            "type": "boolean",
+            "title": "Do Not Translate"
+          },
+          "case_sensitive": {
+            "type": "boolean",
+            "title": "Case Sensitive"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "terms": {
+            "items": {
+              "$ref": "#/components/schemas/TermOut"
+            },
+            "type": "array",
+            "title": "Terms"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "category",
+          "do_not_translate",
+          "case_sensitive",
+          "description",
+          "terms",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "GlossaryEntryOut"
+      },
+      "GlossaryEntryUpdate": {
+        "properties": {
+          "category": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GlossaryCategory"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "do_not_translate": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Do Not Translate"
+          },
+          "case_sensitive": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Case Sensitive"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "terms": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/TermIn"
+                },
+                "type": "array",
+                "minItems": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Terms"
+          }
+        },
+        "type": "object",
+        "title": "GlossaryEntryUpdate",
+        "description": "Partial update. `terms`, when given, replaces the entry's full set of terms."
+      },
+      "GlossaryPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/GlossaryEntryOut"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "page",
+          "page_size"
+        ],
+        "title": "GlossaryPage"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "degraded"
+            ],
+            "title": "Status"
+          },
+          "database": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "unavailable"
+            ],
+            "title": "Database"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "database"
+        ],
+        "title": "HealthResponse"
+      },
+      "LanguageOut": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "de",
+              "en",
+              "fr",
+              "nl",
+              "da",
+              "nb",
+              "es"
+            ],
+            "title": "Code"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "name"
+        ],
+        "title": "LanguageOut"
+      },
+      "TermConflict": {
+        "properties": {
+          "language": {
+            "type": "string",
+            "enum": [
+              "de",
+              "en",
+              "fr",
+              "nl",
+              "da",
+              "nb",
+              "es"
+            ],
+            "title": "Language"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "entry_id": {
+            "type": "integer",
+            "title": "Entry Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "language",
+          "text",
+          "entry_id"
+        ],
+        "title": "TermConflict"
+      },
+      "TermIn": {
+        "properties": {
+          "language": {
+            "type": "string",
+            "enum": [
+              "de",
+              "en",
+              "fr",
+              "nl",
+              "da",
+              "nb",
+              "es"
+            ],
+            "title": "Language"
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 255,
+            "title": "Text"
+          }
+        },
+        "type": "object",
+        "required": [
+          "language",
+          "text"
+        ],
+        "title": "TermIn"
+      },
+      "TermOut": {
+        "properties": {
+          "language": {
+            "type": "string",
+            "enum": [
+              "de",
+              "en",
+              "fr",
+              "nl",
+              "da",
+              "nb",
+              "es"
+            ],
+            "title": "Language"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          }
+        },
+        "type": "object",
+        "required": [
+          "language",
+          "text"
+        ],
+        "title": "TermOut"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

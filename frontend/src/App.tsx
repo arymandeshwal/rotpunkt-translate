@@ -3,6 +3,7 @@ import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
 
 import { Layout } from "./components/Layout";
+import { Toaster } from "./components/ui/sonner";
 import { GlossaryPage } from "./pages/GlossaryPage";
 import { ProjectsPage } from "./pages/ProjectsPage";
 
@@ -24,6 +25,7 @@ export function App() {
       <BrowserRouter>
         <AppRoutes />
       </BrowserRouter>
+      <Toaster position="bottom-right" />
     </QueryClientProvider>
   );
 }

@@ -16,7 +16,11 @@ class HealthResponse(BaseModel):
     database: Literal["ok", "unavailable"]
 
 
-@router.get("/health", response_model=HealthResponse)
+@router.get(
+    "/health",
+    response_model=HealthResponse,
+    responses={503: {"model": HealthResponse, "description": "A dependency is unavailable"}},
+)
 async def health(
     response: Response, session: Annotated[AsyncSession, Depends(get_session)]
 ) -> HealthResponse:
