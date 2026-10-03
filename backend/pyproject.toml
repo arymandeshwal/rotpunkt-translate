@@ -8,6 +8,7 @@ dependencies = [
     "asyncpg>=0.31.0",
     "fastapi>=0.142.2",
     "pydantic-settings>=2.15.0",
+    "pymupdf>=1.28.2",
     "sqlalchemy[asyncio]>=2.1.3",
     "uvicorn[standard]>=0.54.0",
 ]
@@ -16,6 +17,7 @@ dependencies = [
 dev = [
     "httpx>=0.28.1",
     "mypy>=2.4.0",
+    "pymupdf-fonts>=1.0.5",
     "pytest>=9.1.1",
     "pytest-asyncio>=1.4.0",
     "ruff>=0.16.10",
@@ -36,6 +38,8 @@ python_version = "3.12"
 strict = true
 plugins = ["pydantic.mypy"]
 exclude = ["alembic/"]
+# PyMuPDF ships without type hints; allow calling it from typed code.
+untyped_calls_exclude = ["pymupdf"]
 
 [[tool.mypy.overrides]]
 module = ["asyncpg"]
