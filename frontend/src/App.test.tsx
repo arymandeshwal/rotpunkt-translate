@@ -3,6 +3,8 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
 import { AppRoutes } from "./App";
+import { baseRoutes, page } from "./test/glossaryFixtures";
+import { mockApi } from "./test/mockApi";
 import { mockFetchJson, renderWithProviders } from "./test/render";
 
 describe("App shell", () => {
@@ -14,12 +16,13 @@ describe("App shell", () => {
   });
 
   it("navigates to the glossary page", async () => {
-    mockFetchJson({ status: "ok", database: "ok" });
+    mockApi({ ...baseRoutes, "GET /api/glossary": { body: page([]) } });
     renderWithProviders(<AppRoutes />);
 
     await userEvent.click(screen.getByRole("link", { name: "Glossary" }));
 
     expect(screen.getByRole("heading", { name: "Glossary" })).toBeInTheDocument();
+    expect(await screen.findByText("The glossary is empty")).toBeInTheDocument();
   });
 });
 

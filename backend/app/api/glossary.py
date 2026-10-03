@@ -59,6 +59,7 @@ async def list_glossary_entries(
     ] = None,
     category: GlossaryCategory | None = None,
     do_not_translate: bool | None = None,
+    case_sensitive: bool | None = None,
     missing: Annotated[
         LanguageCode | None, Query(description="Only entries without a term in this language")
     ] = None,
@@ -68,7 +69,11 @@ async def list_glossary_entries(
     page_size: Annotated[int, Query(ge=1, le=100)] = 50,
 ) -> GlossaryPage:
     filters = service.GlossaryFilters(
-        q=q, category=category, do_not_translate=do_not_translate, missing=missing
+        q=q,
+        category=category,
+        do_not_translate=do_not_translate,
+        case_sensitive=case_sensitive,
+        missing=missing,
     )
     items, total = await service.list_entries(
         session, filters, sort=sort, order=order, page=page, page_size=page_size

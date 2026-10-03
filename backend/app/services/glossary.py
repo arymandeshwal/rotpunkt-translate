@@ -44,6 +44,7 @@ class GlossaryFilters:
     q: str | None = None
     category: GlossaryCategory | None = None
     do_not_translate: bool | None = None
+    case_sensitive: bool | None = None
     missing: LanguageCode | None = None
 
 
@@ -59,6 +60,8 @@ def _apply_filters(stmt: EntrySelect, f: GlossaryFilters) -> EntrySelect:
         stmt = stmt.where(GlossaryEntry.category == f.category)
     if f.do_not_translate is not None:
         stmt = stmt.where(GlossaryEntry.do_not_translate.is_(f.do_not_translate))
+    if f.case_sensitive is not None:
+        stmt = stmt.where(GlossaryEntry.case_sensitive.is_(f.case_sensitive))
     if f.missing is not None:
         # Do-not-translate entries are never "missing" a translation.
         stmt = stmt.where(

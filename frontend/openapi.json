@@ -121,6 +121,22 @@
             }
           },
           {
+            "name": "case_sensitive",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Case Sensitive"
+            }
+          },
+          {
             "name": "missing",
             "in": "query",
             "required": false,

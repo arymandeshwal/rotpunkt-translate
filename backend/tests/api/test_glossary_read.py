@@ -26,7 +26,13 @@ async def sample(db_session: AsyncSession) -> None:
     await add_entry(db_session, {"de": "arbeitsplatte", "en": "worktop"}, category=KITCHEN)
     await add_entry(db_session, {"de": "Spülunterschrank"}, category=KITCHEN)
     await add_entry(db_session, {"de": "Pflegehinweise", "en": "care instructions"})
-    await add_entry(db_session, {"de": "Zerox HPL XT"}, category=PRODUCT, do_not_translate=True)
+    await add_entry(
+        db_session,
+        {"de": "Zerox HPL XT"},
+        category=PRODUCT,
+        do_not_translate=True,
+        case_sensitive=True,
+    )
 
 
 async def list_glossary(client: AsyncClient, **params: Any) -> dict[str, Any]:
@@ -179,6 +185,15 @@ async def test_filter_by_do_not_translate(client: AsyncClient) -> None:
 
     assert first_terms(protected) == ["Zerox HPL XT"]
     assert regular["total"] == 5
+
+
+@pytest.mark.usefixtures("sample")
+async def test_filter_by_case_sensitive(client: AsyncClient) -> None:
+    exact = await list_glossary(client, case_sensitive=True)
+    loose = await list_glossary(client, case_sensitive=False)
+
+    assert first_terms(exact) == ["Zerox HPL XT"]
+    assert loose["total"] == 5
 
 
 @pytest.mark.usefixtures("sample")

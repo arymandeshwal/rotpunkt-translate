@@ -302,6 +302,7 @@ export interface operations {
                 q?: string | null;
                 category?: components["schemas"]["GlossaryCategory"] | null;
                 do_not_translate?: boolean | null;
+                case_sensitive?: boolean | null;
                 /** @description Only entries without a term in this language */
                 missing?: ("de" | "en" | "fr" | "nl" | "da" | "nb" | "es") | null;
                 sort?: "de" | "en" | "fr" | "nl" | "da" | "nb" | "es" | "created_at" | "updated_at";
