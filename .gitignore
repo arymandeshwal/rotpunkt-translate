@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+dist/
+
+# Env & local data
+.env
+*.local
+
+# Third-party sample documents (copyrighted, fetched locally, never committed)
+samples/downloads/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Client specification (not for the public repo)
+/*.pdf
+
