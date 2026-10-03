@@ -14,7 +14,7 @@ _dev_url = make_url(Settings().database_url)
 TEST_DATABASE_URL = with_database(_dev_url, f"{_dev_url.database}_test")
 os.environ["DATABASE_URL"] = render(TEST_DATABASE_URL)
 
-from app.db import engine  # noqa: E402
+from app.db import engine, get_session  # noqa: E402
 from app.main import app  # noqa: E402
 
 
@@ -42,7 +42,13 @@ async def db_session() -> AsyncIterator[AsyncSession]:
 
 
 @pytest.fixture
-async def client() -> AsyncIterator[AsyncClient]:
+async def client(db_session: AsyncSession) -> AsyncIterator[AsyncClient]:
+    """API client whose requests share the test's rolled-back session."""
+
+    async def test_session() -> AsyncIterator[AsyncSession]:
+        yield db_session
+
+    app.dependency_overrides[get_session] = test_session
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as c:
         yield c
     app.dependency_overrides.clear()

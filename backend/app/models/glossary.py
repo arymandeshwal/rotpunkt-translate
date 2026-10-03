@@ -14,7 +14,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db import Base, TimestampMixin
-from app.languages import LANGUAGES
+from app.languages import LANGUAGES, LanguageCode
 
 
 class GlossaryCategory(StrEnum):
@@ -75,7 +75,7 @@ class GlossaryTerm(Base):
     entry_id: Mapped[int] = mapped_column(
         ForeignKey("glossary_entries.id", ondelete="CASCADE"), index=True
     )
-    language: Mapped[str] = mapped_column(String(8))
+    language: Mapped[LanguageCode] = mapped_column(String(8))
     text: Mapped[str] = mapped_column(String(255))
 
     entry: Mapped[GlossaryEntry] = relationship(back_populates="terms")
