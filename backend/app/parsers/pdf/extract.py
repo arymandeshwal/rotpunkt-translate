@@ -14,6 +14,10 @@ EXTRACT_FLAGS = pymupdf.TEXT_PRESERVE_WHITESPACE | pymupdf.TEXT_MEDIABOX_CLIP
 
 BBox = tuple[float, float, float, float]
 
+# Size range (points) of drawn shapes kept as possible checkboxes or bullets.
+MARKER_MIN = 2.0
+MARKER_MAX = 40.0
+
 
 @dataclass
 class TextLine:
@@ -37,6 +41,8 @@ class ExtractedPage:
     width: float
     height: float
     lines: list[TextLine]
+    markers: list[BBox] = field(default_factory=list)
+    """Small drawn shapes (checkboxes, bullet dots) that may mark list items."""
 
 
 @dataclass
@@ -90,8 +96,22 @@ def _extract_page(page: pymupdf.Page) -> ExtractedPage:
                 )
             )
     return ExtractedPage(
-        number=page.number + 1, width=page.rect.width, height=page.rect.height, lines=lines
+        number=page.number + 1,
+        width=page.rect.width,
+        height=page.rect.height,
+        lines=lines,
+        markers=_markers(page),
     )
+
+
+def _markers(page: pymupdf.Page) -> list[BBox]:
+    """Drawn shapes small enough to be a checkbox or bullet; layout decides if they are one."""
+    markers: list[BBox] = []
+    for drawing in page.get_drawings():
+        rect = drawing["rect"]
+        if MARKER_MIN <= rect.width <= MARKER_MAX and MARKER_MIN <= rect.height <= MARKER_MAX:
+            markers.append((rect.x0, rect.y0, rect.x1, rect.y1))
+    return markers
 
 
 def extract(pdf: bytes) -> ExtractedDocument:
