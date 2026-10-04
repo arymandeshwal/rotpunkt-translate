@@ -52,6 +52,17 @@ def test_switch_from_bold_to_regular_starts_a_new_paragraph() -> None:
     assert [s.bold for s in result] == [True, False]
 
 
+def test_language_prefix_starts_a_new_paragraph() -> None:
+    # Drawer flyer captions: one line per language, tightly stacked in the same style.
+    lines = [
+        "DE – Modul für Messer",
+        "EN – Insert for knives",
+        "FR – Module pour couteaux",
+    ]
+
+    assert texts(paragraph(lines, size=7)) == lines
+
+
 def test_font_size_change_starts_a_new_paragraph() -> None:
     items = [Text("Pflegehinweise", y=100, size=20), Text("Basisreinigung mit Wasser.", y=122)]
 
@@ -71,19 +82,25 @@ def test_large_text_is_a_heading() -> None:
     ]
 
 
-def test_short_bold_line_at_body_size_is_a_heading() -> None:
+def test_bold_text_at_body_size_is_not_a_heading() -> None:
+    # In the Rotpunkt samples, short bold lines at body size are closing sentences, URLs and
+    # page numbers far more often than headings, so only font size makes a heading.
     items = [
-        Text("Basic cleaning", y=100, bold=True),
+        Text("We hope you enjoy this product!", y=100, bold=True),
         *paragraph(["Basic cleaning of XT / FX is usually done with hot water."], y=125),
     ]
 
-    assert [s.kind for s in segments(items)] == ["heading", "paragraph"]
+    assert [s.kind for s in segments(items)] == ["paragraph", "paragraph"]
 
 
-def test_bold_sentence_is_not_a_heading() -> None:
-    items = [Text("Wir übernehmen keine Haftung für Schäden.", y=100, bold=True)]
+def test_large_numbers_are_not_headings() -> None:
+    # Catalogue page numbers are printed larger than the body text.
+    body = paragraph(
+        ["Grifflose Küchen? Kein Problem. Entscheiden Sie sich für Ihren Stil."], y=100
+    )
+    result = segments([*body, Text("04", x=40, y=800, size=10)])
 
-    assert [s.kind for s in segments(items)] == ["paragraph"]
+    assert [(s.text, s.kind) for s in result][-1] == ("04", "paragraph")
 
 
 def test_segment_metadata() -> None:
@@ -143,6 +160,20 @@ def test_lines_next_to_checkboxes_are_separate_list_items() -> None:
     assert [(s.kind, s.text) for s in result] == [("list_item", o) for o in options]
 
 
+def test_large_text_next_to_a_drawing_is_not_a_list_item() -> None:
+    # Drawer flyer: the 61 pt title words "take / a look / inside" sit next to decorations.
+    body = paragraph(["Die Drawer Solutions bilden eine optische Einheit."], y=300)
+    items: list[Text | Box] = [Box(20, 60, 50, 90), Text("take", x=60, y=90, size=40), *body]
+
+    assert [s.kind for s in segments(items)] == ["heading", "paragraph"]
+
+
+def test_marker_to_the_right_of_a_line_does_not_make_a_list_item() -> None:
+    items: list[Text | Box] = [Text("Moderne Küchen", x=72, y=100), Box(200, 90, 227, 103)]
+
+    assert [s.kind for s in segments(items)] == ["paragraph"]
+
+
 def test_drawings_far_from_text_do_not_make_list_items() -> None:
     items: list[Text | Box] = [
         Box(20, 90, 40, 105),
@@ -176,6 +207,17 @@ def test_superscript_fragment_is_merged_into_its_line() -> None:
     items = [Text(first, y=100), Text("®", x=end + 0.3, y=96, size=6)]
 
     assert texts(items) == ["Drawer Solutions®"]
+
+
+def test_pieces_with_different_font_sizes_stay_separate() -> None:
+    # HPL cover: a 7 pt language label sits on the same row as the 33 pt title "XTreme".
+    label = "Onderhoudsaanwijzingen"
+    end = 40 + text_width(label, size=7)
+    # 20 pt apart: within the old 1 em (33 pt) merge distance, but far enough that PyMuPDF
+    # itself keeps them as separate lines, as in the real file.
+    items = [Text(label, x=40, y=380, size=7), Text("XTreme", x=end + 20, y=385, size=33)]
+
+    assert sorted(texts(items)) == ["Onderhoudsaanwijzingen", "XTreme"]
 
 
 def test_text_on_the_same_row_in_different_columns_is_not_merged() -> None:

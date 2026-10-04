@@ -12,11 +12,18 @@ UNREADABLE_WARNING = "unreadable_characters"
 
 
 def normalize_text(raw: str) -> tuple[str, set[str]]:
-    """Return the normalized text and any warnings about it.
+    """Normalize extracted text without changing any visible character.
 
     - Unicode NFC, so "u" + combining diaeresis becomes the single character "ü".
     - Invisible format characters (soft hyphen, zero-width space, BOM, ...) are removed.
     - Control characters are removed; tab, newline and carriage return become a space.
+
+    Args:
+        raw: Text exactly as extracted from the PDF.
+
+    Returns:
+        (normalized text, warnings). The warnings contain UNREADABLE_WARNING if the text has
+        characters the PDF font could not map to Unicode (U+FFFD); those are kept.
     """
     text = unicodedata.normalize("NFC", raw)
     kept: list[str] = []

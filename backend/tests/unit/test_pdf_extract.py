@@ -4,7 +4,7 @@ import pytest
 
 from app.parsers.pdf import TextLine, extract
 from app.parsers.pdf.text import UNREADABLE_WARNING
-from tests.pdf_factory import Text, make_pdf
+from tests.pdf_factory import Box, Text, make_pdf, text_width
 
 
 def line_texts(pdf: bytes) -> list[str]:
@@ -83,6 +83,49 @@ def test_unreadable_glyphs_are_flagged() -> None:
 
     assert "�" in line.text
     assert line.warnings == {UNREADABLE_WARNING}
+
+
+def test_mixed_size_line_is_split() -> None:
+    # HPL cover: PyMuPDF puts a 7 pt label and a 33 pt title word on one line, joined by a
+    # 33 pt space span.
+    label = "Onderhoudsaanwijzingen"
+    end = 40 + text_width(label, size=7)
+    pdf = make_pdf([Text(label, x=40, y=380, size=7), Text("XTreme", x=end + 20, y=385, size=33)])
+
+    small, large = extract(pdf).pages[0].lines
+    assert (small.text.strip(), small.font_size) == (label, 7)
+    assert (large.text.strip(), large.font_size) == ("XTreme", 33)
+    assert small.bbox[3] - small.bbox[1] < 12  # the 33 pt space does not inflate the box
+
+
+def test_superscript_stays_on_its_line() -> None:
+    first = "Drawer Solutions"
+    end = 72 + text_width(first)
+
+    pdf = make_pdf([Text(first, y=100), Text("®", x=end + 0.3, y=96, size=6)])
+
+    assert [line.font_size for line in extract(pdf).pages[0].lines] == [11]
+
+
+def test_small_drawn_shapes_are_returned_as_markers() -> None:
+    # Planning checklist: checkboxes are drawn 27 x 13 pt rectangles.
+    page = extract(make_pdf([Box(179, 271, 206, 284), Text("Grifflose Küchen", x=215, y=282)]))
+
+    [marker] = page.pages[0].markers
+    assert marker == pytest.approx((179, 271, 206, 284), abs=1)
+
+
+@pytest.mark.parametrize(
+    "box",
+    [
+        Box(20, 20, 575, 400),  # background panel
+        Box(20, 100, 575, 101),  # thin rule line
+        Box(20, 100, 21, 101),  # speck
+    ],
+    ids=["panel", "rule", "speck"],
+)
+def test_large_or_tiny_shapes_are_not_markers(box: Box) -> None:
+    assert extract(make_pdf([box, Text("Text")])).pages[0].markers == []
 
 
 def test_blank_page_has_no_lines() -> None:
