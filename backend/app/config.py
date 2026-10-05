@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     app_name: str = "Rotpunkt Translate"
     database_url: str = "postgresql+asyncpg://rotpunkt:rotpunkt@localhost:5433/rotpunkt"
     cors_origins: list[str] = ["http://localhost:5173"]
+    upload_dir: str = "storage/uploads"
 
 
 @lru_cache
