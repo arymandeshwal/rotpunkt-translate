@@ -105,10 +105,20 @@ kitchen term / product name / general · "do not translate" entries have exactly
 - Our own glossary matching must cope with "Echtholz fronten" (a space where a soft hyphen was) → step 7.
 
 ### Step 3 – Upload + project ⬜ (next)
+
 Upload a PDF → project created automatically → original file stored → segments stored in
 the database → language detected **per segment** → source language confirmed or changed by hand.
 Segments not in the source language are marked (they will not be translated).
 Includes an end-to-end check of all sample PDFs: upload → database contents vs. the page images.
+
+| Sub-part | Content | Status |
+|---|---|---|
+| 3a | Data model: Project, Document, Page, Segment tables + Alembic migrations | ⬜ |
+| 3b | Language detection: `lingua-py` integration to detect language per segment | ⬜ |
+| 3c | Upload API: `POST /api/projects` (accepts PDF, saves to disk, parses, detects languages, saves to DB) | ⬜ |
+| 3d | Project API: `GET /api/projects/{id}` and `PATCH /api/projects/{id}` (confirm source language) | ⬜ |
+| 3e | E2E tests: Upload sample PDFs and verify database contents | ⬜ |
+| 3f | Frontend UI: File dropzone, project setup view, confirm source language | ⬜ |
 
 ### Steps 4–11 ⬜
 - **4 – Providers:** one interface; DeepL, Claude and a mock provider (used in CI). Shared contract tests.
