@@ -6,7 +6,17 @@ from typing import Any
 
 import pymupdf
 
+from app.parsers.pdf.errors import (
+    MAX_FILE_BYTES,
+    MAX_PAGES,
+    EncryptedPdfError,
+    InvalidPdfError,
+    NoTextError,
+    TooLargeError,
+)
 from app.parsers.pdf.text import normalize_text
+
+NO_TEXT_LAYER_WARNING = "no_text_layer"
 
 # Keep whitespace as is, ignore text outside the visible page; ligatures (ﬁ) come out as "fi".
 # No dehyphenation: line breaks are handled by the translation engine.
@@ -58,6 +68,7 @@ class ExtractedPage:
         lines: Text lines in the order PyMuPDF returns them (not reading order).
         markers: Bounding boxes of small drawn shapes (checkboxes, bullet dots) that may mark
             list items; the layout step decides whether they do.
+        warnings: Page-level problems, e.g. NO_TEXT_LAYER_WARNING for a scanned page.
     """
 
     number: int
@@ -65,6 +76,7 @@ class ExtractedPage:
     height: float
     lines: list[TextLine]
     markers: list[BBox] = field(default_factory=list)
+    warnings: set[str] = field(default_factory=set)
 
 
 @dataclass
@@ -205,13 +217,43 @@ def _extract_page(page: pymupdf.Page) -> ExtractedPage:
             for group in _split_by_size(spans):
                 if (text_line := _to_line(group)) is not None:
                     lines.append(text_line)
+    # An image-only page in an otherwise digital PDF is usually a scan: its text cannot be
+    # translated, and the user must be told rather than see it silently skipped.
+    scanned = not lines and bool(page.get_images())
     return ExtractedPage(
         number=page.number + 1,
         width=page.rect.width,
         height=page.rect.height,
         lines=lines,
         markers=_markers(page),
+        warnings={NO_TEXT_LAYER_WARNING} if scanned else set(),
     )
+
+
+def _open(pdf: bytes) -> pymupdf.Document:
+    """Open a PDF after checking its size.
+
+    Args:
+        pdf: The PDF file's content.
+
+    Returns:
+        The opened document; the caller must close it.
+
+    Raises:
+        InvalidPdfError: If the data is empty or not a readable PDF.
+        TooLargeError: If the file exceeds MAX_FILE_BYTES.
+    """
+    if not pdf:
+        raise InvalidPdfError("The file is empty.")
+    if len(pdf) > MAX_FILE_BYTES:
+        raise TooLargeError(
+            f"The file is {len(pdf) / 1024 / 1024:.0f} MB; "
+            f"the limit is {MAX_FILE_BYTES // 1024 // 1024} MB."
+        )
+    try:
+        return pymupdf.open(stream=pdf, filetype="pdf")
+    except (pymupdf.FileDataError, pymupdf.EmptyFileError) as exc:
+        raise InvalidPdfError("The file is not a PDF or it is damaged.") from exc
 
 
 def extract(pdf: bytes) -> ExtractedDocument:
@@ -224,7 +266,32 @@ def extract(pdf: bytes) -> ExtractedDocument:
         One ExtractedPage per page, in page order.
 
     Raises:
-        pymupdf.FileDataError: If the data is not a readable PDF.
+        InvalidPdfError: If the file is empty, not a PDF, damaged or has no pages.
+        EncryptedPdfError: If the PDF needs a password to open.
+        TooLargeError: If the file exceeds MAX_FILE_BYTES or MAX_PAGES.
+        NoTextError: If no page contains extractable text (a scanned document).
     """
-    with pymupdf.open(stream=pdf, filetype="pdf") as doc:
-        return ExtractedDocument(pages=[_extract_page(page) for page in doc])
+    with _open(pdf) as doc:
+        if doc.needs_pass:
+            raise EncryptedPdfError(
+                "The PDF is password-protected. Remove the password and upload it again."
+            )
+        if doc.page_count == 0:
+            raise InvalidPdfError("The PDF has no pages.")
+        if doc.page_count > MAX_PAGES:
+            raise TooLargeError(f"The PDF has {doc.page_count} pages; the limit is {MAX_PAGES}.")
+        try:
+            pages = [_extract_page(page) for page in doc]
+        except RuntimeError as exc:  # MuPDF errors on damaged page content
+            raise InvalidPdfError("The PDF is damaged and its text cannot be read.") from exc
+
+        if not any(page.lines for page in pages):
+            # MuPDF repairs broken files where it can; a repaired file without text is
+            # damaged, not scanned.
+            if doc.is_repaired:
+                raise InvalidPdfError("The file is not a PDF or it is damaged.")
+            raise NoTextError(
+                "The PDF contains no text that can be extracted. Scanned documents are not "
+                "supported yet (no OCR)."
+            )
+    return ExtractedDocument(pages=pages)

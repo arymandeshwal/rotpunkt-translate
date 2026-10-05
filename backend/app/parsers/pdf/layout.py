@@ -77,11 +77,14 @@ class PageInfo:
         number: 1-based page number.
         width: Page width in PDF points.
         height: Page height in PDF points.
+        warnings: Page-level problems, e.g. "no_text_layer" for a scanned page whose
+            content cannot be translated.
     """
 
     number: int
     width: float
     height: float
+    warnings: set[str] = field(default_factory=set)
 
 
 @dataclass
@@ -448,5 +451,8 @@ def build_segments(document: ExtractedDocument) -> ParsedDocument:
                     warnings=set().union(*(line.warnings for line in paragraph)),
                 )
             )
-    pages = [PageInfo(page.number, page.width, page.height) for page in document.pages]
+    pages = [
+        PageInfo(page.number, page.width, page.height, set(page.warnings))
+        for page in document.pages
+    ]
     return ParsedDocument(pages=pages, segments=segments)

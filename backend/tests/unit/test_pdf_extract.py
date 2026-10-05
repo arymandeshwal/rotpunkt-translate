@@ -2,7 +2,8 @@ import re
 
 import pytest
 
-from app.parsers.pdf import TextLine, extract
+from app.parsers.pdf import TextLine
+from app.parsers.pdf.extract import extract
 from app.parsers.pdf.text import UNREADABLE_WARNING
 from tests.pdf_factory import Box, Text, make_pdf, text_width
 

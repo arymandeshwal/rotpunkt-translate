@@ -1,27 +1,46 @@
-from app.parsers.pdf.extract import ExtractedDocument, ExtractedPage, TextLine, extract
-from app.parsers.pdf.layout import (
-    PageInfo,
-    ParsedDocument,
-    Segment,
-    SegmentKind,
-    build_segments,
+"""PDF parsing: parse_pdf() turns a PDF into translation segments in reading order."""
+
+from app.parsers.pdf.errors import (
+    EncryptedPdfError,
+    InvalidPdfError,
+    NoTextError,
+    PdfError,
+    TooLargeError,
 )
+
+# Imported under another name: binding "extract" here would hide the module of that name.
+from app.parsers.pdf.extract import NO_TEXT_LAYER_WARNING, TextLine
+from app.parsers.pdf.extract import extract as _extract
+from app.parsers.pdf.layout import PageInfo, ParsedDocument, Segment, SegmentKind, build_segments
 
 
 def parse_pdf(pdf: bytes) -> ParsedDocument:
-    """PDF bytes -> segments (headings, paragraphs, list items) in reading order."""
-    return build_segments(extract(pdf))
+    """Parse a PDF into segments (headings, paragraphs, list items) in reading order.
+
+    Args:
+        pdf: The PDF file's content.
+
+    Returns:
+        Page dimensions and warnings, and all segments in reading order.
+
+    Raises:
+        PdfError: A subclass explaining why the file cannot be parsed (invalid, encrypted,
+            too large or without text); str(error) is a user-facing message.
+    """
+    return build_segments(_extract(pdf))
 
 
 __all__ = [
-    "ExtractedDocument",
-    "ExtractedPage",
+    "NO_TEXT_LAYER_WARNING",
+    "EncryptedPdfError",
+    "InvalidPdfError",
+    "NoTextError",
     "PageInfo",
     "ParsedDocument",
+    "PdfError",
     "Segment",
     "SegmentKind",
     "TextLine",
-    "build_segments",
-    "extract",
+    "TooLargeError",
     "parse_pdf",
 ]
