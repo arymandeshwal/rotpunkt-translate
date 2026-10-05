@@ -113,8 +113,8 @@ Includes an end-to-end check of all sample PDFs: upload → database contents vs
 
 | Sub-part | Content | Status |
 |---|---|---|
-| 3a | Data model: Project, Document, Page, Segment tables + Alembic migrations | ⬜ |
-| 3b | Language detection: `lingua-py` integration to detect language per segment | ⬜ |
+| 3a | Data model: Project, Document, Page, Segment tables + Alembic migrations | ✅ |
+| 3b | Language detection: `lingua-py` integration to detect language per segment | ✅ |
 | 3c | Upload API: `POST /api/projects` (accepts PDF, saves to disk, parses, detects languages, saves to DB) | ✅ |
 | 3d | Project API: `GET /api/projects/{id}` and `PATCH /api/projects/{id}` (confirm source language) | ✅ |
 | 3e | E2E tests: Upload sample PDFs and verify database contents | ✅ |
@@ -191,3 +191,153 @@ Measure first, then fix the real bottlenecks.
 | 2026-10-04 | Bold-heading rule removed: on the samples it mostly produced wrong headings |
 | 2026-10-04 | One source language → one target language; other languages are left untranslated |
 | 2026-10-04 | Form/table reading order deferred to the preview step |
+
+---
+
+## Specification Feature Reference
+
+**A. Project Management**
+| ID | Feature | Description |
+|---|---|---|
+| A1 | Create project | Start a new translation project with a name |
+| A2 | Store original file | Keep the uploaded source file with the project |
+| A3 | Project status | Track the lifecycle: Draft → In Translation → In Review → Approved → Archived |
+| A4 | Archive project | Move finished projects out of the active list |
+| A5 | Reopen project | Open an existing or archived project and keep working |
+| A6 | Copy project | Duplicate a project, e.g. to reuse it for another language or a similar document |
+| A7 | Search & filter projects | Find projects by name, status or language |
+| A8 | Customer field (implicit) | Link projects to a customer; search (L1) needs this |
+
+**B. File Upload & Parsing**
+| ID | Feature | Description |
+|---|---|---|
+| B1 | DOCX upload | Read Word documents and keep their structure |
+| B2 | XLSX upload | Read Excel sheets cell by cell |
+| B3 | PDF upload | Pull text out of PDFs (layout is hard to keep) |
+| B4 | InDesign upload | Read InDesign files (realistically IDML) |
+| B5 | Text extraction | Split the document into translatable segments |
+| B6 | Structure detection | Keep headings, paragraphs, tables and cells so the file can be rebuilt |
+| B7 | Language detection | Detect the source language automatically |
+| B8 | Auto-create project on upload | Create the project as soon as a file is uploaded |
+
+**C. Language Selection**
+| ID | Feature | Description |
+|---|---|---|
+| C1 | Source language | Choose it by hand or use the detected one |
+| C2 | Single target language | Translate into one language |
+| C3 | Multiple target languages | Translate into several languages in one run |
+
+**D. Translation Engine**
+| ID | Feature | Description |
+|---|---|---|
+| D1 | AI translation (LLM) | Translate segments with an LLM, using the glossary as context |
+| D2 | DeepL integration | Use DeepL as a second translation provider |
+| D3 | Provider abstraction | One interface so translation providers or models can be swapped |
+| D4 | Glossary enforcement | Use approved glossary terms and leave "do not translate" terms as they are |
+
+**E. Translation Preview**
+| ID | Feature | Description |
+|---|---|---|
+| E1 | Preview-only translation | "Start translation" creates a draft, not a final file |
+| E2 | Side-by-side view | Original on the left, translation on the right, segments aligned |
+
+**F. Term Highlighting**
+| ID | Feature | Description |
+|---|---|---|
+| F1 | Glossary terms (green) | Mark glossary terms |
+| F2 | Protected names / item numbers (white) | Mark product names/item numbers that must not change |
+| F3 | Kitchen trade terms (blue) | Mark kitchen-industry vocabulary |
+| F4 | Ambiguous terms (orange) | Mark terms that could be translated more than one way |
+| F5 | Unknown/faulty terms (red) | Mark terms the system can't resolve |
+| F6 | Term detail popover | Click a term to see the translation used, alternatives, a description and the glossary entry |
+| F7 | Inline term edit | Edit a term's translation |
+
+**G. Manual Editing**
+| ID | Feature | Description |
+|---|---|---|
+| G1 | Edit text | Change the translated text |
+| G2 | Replace terms | Find and replace a term across the translation |
+| G3 | Add term to glossary | Send a term from the editor to the glossary |
+| G4 | Comments | Add comments to segments |
+| G5 | Re-translate section | Translate one segment or selected section again |
+
+**H. Glossary Management**
+| ID | Feature | Description |
+|---|---|---|
+| H1 | Term CRUD | Create, edit and delete glossary terms |
+| H2 | Multi-language entries | One term with translations in multiple languages |
+| H3 | "Do not translate" flag | Mark terms that must stay untranslated |
+| H4 | Synonyms | Store alternative source forms |
+| H5 | Excel import | Import glossary terms from Excel |
+| H6 | Excel export | Export the glossary to Excel |
+| H7 | Duplicate check | Stop the same term from being added more than once |
+| H8 | Versioning | Keep a history of glossary versions |
+| H9 | Approval status | A term is only enforced once approved |
+
+**I. Quality Check**
+| ID | Feature | Description |
+|---|---|---|
+| I1 | Untranslated text | Find segments that are empty or still in the source language |
+| I2 | Missing glossary terms | Find places where a specified glossary term was not used |
+| I3 | Inconsistent translations | Find the same source text translated differently |
+| I4 | Unknown terms | Find unrecognized technical terms |
+| I5 | Formatting problems | Find broken placeholders or formatting |
+| I6 | Warning panel | Show all QA warnings before approval/export |
+
+**J. Approval**
+| ID | Feature | Description |
+|---|---|---|
+| J1 | Approve translation | "Approve" locks the translation as approved |
+
+**K. Export**
+| ID | Feature | Description |
+|---|---|---|
+| K1 | Word export | Rebuild the DOCX with the translated content |
+| K2 | Excel export | Rebuild the XLSX with the translated content |
+| K3 | PDF export | Produce a translated PDF |
+| K4 | Excel column mapping | Advanced setting to choose the relevant Excel columns |
+| K5 | Export templates | Saved export configurations |
+| K6 | Export modes | Translation only, original + translation, etc. |
+
+**L. History & Search**
+| ID | Feature | Description |
+|---|---|---|
+| L1 | Project history | Store the original, preview, final file, glossary version and number of changes |
+| L2 | Advanced search | Search by project, file name, custom date range |
+
+**M. Users & Roles**
+| ID | Feature | Description |
+|---|---|---|
+| M1 | Authentication (implicit) | Log in and log out securely |
+| M2 | Roles | Translator, Reviewer and Admin permissions |
+| M3 | User management | Admin creates and manages users |
+
+**N. Dashboard**
+| ID | Feature | Description |
+|---|---|---|
+| N1 | Project overview | Open projects, projects in review, etc. |
+| N2 | Top glossary terms | Glossary terms used most often |
+| N3 | Statistics | Volume, corrections and usage figures |
+
+**O. Settings**
+| ID | Feature | Description |
+|---|---|---|
+| O1 | Default language and export | Preferred defaults per user |
+| O2 | Highlight colors | Change the colors used for highlighting |
+| O3 | AI model / API config | Choose the LLM and configure its API |
+
+**P. Platform**
+| ID | Feature | Description |
+|---|---|---|
+| P1 | Web app on a central server | Runs in the browser from a central server |
+| P2 | Multi-user concurrency | Several users can work at the same time |
+| P3 | Responsive, modern UI | Works on desktop and tablet |
+
+**Phase 2 Items (Uncategorized)**
+- Translation memory
+- More formats (PPTX/XML/CSV)
+- Multilingual glossary approval workflow
+- Automatic detection of new terms
+- Comparing translation versions
+- Approval notifications
+- Advanced analytics
