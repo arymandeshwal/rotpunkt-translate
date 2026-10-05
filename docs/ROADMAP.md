@@ -33,7 +33,7 @@ _Last updated: 2026-10-05_
 | Backend | Python 3.12, FastAPI, SQLAlchemy 2 (async), Alembic, PostgreSQL |
 | PDF parsing | PyMuPDF (AGPL, accepted) |
 | Frontend | React, TypeScript, Vite, Tailwind, shadcn/ui, TanStack Query, openapi-fetch (types generated from the API) |
-| Translation | DeepL (free API) and an LLM (Claude) behind one provider interface |
+| Translation | DeepL (free API) and an LLM (Gemini 1.5 Flash) behind one provider interface |
 | Testing | pytest (real Postgres), Vitest + Testing Library, Playwright (planned) |
 | Tooling | uv, ruff, mypy strict, ESLint, Docker Compose, GitHub Actions |
 
@@ -121,7 +121,7 @@ Includes an end-to-end check of all sample PDFs: upload → database contents vs
 | 3f | Frontend UI: File dropzone, project setup view, confirm source language | ✅ |
 
 ### Steps 4–11 ⬜
-- **4 – Providers:** one interface; DeepL, Claude and a mock provider (used in CI). Shared contract tests.
+- **4 – Providers:** one interface; DeepL, Gemini and a mock provider (used in CI). Shared contract tests.
 - **5 – Glossary enforcement:** the experiment showed DeepL translates product/colour/brand
   names ("Class VI Black" → "Klasse VI Schwarz") and ignores Rotpunkt terms
   (Korpus → "body" instead of "carcase").
