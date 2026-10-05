@@ -117,7 +117,7 @@ Includes an end-to-end check of all sample PDFs: upload → database contents vs
 | 3b | Language detection: `lingua-py` integration to detect language per segment | ⬜ |
 | 3c | Upload API: `POST /api/projects` (accepts PDF, saves to disk, parses, detects languages, saves to DB) | ✅ |
 | 3d | Project API: `GET /api/projects/{id}` and `PATCH /api/projects/{id}` (confirm source language) | ✅ |
-| 3e | E2E tests: Upload sample PDFs and verify database contents | ⬜ |
+| 3e | E2E tests: Upload sample PDFs and verify database contents | ✅ |
 | 3f | Frontend UI: File dropzone, project setup view, confirm source language | ⬜ |
 
 ### Steps 4–11 ⬜
