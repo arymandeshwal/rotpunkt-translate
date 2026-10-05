@@ -40,6 +40,10 @@ class DocumentSchema(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
+class ProjectUpdateRequest(BaseModel):
+    source_language: LanguageCode
+
+
 class ProjectResponse(BaseModel):
     id: uuid.UUID
     name: str
