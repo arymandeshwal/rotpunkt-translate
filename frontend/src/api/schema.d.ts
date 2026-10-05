@@ -75,10 +75,116 @@ export interface paths {
         patch: operations["update_glossary_entry_api_glossary__entry_id__patch"];
         trace?: never;
     };
+    "/api/projects": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Create Project
+         * @description Upload a PDF, parse its contents, detect languages, and create a new project.
+         */
+        post: operations["create_project_api_projects_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/{project_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Project
+         * @description Get a project and all its parsed contents.
+         */
+        get: operations["get_project_api_projects__project_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /**
+         * Update Project
+         * @description Update a project, typically to confirm or change its source language.
+         *
+         *     Changing the source language recalculates the 'is_translatable' flag
+         *     for every segment in the project.
+         */
+        patch: operations["update_project_api_projects__project_id__patch"];
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** Body_create_project_api_projects_post */
+        Body_create_project_api_projects_post: {
+            /** File */
+            file: string;
+        };
+        /** DocumentPageSchema */
+        DocumentPageSchema: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Number */
+            number: number;
+            /** Width */
+            width: number;
+            /** Height */
+            height: number;
+            /** Warnings */
+            warnings: string[];
+        };
+        /** DocumentSchema */
+        DocumentSchema: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Original Filename */
+            original_filename: string;
+            /** Source Language */
+            source_language: ("de" | "en" | "fr" | "nl" | "da" | "nb" | "es") | null;
+            /** Pages */
+            pages: components["schemas"]["DocumentPageSchema"][];
+            /** Segments */
+            segments: components["schemas"]["DocumentSegmentSchema"][];
+        };
+        /** DocumentSegmentSchema */
+        DocumentSegmentSchema: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Page Number */
+            page_number: number;
+            /** Order Index */
+            order_index: number;
+            /** Kind */
+            kind: string;
+            /** Text */
+            text: string;
+            /** Bounding Box */
+            bounding_box: number[];
+            /** Detected Language */
+            detected_language: string | null;
+            /** Is Translatable */
+            is_translatable: boolean | null;
+        };
         /** DuplicateTermsDetail */
         DuplicateTermsDetail: {
             /** Message */
@@ -191,6 +297,42 @@ export interface components {
             code: "de" | "en" | "fr" | "nl" | "da" | "nb" | "es";
             /** Name */
             name: string;
+        };
+        /** ProjectResponse */
+        ProjectResponse: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Name */
+            name: string;
+            status: components["schemas"]["ProjectStatus"];
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+            /** Documents */
+            documents: components["schemas"]["DocumentSchema"][];
+        };
+        /**
+         * ProjectStatus
+         * @enum {string}
+         */
+        ProjectStatus: "new" | "translating" | "review" | "done";
+        /** ProjectUpdateRequest */
+        ProjectUpdateRequest: {
+            /**
+             * Source Language
+             * @enum {string}
+             */
+            source_language: "de" | "en" | "fr" | "nl" | "da" | "nb" | "es";
         };
         /** TermConflict */
         TermConflict: {
@@ -490,6 +632,105 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["DuplicateTermsResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_project_api_projects_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": components["schemas"]["Body_create_project_api_projects_post"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProjectResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_project_api_projects__project_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                project_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProjectResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_project_api_projects__project_id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                project_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ProjectUpdateRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProjectResponse"];
                 };
             };
             /** @description Validation Error */

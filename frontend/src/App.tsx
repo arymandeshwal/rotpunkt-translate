@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import { Layout } from "./components/Layout";
 import { Toaster } from "./components/ui/sonner";
 import { GlossaryPage } from "./pages/GlossaryPage";
+import { ProjectSetupPage } from "./pages/ProjectSetupPage";
 import { ProjectsPage } from "./pages/ProjectsPage";
 
 export function AppRoutes() {
@@ -12,6 +13,7 @@ export function AppRoutes() {
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<ProjectsPage />} />
+        <Route path="projects/:id/setup" element={<ProjectSetupPage />} />
         <Route path="glossary" element={<GlossaryPage />} />
       </Route>
     </Routes>

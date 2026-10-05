@@ -438,10 +438,321 @@
           }
         }
       }
+    },
+    "/api/projects": {
+      "post": {
+        "tags": [
+          "projects"
+        ],
+        "summary": "Create Project",
+        "description": "Upload a PDF, parse its contents, detect languages, and create a new project.",
+        "operationId": "create_project_api_projects_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_create_project_api_projects_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/projects/{project_id}": {
+      "get": {
+        "tags": [
+          "projects"
+        ],
+        "summary": "Get Project",
+        "description": "Get a project and all its parsed contents.",
+        "operationId": "get_project_api_projects__project_id__get",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Project Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "projects"
+        ],
+        "summary": "Update Project",
+        "description": "Update a project, typically to confirm or change its source language.\n\nChanging the source language recalculates the 'is_translatable' flag\nfor every segment in the project.",
+        "operationId": "update_project_api_projects__project_id__patch",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Project Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "Body_create_project_api_projects_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_create_project_api_projects_post"
+      },
+      "DocumentPageSchema": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "number": {
+            "type": "integer",
+            "title": "Number"
+          },
+          "width": {
+            "type": "number",
+            "title": "Width"
+          },
+          "height": {
+            "type": "number",
+            "title": "Height"
+          },
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Warnings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "number",
+          "width",
+          "height",
+          "warnings"
+        ],
+        "title": "DocumentPageSchema"
+      },
+      "DocumentSchema": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "original_filename": {
+            "type": "string",
+            "title": "Original Filename"
+          },
+          "source_language": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "de",
+                  "en",
+                  "fr",
+                  "nl",
+                  "da",
+                  "nb",
+                  "es"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Language"
+          },
+          "pages": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentPageSchema"
+            },
+            "type": "array",
+            "title": "Pages"
+          },
+          "segments": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentSegmentSchema"
+            },
+            "type": "array",
+            "title": "Segments"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "original_filename",
+          "source_language",
+          "pages",
+          "segments"
+        ],
+        "title": "DocumentSchema"
+      },
+      "DocumentSegmentSchema": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "page_number": {
+            "type": "integer",
+            "title": "Page Number"
+          },
+          "order_index": {
+            "type": "integer",
+            "title": "Order Index"
+          },
+          "kind": {
+            "type": "string",
+            "title": "Kind"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "bounding_box": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Bounding Box"
+          },
+          "detected_language": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Detected Language"
+          },
+          "is_translatable": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Translatable"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "page_number",
+          "order_index",
+          "kind",
+          "text",
+          "bounding_box",
+          "detected_language",
+          "is_translatable"
+        ],
+        "title": "DocumentSegmentSchema"
+      },
       "DuplicateTermsDetail": {
         "properties": {
           "message": {
@@ -748,6 +1059,81 @@
           "name"
         ],
         "title": "LanguageOut"
+      },
+      "ProjectResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ProjectStatus"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "documents": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentSchema"
+            },
+            "type": "array",
+            "title": "Documents"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "status",
+          "created_at",
+          "updated_at",
+          "documents"
+        ],
+        "title": "ProjectResponse"
+      },
+      "ProjectStatus": {
+        "type": "string",
+        "enum": [
+          "new",
+          "translating",
+          "review",
+          "done"
+        ],
+        "title": "ProjectStatus"
+      },
+      "ProjectUpdateRequest": {
+        "properties": {
+          "source_language": {
+            "type": "string",
+            "enum": [
+              "de",
+              "en",
+              "fr",
+              "nl",
+              "da",
+              "nb",
+              "es"
+            ],
+            "title": "Source Language"
+          }
+        },
+        "type": "object",
+        "required": [
+          "source_language"
+        ],
+        "title": "ProjectUpdateRequest"
       },
       "TermConflict": {
         "properties": {
