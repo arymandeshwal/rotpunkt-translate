@@ -52,7 +52,7 @@ A2, B3 (PDF), B5, B6, B7, B8, C1, C2, D1, D2, D4, E2, F1–F5, G5, H1–H3, I1, 
 | 0 | **Skeleton** – Docker Compose, FastAPI health check, React shell, Postgres, CI | – | ✅ `18fc73b` |
 | 1 | **Glossary** | H1, H2, H3 | ✅ |
 | 2 | **PDF parser** | B3, B5, B6 | ✅ |
-| 3 | **Upload + project** | B3, B8, A2, B7, C1 | ⬜ next |
+| 3 | **Upload + project** | B3, B8, A2, B7, C1 | ✅ |
 | 4 | **Translation providers** | D1, D2, C2 | ⬜ |
 | 5 | **Glossary enforcement** | D4 | ⬜ |
 | 6 | **Translation job** (background, batched, status) | – | ⬜ |
@@ -104,7 +104,7 @@ kitchen term / product name / general · "do not translate" entries have exactly
 - Text printed along a circle comes out as letter fragments (one badge in the flyer).
 - Our own glossary matching must cope with "Echtholz fronten" (a space where a soft hyphen was) → step 7.
 
-### Step 3 – Upload + project ⬜ (next)
+### Step 3 – Upload + project ✅
 
 Upload a PDF → project created automatically → original file stored → segments stored in
 the database → language detected **per segment** → source language confirmed or changed by hand.
