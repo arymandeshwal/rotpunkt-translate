@@ -26,3 +26,6 @@ Thumbs.db
 # Client specification (not for the public repo)
 /*.pdf
 
+# Local storage (Uploads, databases, etc)
+backend/storage/
+
