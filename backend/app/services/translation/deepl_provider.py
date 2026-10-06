@@ -4,6 +4,7 @@ from functools import partial
 import deepl
 
 from .base import TranslationProvider
+from .utils import filter_relevant_glossary
 
 
 class DeepLProvider(TranslationProvider):
@@ -21,7 +22,11 @@ class DeepLProvider(TranslationProvider):
         self.translator = deepl.Translator(api_key)
 
     async def translate(
-        self, texts: list[str], source_language: str, target_language: str
+        self, 
+        texts: list[str], 
+        source_language: str, 
+        target_language: str,
+        glossary: dict[str, str] | None = None
     ) -> list[str]:
         """
         Translate texts using the DeepL API.
@@ -34,6 +39,7 @@ class DeepLProvider(TranslationProvider):
             texts: List of strings to translate.
             source_language: ISO language code of the input (e.g., 'de').
             target_language: ISO language code of the output (e.g., 'en').
+            glossary: Optional dictionary mapping source terms to forced target terms.
 
         Returns:
             A list of translated strings matching the order and length of the input.
@@ -51,18 +57,42 @@ class DeepLProvider(TranslationProvider):
 
         source = source_language.upper() if source_language else None
 
-        # The translate_text method is synchronous, so we run it in a threadpool
-        # to avoid blocking the asyncio event loop.
+        # DeepL glossary creation and deletion are synchronous
+        deepl_glossary = None
+        relevant_glossary = filter_relevant_glossary(texts, glossary)
+        
         loop = asyncio.get_running_loop()
-        func = partial(
-            self.translator.translate_text,
-            texts,
-            source_lang=source,
-            target_lang=target,
-            preserve_formatting=True,
-        )
+        
+        if relevant_glossary:
+            if not source:
+                raise ValueError("DeepL glossaries require a defined source_language.")
+                
+            # Create a temporary glossary on DeepL servers
+            create_func = partial(
+                self.translator.create_glossary,
+                name="rotpunkt_temp_glossary",
+                source_lang=source,
+                target_lang=target,
+                entries=relevant_glossary
+            )
+            deepl_glossary = await loop.run_in_executor(None, create_func)
 
-        results = await loop.run_in_executor(None, func)
+        try:
+            # The translate_text method is synchronous, so we run it in a threadpool
+            func = partial(
+                self.translator.translate_text,
+                texts,
+                source_lang=source,
+                target_lang=target,
+                preserve_formatting=True,
+                glossary=deepl_glossary,
+            )
+
+            results = await loop.run_in_executor(None, func)
+        finally:
+            if deepl_glossary:
+                delete_func = partial(self.translator.delete_glossary, deepl_glossary)
+                await loop.run_in_executor(None, delete_func)
 
         # DeepL SDK returns a single TextResult if only one string was passed,
         # otherwise it returns a list of TextResult objects.

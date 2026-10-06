@@ -75,7 +75,11 @@ async def test_deepl_provider():
 
         # Verify it passed the right args to DeepL
         mock_instance.translate_text.assert_called_with(
-            ["Hello"], source_lang="DE", target_lang="EN-US", preserve_formatting=True
+            ["Hello"], 
+            source_lang="DE", 
+            target_lang="EN-US", 
+            preserve_formatting=True,
+            glossary=None
         )
 
 
