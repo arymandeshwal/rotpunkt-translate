@@ -14,30 +14,27 @@ class DeepLProvider(TranslationProvider):
     def __init__(self, api_key: str):
         """
         Initialize the DeepL provider with an API key.
-        
+
         Args:
             api_key: The authentication key for the DeepL API.
         """
         self.translator = deepl.Translator(api_key)
 
     async def translate(
-        self, 
-        texts: list[str], 
-        source_language: str, 
-        target_language: str
+        self, texts: list[str], source_language: str, target_language: str
     ) -> list[str]:
         """
         Translate texts using the DeepL API.
-        
+
         This method maps standard ISO codes to DeepL's expected formats (e.g., 'EN-US')
-        and executes the synchronous DeepL SDK calls within an asyncio threadpool 
+        and executes the synchronous DeepL SDK calls within an asyncio threadpool
         to prevent blocking the event loop.
-        
+
         Args:
             texts: List of strings to translate.
             source_language: ISO language code of the input (e.g., 'de').
             target_language: ISO language code of the output (e.g., 'en').
-            
+
         Returns:
             A list of translated strings matching the order and length of the input.
         """
@@ -62,7 +59,7 @@ class DeepLProvider(TranslationProvider):
             texts,
             source_lang=source,
             target_lang=target,
-            preserve_formatting=True
+            preserve_formatting=True,
         )
 
         results = await loop.run_in_executor(None, func)

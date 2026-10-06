@@ -11,6 +11,11 @@ class Settings(BaseSettings):
     cors_origins: list[str] = ["http://localhost:5173"]
     upload_dir: str = "storage/uploads"
 
+    # Translation Providers
+    translation_provider: str = "mock"  # 'mock', 'deepl', or 'gemini'
+    deepl_api_key: str | None = None
+    gemini_api_key: str | None = None
+
 
 @lru_cache
 def get_settings() -> Settings:
