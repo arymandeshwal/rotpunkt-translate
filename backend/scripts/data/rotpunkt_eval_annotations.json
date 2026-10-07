@@ -1,0 +1,1933 @@
+[
+  {
+    "id": 43,
+    "text": "If dealing with a blind corner, use the filler panel to bridge the gap before attaching the fascia.",
+    "category": "F4",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "ambiguous_term",
+        "text": "blind corner"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "text": "The fascia must be aligned with the filler panel carefully.",
+    "category": "F4",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "text": "The product is designed for indoor use only and should be kept dry at all times.",
+    "category": "Clean",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 10,
+    "text": "The Cabinet body is white.",
+    "category": "F1_F2",
+    "length_type": "short",
+    "active_glossary": [
+      {
+        "entry_id": 1,
+        "target_text": "Cabinet body",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 2,
+        "target_text": "Greenline",
+        "is_dnt": true,
+        "is_case_sensitive": true
+      },
+      {
+        "entry_id": 3,
+        "target_text": "Rotpunkt Küchen",
+        "is_dnt": true,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 4,
+        "target_text": "Front",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      }
+    ],
+    "expected_annotations": [
+      {
+        "type": "glossary",
+        "text": "Cabinet body"
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "text": "Warning: failure to tighten the screvvs on the C4binet may lead to failure of the th!ck units.",
+    "category": "F5",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "faulty_term",
+        "text": "screvvs"
+      },
+      {
+        "type": "faulty_term",
+        "text": "C4binet"
+      },
+      {
+        "type": "faulty_term",
+        "text": "th!ck"
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "text": "The fascia must be aligned with the filler panel carefully.",
+    "category": "F4",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "text": "The new Greenline series features a durable Cabinet body.",
+    "category": "F1_F2",
+    "length_type": "medium",
+    "active_glossary": [
+      {
+        "entry_id": 1,
+        "target_text": "Cabinet body",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 2,
+        "target_text": "Greenline",
+        "is_dnt": true,
+        "is_case_sensitive": true
+      },
+      {
+        "entry_id": 3,
+        "target_text": "Rotpunkt Küchen",
+        "is_dnt": true,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 4,
+        "target_text": "Front",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      }
+    ],
+    "expected_annotations": [
+      {
+        "type": "dnt",
+        "text": "Greenline"
+      },
+      {
+        "type": "glossary",
+        "text": "Cabinet body"
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "text": "The C4binet b0dy is made of solid w00d.",
+    "category": "F5",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "faulty_term",
+        "text": "C4binet"
+      },
+      {
+        "type": "faulty_term",
+        "text": "b0dy"
+      },
+      {
+        "type": "faulty_term",
+        "text": "w00d"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "text": "The Cabinet body is white.",
+    "category": "F1_F2",
+    "length_type": "short",
+    "active_glossary": [
+      {
+        "entry_id": 1,
+        "target_text": "Cabinet body",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 2,
+        "target_text": "Greenline",
+        "is_dnt": true,
+        "is_case_sensitive": true
+      },
+      {
+        "entry_id": 3,
+        "target_text": "Rotpunkt Küchen",
+        "is_dnt": true,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 4,
+        "target_text": "Front",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      }
+    ],
+    "expected_annotations": [
+      {
+        "type": "glossary",
+        "text": "Cabinet body"
+      }
+    ]
+  },
+  {
+    "id": 79,
+    "text": "Please read carefully.",
+    "category": "Clean",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 74,
+    "text": "The C4binet b0dy is made of solid w00d.",
+    "category": "F5",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "faulty_term",
+        "text": "C4binet"
+      },
+      {
+        "type": "faulty_term",
+        "text": "b0dy"
+      },
+      {
+        "type": "faulty_term",
+        "text": "w00d"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "text": "The new Greenline series features a durable Cabinet body.",
+    "category": "F1_F2",
+    "length_type": "medium",
+    "active_glossary": [
+      {
+        "entry_id": 1,
+        "target_text": "Cabinet body",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 2,
+        "target_text": "Greenline",
+        "is_dnt": true,
+        "is_case_sensitive": true
+      },
+      {
+        "entry_id": 3,
+        "target_text": "Rotpunkt Küchen",
+        "is_dnt": true,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 4,
+        "target_text": "Front",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      }
+    ],
+    "expected_annotations": [
+      {
+        "type": "dnt",
+        "text": "Greenline"
+      },
+      {
+        "type": "glossary",
+        "text": "Cabinet body"
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "text": "Attach the filler panel.",
+    "category": "F4",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "text": "The fascia must be aligned with the filler panel carefully.",
+    "category": "F4",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "text": "Use 4mm screvvs.",
+    "category": "F5",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "faulty_term",
+        "text": "screvvs"
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "text": "If dealing with a blind corner, use the filler panel to bridge the gap before attaching the fascia.",
+    "category": "F4",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "ambiguous_term",
+        "text": "blind corner"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "text": "If dealing with a blind corner, use the filler panel to bridge the gap before attaching the fascia.",
+    "category": "F4",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "ambiguous_term",
+        "text": "blind corner"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "text": "In the event of a warranty claim, please contact the customer service department with your original receipt.",
+    "category": "Clean",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 77,
+    "text": "The product is designed for indoor use only and should be kept dry at all times.",
+    "category": "Clean",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 38,
+    "text": "For optimal durability, the MDF carrier board is fully sealed using thick ABS edge banding.",
+    "category": "F3",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "kitchen_trade_term",
+        "text": "MDF carrier board"
+      },
+      {
+        "type": "kitchen_trade_term",
+        "text": "ABS edge banding"
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "text": "The melamine resin coated panels are standard.",
+    "category": "F3",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "kitchen_trade_term",
+        "text": "melamine resin coated"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "text": "The melamine resin coated panels are standard.",
+    "category": "F3",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "kitchen_trade_term",
+        "text": "melamine resin coated"
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "text": "ABS edge banding applied.",
+    "category": "F3",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "kitchen_trade_term",
+        "text": "ABS edge banding"
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "text": "Please read carefully.",
+    "category": "Clean",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 81,
+    "text": "In the event of a warranty claim, please contact the customer service department with your original receipt.",
+    "category": "Clean",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 50,
+    "text": "Attach the filler panel.",
+    "category": "F4",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "text": "In the event of a warranty claim, please contact the customer service department with your original receipt.",
+    "category": "Clean",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 27,
+    "text": "ABS edge banding applied.",
+    "category": "F3",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "kitchen_trade_term",
+        "text": "ABS edge banding"
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "text": "Please read carefully.",
+    "category": "Clean",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 34,
+    "text": "The melamine resin coated panels are standard.",
+    "category": "F3",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "kitchen_trade_term",
+        "text": "melamine resin coated"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "text": "When assembling the Rotpunkt Küchen components, ensure the Greenline spec is met for the Front.",
+    "category": "F1_F2",
+    "length_type": "big",
+    "active_glossary": [
+      {
+        "entry_id": 1,
+        "target_text": "Cabinet body",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 2,
+        "target_text": "Greenline",
+        "is_dnt": true,
+        "is_case_sensitive": true
+      },
+      {
+        "entry_id": 3,
+        "target_text": "Rotpunkt Küchen",
+        "is_dnt": true,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 4,
+        "target_text": "Front",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      }
+    ],
+    "expected_annotations": [
+      {
+        "type": "dnt",
+        "text": "Rotpunkt Küchen"
+      },
+      {
+        "type": "dnt",
+        "text": "Greenline"
+      },
+      {
+        "type": "glossary",
+        "text": "Front"
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "text": "The fascia must be aligned with the filler panel carefully.",
+    "category": "F4",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "text": "The fascia must be aligned with the filler panel carefully.",
+    "category": "F4",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "text": "Use 4mm screvvs.",
+    "category": "F5",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "faulty_term",
+        "text": "screvvs"
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "text": "Warning: failure to tighten the screvvs on the C4binet may lead to failure of the th!ck units.",
+    "category": "F5",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "faulty_term",
+        "text": "screvvs"
+      },
+      {
+        "type": "faulty_term",
+        "text": "C4binet"
+      },
+      {
+        "type": "faulty_term",
+        "text": "th!ck"
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "text": "The fascia must be aligned with the filler panel carefully.",
+    "category": "F4",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "text": "In the event of a warranty claim, please contact the customer service department with your original receipt.",
+    "category": "Clean",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 53,
+    "text": "Attach the filler panel.",
+    "category": "F4",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "text": "The product is designed for indoor use only and should be kept dry at all times.",
+    "category": "Clean",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 13,
+    "text": "The Cabinet body is white.",
+    "category": "F1_F2",
+    "length_type": "short",
+    "active_glossary": [
+      {
+        "entry_id": 1,
+        "target_text": "Cabinet body",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 2,
+        "target_text": "Greenline",
+        "is_dnt": true,
+        "is_case_sensitive": true
+      },
+      {
+        "entry_id": 3,
+        "target_text": "Rotpunkt Küchen",
+        "is_dnt": true,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 4,
+        "target_text": "Front",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      }
+    ],
+    "expected_annotations": [
+      {
+        "type": "glossary",
+        "text": "Cabinet body"
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "text": "The melamine resin coated panels are standard.",
+    "category": "F3",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "kitchen_trade_term",
+        "text": "melamine resin coated"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "text": "ABS edge banding applied.",
+    "category": "F3",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "kitchen_trade_term",
+        "text": "ABS edge banding"
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "text": "The melamine resin coated panels are standard.",
+    "category": "F3",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "kitchen_trade_term",
+        "text": "melamine resin coated"
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "text": "Attach the filler panel.",
+    "category": "F4",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "text": "The Cabinet body is white.",
+    "category": "F1_F2",
+    "length_type": "short",
+    "active_glossary": [
+      {
+        "entry_id": 1,
+        "target_text": "Cabinet body",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 2,
+        "target_text": "Greenline",
+        "is_dnt": true,
+        "is_case_sensitive": true
+      },
+      {
+        "entry_id": 3,
+        "target_text": "Rotpunkt Küchen",
+        "is_dnt": true,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 4,
+        "target_text": "Front",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      }
+    ],
+    "expected_annotations": [
+      {
+        "type": "glossary",
+        "text": "Cabinet body"
+      }
+    ]
+  },
+  {
+    "id": 67,
+    "text": "Use 4mm screvvs.",
+    "category": "F5",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "faulty_term",
+        "text": "screvvs"
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "text": "The C4binet b0dy is made of solid w00d.",
+    "category": "F5",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "faulty_term",
+        "text": "C4binet"
+      },
+      {
+        "type": "faulty_term",
+        "text": "b0dy"
+      },
+      {
+        "type": "faulty_term",
+        "text": "w00d"
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "text": "Use 4mm screvvs.",
+    "category": "F5",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "faulty_term",
+        "text": "screvvs"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "text": "The new Greenline series features a durable Cabinet body.",
+    "category": "F1_F2",
+    "length_type": "medium",
+    "active_glossary": [
+      {
+        "entry_id": 1,
+        "target_text": "Cabinet body",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 2,
+        "target_text": "Greenline",
+        "is_dnt": true,
+        "is_case_sensitive": true
+      },
+      {
+        "entry_id": 3,
+        "target_text": "Rotpunkt Küchen",
+        "is_dnt": true,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 4,
+        "target_text": "Front",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      }
+    ],
+    "expected_annotations": [
+      {
+        "type": "dnt",
+        "text": "Greenline"
+      },
+      {
+        "type": "glossary",
+        "text": "Cabinet body"
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "text": "For optimal durability, the MDF carrier board is fully sealed using thick ABS edge banding.",
+    "category": "F3",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "kitchen_trade_term",
+        "text": "MDF carrier board"
+      },
+      {
+        "type": "kitchen_trade_term",
+        "text": "ABS edge banding"
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "text": "Please read carefully.",
+    "category": "Clean",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 47,
+    "text": "Attach the filler panel.",
+    "category": "F4",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "text": "When assembling the Rotpunkt Küchen components, ensure the Greenline spec is met for the Front.",
+    "category": "F1_F2",
+    "length_type": "big",
+    "active_glossary": [
+      {
+        "entry_id": 1,
+        "target_text": "Cabinet body",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 2,
+        "target_text": "Greenline",
+        "is_dnt": true,
+        "is_case_sensitive": true
+      },
+      {
+        "entry_id": 3,
+        "target_text": "Rotpunkt Küchen",
+        "is_dnt": true,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 4,
+        "target_text": "Front",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      }
+    ],
+    "expected_annotations": [
+      {
+        "type": "dnt",
+        "text": "Rotpunkt Küchen"
+      },
+      {
+        "type": "dnt",
+        "text": "Greenline"
+      },
+      {
+        "type": "glossary",
+        "text": "Front"
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "text": "If dealing with a blind corner, use the filler panel to bridge the gap before attaching the fascia.",
+    "category": "F4",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "ambiguous_term",
+        "text": "blind corner"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "text": "The new Greenline series features a durable Cabinet body.",
+    "category": "F1_F2",
+    "length_type": "medium",
+    "active_glossary": [
+      {
+        "entry_id": 1,
+        "target_text": "Cabinet body",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 2,
+        "target_text": "Greenline",
+        "is_dnt": true,
+        "is_case_sensitive": true
+      },
+      {
+        "entry_id": 3,
+        "target_text": "Rotpunkt Küchen",
+        "is_dnt": true,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 4,
+        "target_text": "Front",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      }
+    ],
+    "expected_annotations": [
+      {
+        "type": "dnt",
+        "text": "Greenline"
+      },
+      {
+        "type": "glossary",
+        "text": "Cabinet body"
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "text": "ABS edge banding applied.",
+    "category": "F3",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "kitchen_trade_term",
+        "text": "ABS edge banding"
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "text": "Attach the filler panel.",
+    "category": "F4",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "text": "Warning: failure to tighten the screvvs on the C4binet may lead to failure of the th!ck units.",
+    "category": "F5",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "faulty_term",
+        "text": "screvvs"
+      },
+      {
+        "type": "faulty_term",
+        "text": "C4binet"
+      },
+      {
+        "type": "faulty_term",
+        "text": "th!ck"
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "text": "For optimal durability, the MDF carrier board is fully sealed using thick ABS edge banding.",
+    "category": "F3",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "kitchen_trade_term",
+        "text": "MDF carrier board"
+      },
+      {
+        "type": "kitchen_trade_term",
+        "text": "ABS edge banding"
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "text": "Warning: failure to tighten the screvvs on the C4binet may lead to failure of the th!ck units.",
+    "category": "F5",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "faulty_term",
+        "text": "screvvs"
+      },
+      {
+        "type": "faulty_term",
+        "text": "C4binet"
+      },
+      {
+        "type": "faulty_term",
+        "text": "th!ck"
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "text": "The melamine resin coated panels are standard.",
+    "category": "F3",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "kitchen_trade_term",
+        "text": "melamine resin coated"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "text": "When assembling the Rotpunkt Küchen components, ensure the Greenline spec is met for the Front.",
+    "category": "F1_F2",
+    "length_type": "big",
+    "active_glossary": [
+      {
+        "entry_id": 1,
+        "target_text": "Cabinet body",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 2,
+        "target_text": "Greenline",
+        "is_dnt": true,
+        "is_case_sensitive": true
+      },
+      {
+        "entry_id": 3,
+        "target_text": "Rotpunkt Küchen",
+        "is_dnt": true,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 4,
+        "target_text": "Front",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      }
+    ],
+    "expected_annotations": [
+      {
+        "type": "dnt",
+        "text": "Rotpunkt Küchen"
+      },
+      {
+        "type": "dnt",
+        "text": "Greenline"
+      },
+      {
+        "type": "glossary",
+        "text": "Front"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "text": "The Cabinet body is white.",
+    "category": "F1_F2",
+    "length_type": "short",
+    "active_glossary": [
+      {
+        "entry_id": 1,
+        "target_text": "Cabinet body",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 2,
+        "target_text": "Greenline",
+        "is_dnt": true,
+        "is_case_sensitive": true
+      },
+      {
+        "entry_id": 3,
+        "target_text": "Rotpunkt Küchen",
+        "is_dnt": true,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 4,
+        "target_text": "Front",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      }
+    ],
+    "expected_annotations": [
+      {
+        "type": "glossary",
+        "text": "Cabinet body"
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "text": "The C4binet b0dy is made of solid w00d.",
+    "category": "F5",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "faulty_term",
+        "text": "C4binet"
+      },
+      {
+        "type": "faulty_term",
+        "text": "b0dy"
+      },
+      {
+        "type": "faulty_term",
+        "text": "w00d"
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "text": "The product is designed for indoor use only and should be kept dry at all times.",
+    "category": "Clean",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 20,
+    "text": "The new Greenline series features a durable Cabinet body.",
+    "category": "F1_F2",
+    "length_type": "medium",
+    "active_glossary": [
+      {
+        "entry_id": 1,
+        "target_text": "Cabinet body",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 2,
+        "target_text": "Greenline",
+        "is_dnt": true,
+        "is_case_sensitive": true
+      },
+      {
+        "entry_id": 3,
+        "target_text": "Rotpunkt Küchen",
+        "is_dnt": true,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 4,
+        "target_text": "Front",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      }
+    ],
+    "expected_annotations": [
+      {
+        "type": "dnt",
+        "text": "Greenline"
+      },
+      {
+        "type": "glossary",
+        "text": "Cabinet body"
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "text": "The product is designed for indoor use only and should be kept dry at all times.",
+    "category": "Clean",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 44,
+    "text": "Attach the filler panel.",
+    "category": "F4",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ]
+  },
+  {
+    "id": 91,
+    "text": "Please read carefully.",
+    "category": "Clean",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 21,
+    "text": "ABS edge banding applied.",
+    "category": "F3",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "kitchen_trade_term",
+        "text": "ABS edge banding"
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "text": "The Cabinet body is white.",
+    "category": "F1_F2",
+    "length_type": "short",
+    "active_glossary": [
+      {
+        "entry_id": 1,
+        "target_text": "Cabinet body",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 2,
+        "target_text": "Greenline",
+        "is_dnt": true,
+        "is_case_sensitive": true
+      },
+      {
+        "entry_id": 3,
+        "target_text": "Rotpunkt Küchen",
+        "is_dnt": true,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 4,
+        "target_text": "Front",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      }
+    ],
+    "expected_annotations": [
+      {
+        "type": "glossary",
+        "text": "Cabinet body"
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "text": "In the event of a warranty claim, please contact the customer service department with your original receipt.",
+    "category": "Clean",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 58,
+    "text": "If dealing with a blind corner, use the filler panel to bridge the gap before attaching the fascia.",
+    "category": "F4",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "ambiguous_term",
+        "text": "blind corner"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "text": "Please read carefully.",
+    "category": "Clean",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 54,
+    "text": "The fascia must be aligned with the filler panel carefully.",
+    "category": "F4",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "text": "In the event of a warranty claim, please contact the customer service department with your original receipt.",
+    "category": "Clean",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 26,
+    "text": "For optimal durability, the MDF carrier board is fully sealed using thick ABS edge banding.",
+    "category": "F3",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "kitchen_trade_term",
+        "text": "MDF carrier board"
+      },
+      {
+        "type": "kitchen_trade_term",
+        "text": "ABS edge banding"
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "text": "Warning: failure to tighten the screvvs on the C4binet may lead to failure of the th!ck units.",
+    "category": "F5",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "faulty_term",
+        "text": "screvvs"
+      },
+      {
+        "type": "faulty_term",
+        "text": "C4binet"
+      },
+      {
+        "type": "faulty_term",
+        "text": "th!ck"
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "text": "Please read carefully.",
+    "category": "Clean",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 78,
+    "text": "In the event of a warranty claim, please contact the customer service department with your original receipt.",
+    "category": "Clean",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 65,
+    "text": "The C4binet b0dy is made of solid w00d.",
+    "category": "F5",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "faulty_term",
+        "text": "C4binet"
+      },
+      {
+        "type": "faulty_term",
+        "text": "b0dy"
+      },
+      {
+        "type": "faulty_term",
+        "text": "w00d"
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "text": "ABS edge banding applied.",
+    "category": "F3",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "kitchen_trade_term",
+        "text": "ABS edge banding"
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "text": "The melamine resin coated panels are standard.",
+    "category": "F3",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "kitchen_trade_term",
+        "text": "melamine resin coated"
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "text": "The product is designed for indoor use only and should be kept dry at all times.",
+    "category": "Clean",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 98,
+    "text": "The product is designed for indoor use only and should be kept dry at all times.",
+    "category": "Clean",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 5,
+    "text": "The new Greenline series features a durable Cabinet body.",
+    "category": "F1_F2",
+    "length_type": "medium",
+    "active_glossary": [
+      {
+        "entry_id": 1,
+        "target_text": "Cabinet body",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 2,
+        "target_text": "Greenline",
+        "is_dnt": true,
+        "is_case_sensitive": true
+      },
+      {
+        "entry_id": 3,
+        "target_text": "Rotpunkt Küchen",
+        "is_dnt": true,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 4,
+        "target_text": "Front",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      }
+    ],
+    "expected_annotations": [
+      {
+        "type": "dnt",
+        "text": "Greenline"
+      },
+      {
+        "type": "glossary",
+        "text": "Cabinet body"
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "text": "If dealing with a blind corner, use the filler panel to bridge the gap before attaching the fascia.",
+    "category": "F4",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "ambiguous_term",
+        "text": "blind corner"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "text": "Please read carefully.",
+    "category": "Clean",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 12,
+    "text": "When assembling the Rotpunkt Küchen components, ensure the Greenline spec is met for the Front.",
+    "category": "F1_F2",
+    "length_type": "big",
+    "active_glossary": [
+      {
+        "entry_id": 1,
+        "target_text": "Cabinet body",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 2,
+        "target_text": "Greenline",
+        "is_dnt": true,
+        "is_case_sensitive": true
+      },
+      {
+        "entry_id": 3,
+        "target_text": "Rotpunkt Küchen",
+        "is_dnt": true,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 4,
+        "target_text": "Front",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      }
+    ],
+    "expected_annotations": [
+      {
+        "type": "dnt",
+        "text": "Rotpunkt Küchen"
+      },
+      {
+        "type": "dnt",
+        "text": "Greenline"
+      },
+      {
+        "type": "glossary",
+        "text": "Front"
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "text": "Use 4mm screvvs.",
+    "category": "F5",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "faulty_term",
+        "text": "screvvs"
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "text": "In the event of a warranty claim, please contact the customer service department with your original receipt.",
+    "category": "Clean",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 14,
+    "text": "The new Greenline series features a durable Cabinet body.",
+    "category": "F1_F2",
+    "length_type": "medium",
+    "active_glossary": [
+      {
+        "entry_id": 1,
+        "target_text": "Cabinet body",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 2,
+        "target_text": "Greenline",
+        "is_dnt": true,
+        "is_case_sensitive": true
+      },
+      {
+        "entry_id": 3,
+        "target_text": "Rotpunkt Küchen",
+        "is_dnt": true,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 4,
+        "target_text": "Front",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      }
+    ],
+    "expected_annotations": [
+      {
+        "type": "dnt",
+        "text": "Greenline"
+      },
+      {
+        "type": "glossary",
+        "text": "Cabinet body"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "text": "When assembling the Rotpunkt Küchen components, ensure the Greenline spec is met for the Front.",
+    "category": "F1_F2",
+    "length_type": "big",
+    "active_glossary": [
+      {
+        "entry_id": 1,
+        "target_text": "Cabinet body",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 2,
+        "target_text": "Greenline",
+        "is_dnt": true,
+        "is_case_sensitive": true
+      },
+      {
+        "entry_id": 3,
+        "target_text": "Rotpunkt Küchen",
+        "is_dnt": true,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 4,
+        "target_text": "Front",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      }
+    ],
+    "expected_annotations": [
+      {
+        "type": "dnt",
+        "text": "Rotpunkt Küchen"
+      },
+      {
+        "type": "dnt",
+        "text": "Greenline"
+      },
+      {
+        "type": "glossary",
+        "text": "Front"
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "text": "For optimal durability, the MDF carrier board is fully sealed using thick ABS edge banding.",
+    "category": "F3",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "kitchen_trade_term",
+        "text": "MDF carrier board"
+      },
+      {
+        "type": "kitchen_trade_term",
+        "text": "ABS edge banding"
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "text": "For optimal durability, the MDF carrier board is fully sealed using thick ABS edge banding.",
+    "category": "F3",
+    "length_type": "big",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "kitchen_trade_term",
+        "text": "MDF carrier board"
+      },
+      {
+        "type": "kitchen_trade_term",
+        "text": "ABS edge banding"
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "text": "ABS edge banding applied.",
+    "category": "F3",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": [
+      {
+        "type": "kitchen_trade_term",
+        "text": "ABS edge banding"
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "text": "The product is designed for indoor use only and should be kept dry at all times.",
+    "category": "Clean",
+    "length_type": "medium",
+    "active_glossary": [],
+    "expected_annotations": []
+  },
+  {
+    "id": 4,
+    "text": "The Cabinet body is white.",
+    "category": "F1_F2",
+    "length_type": "short",
+    "active_glossary": [
+      {
+        "entry_id": 1,
+        "target_text": "Cabinet body",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 2,
+        "target_text": "Greenline",
+        "is_dnt": true,
+        "is_case_sensitive": true
+      },
+      {
+        "entry_id": 3,
+        "target_text": "Rotpunkt Küchen",
+        "is_dnt": true,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 4,
+        "target_text": "Front",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      }
+    ],
+    "expected_annotations": [
+      {
+        "type": "glossary",
+        "text": "Cabinet body"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "text": "When assembling the Rotpunkt Küchen components, ensure the Greenline spec is met for the Front.",
+    "category": "F1_F2",
+    "length_type": "big",
+    "active_glossary": [
+      {
+        "entry_id": 1,
+        "target_text": "Cabinet body",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 2,
+        "target_text": "Greenline",
+        "is_dnt": true,
+        "is_case_sensitive": true
+      },
+      {
+        "entry_id": 3,
+        "target_text": "Rotpunkt Küchen",
+        "is_dnt": true,
+        "is_case_sensitive": false
+      },
+      {
+        "entry_id": 4,
+        "target_text": "Front",
+        "is_dnt": false,
+        "is_case_sensitive": false
+      }
+    ],
+    "expected_annotations": [
+      {
+        "type": "dnt",
+        "text": "Rotpunkt Küchen"
+      },
+      {
+        "type": "dnt",
+        "text": "Greenline"
+      },
+      {
+        "type": "glossary",
+        "text": "Front"
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "text": "Please read carefully.",
+    "category": "Clean",
+    "length_type": "short",
+    "active_glossary": [],
+    "expected_annotations": []
+  }
+]

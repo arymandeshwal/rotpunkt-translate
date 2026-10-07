@@ -1,5 +1,5 @@
 from app.services.highlighting import compute_deterministic_annotations
-from app.services.translation_service import GlossaryTermInfo
+from app.services.models import GlossaryTermInfo
 
 
 def test_highlighting_glossary():

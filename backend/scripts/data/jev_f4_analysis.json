@@ -1,0 +1,4782 @@
+[
+  {
+    "text": "If dealing with a blind corner, use the filler panel to bridge the gap before attaching the fascia.",
+    "expected": [
+      {
+        "type": "ambiguous_term",
+        "text": "blind corner"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      }
+    ],
+    "final_produced": [
+      {
+        "text": "attaching the fascia",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "blind corner, use",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "filler panel to",
+        "type": "ambiguous_term"
+      }
+    ],
+    "chunk_tracing": [
+      {
+        "chunk": "gap before attaching",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.58,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "before attaching the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.86,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "attaching the fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.52,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.86,
+        "final_annotation": true
+      },
+      {
+        "chunk": "blind corner, use",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.78,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.9,
+        "final_annotation": true
+      },
+      {
+        "chunk": "before attaching",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.8,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.36,
+        "final_annotation": false
+      },
+      {
+        "chunk": "If dealing with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.94,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "corner, use the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.02,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel to",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.5,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.66,
+        "final_annotation": true
+      },
+      {
+        "chunk": "panel to bridge",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.52,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.9,
+        "final_annotation": false
+      },
+      {
+        "chunk": "dealing with a",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "bridge the gap",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.2,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the gap before",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.7,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "a blind corner",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.82,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.86,
+        "final_annotation": false
+      },
+      {
+        "chunk": "use the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.64,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.7,
+        "final_annotation": false
+      },
+      {
+        "chunk": "attaching the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "to bridge the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.62,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "dealing with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with a blind",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.48,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "blind corner",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.82,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.84,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.72,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.26,
+        "final_annotation": false
+      },
+      {
+        "chunk": "corner, use",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.08,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "If dealing",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "bridge the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.44,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "gap before",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.76,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.64,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.7,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.9,
+        "final_annotation": false
+      },
+      {
+        "chunk": "attaching",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.8,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "to bridge",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.48,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel to",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.08,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "dealing",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "a blind",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.4,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "use the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.98,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the gap",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.34,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "corner",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.28,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "bridge",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.16,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "before",
+        "stage1_choice": "generic",
+        "stage1_conf": 1.0,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with a",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.7,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.7,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.86,
+        "final_annotation": false
+      },
+      {
+        "chunk": "blind",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.48,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.46,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.88,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "use",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "gap",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.42,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      }
+    ]
+  },
+  {
+    "text": "The fascia must be aligned with the filler panel carefully.",
+    "expected": [
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ],
+    "final_produced": [
+      {
+        "text": "filler panel carefully",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "The fascia must",
+        "type": "ambiguous_term"
+      }
+    ],
+    "chunk_tracing": [
+      {
+        "chunk": "filler panel carefully",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.74,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.86,
+        "final_annotation": true
+      },
+      {
+        "chunk": "aligned with the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.34,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.86,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.72,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel carefully",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.04,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must be aligned",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.06,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "be aligned with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.1,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The fascia must",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.96,
+        "final_annotation": true
+      },
+      {
+        "chunk": "with the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.72,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.82,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia must be",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.74,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": false
+      },
+      {
+        "chunk": "aligned with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.14,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.9,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.48,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia must",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.82,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": false
+      },
+      {
+        "chunk": "be aligned",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.08,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.82,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.96,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.74,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.88,
+        "final_annotation": false
+      },
+      {
+        "chunk": "carefully",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.98,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "aligned",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.08,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must be",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.94,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.86,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.82,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.76,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.74,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.96,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.44,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.66,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      }
+    ]
+  },
+  {
+    "text": "The fascia must be aligned with the filler panel carefully.",
+    "expected": [
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ],
+    "final_produced": [
+      {
+        "text": "filler panel carefully",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "The fascia must",
+        "type": "ambiguous_term"
+      }
+    ],
+    "chunk_tracing": [
+      {
+        "chunk": "filler panel carefully",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.72,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.86,
+        "final_annotation": true
+      },
+      {
+        "chunk": "aligned with the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.34,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.82,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.72,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel carefully",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.02,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must be aligned",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.16,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "be aligned with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.04,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The fascia must",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.74,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": true
+      },
+      {
+        "chunk": "with the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.74,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.8,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia must be",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.74,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.92,
+        "final_annotation": false
+      },
+      {
+        "chunk": "aligned with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.08,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.9,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.44,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia must",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": false
+      },
+      {
+        "chunk": "be aligned",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.14,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.82,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.72,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.8,
+        "final_annotation": false
+      },
+      {
+        "chunk": "carefully",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.98,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "aligned",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.02,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must be",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.88,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.92,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.82,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.82,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.68,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.98,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.88,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.5,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.7,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      }
+    ]
+  },
+  {
+    "text": "Attach the filler panel.",
+    "expected": [
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ],
+    "final_produced": [
+      {
+        "text": "Attach the filler",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "panel",
+        "type": "ambiguous_term"
+      }
+    ],
+    "chunk_tracing": [
+      {
+        "chunk": "Attach the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.56,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.82,
+        "final_annotation": true
+      },
+      {
+        "chunk": "the filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.84,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.52,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.9,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.3,
+        "final_annotation": false
+      },
+      {
+        "chunk": "Attach the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.88,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.56,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.84,
+        "final_annotation": false
+      },
+      {
+        "chunk": "Attach",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.78,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.58,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.84,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.7,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": true
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.94,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      }
+    ]
+  },
+  {
+    "text": "The fascia must be aligned with the filler panel carefully.",
+    "expected": [
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ],
+    "final_produced": [
+      {
+        "text": "filler panel carefully",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "The fascia must",
+        "type": "ambiguous_term"
+      }
+    ],
+    "chunk_tracing": [
+      {
+        "chunk": "filler panel carefully",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.77,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.86,
+        "final_annotation": true
+      },
+      {
+        "chunk": "aligned with the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.34,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.86,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.7,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel carefully",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.07,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must be aligned",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.13,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "be aligned with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.05,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The fascia must",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.74,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": true
+      },
+      {
+        "chunk": "with the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.78,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.8,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia must be",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.75,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.92,
+        "final_annotation": false
+      },
+      {
+        "chunk": "aligned with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.09,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.9,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.44,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia must",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.78,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.92,
+        "final_annotation": false
+      },
+      {
+        "chunk": "be aligned",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.1,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.8,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.92,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.77,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.84,
+        "final_annotation": false
+      },
+      {
+        "chunk": "carefully",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.98,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "aligned",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.07,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must be",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.85,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.92,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.84,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.78,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.75,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.98,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.5,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.64,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      }
+    ]
+  },
+  {
+    "text": "If dealing with a blind corner, use the filler panel to bridge the gap before attaching the fascia.",
+    "expected": [
+      {
+        "type": "ambiguous_term",
+        "text": "blind corner"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      }
+    ],
+    "final_produced": [
+      {
+        "text": "attaching the fascia",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "blind corner, use",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "panel to bridge",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "the filler",
+        "type": "ambiguous_term"
+      }
+    ],
+    "chunk_tracing": [
+      {
+        "chunk": "gap before attaching",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.56,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "before attaching the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "attaching the fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.64,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.88,
+        "final_annotation": true
+      },
+      {
+        "chunk": "blind corner, use",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.8,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.9,
+        "final_annotation": true
+      },
+      {
+        "chunk": "before attaching",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.77,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.4,
+        "final_annotation": false
+      },
+      {
+        "chunk": "If dealing with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.93,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "corner, use the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.04,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel to",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.39,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel to bridge",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.5,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.92,
+        "final_annotation": true
+      },
+      {
+        "chunk": "dealing with a",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.89,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "bridge the gap",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.29,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the gap before",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.69,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "a blind corner",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.77,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.88,
+        "final_annotation": false
+      },
+      {
+        "chunk": "use the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.57,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.76,
+        "final_annotation": false
+      },
+      {
+        "chunk": "attaching the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "to bridge the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.73,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "dealing with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.97,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with a blind",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.49,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "blind corner",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.86,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.86,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.2,
+        "final_annotation": false
+      },
+      {
+        "chunk": "corner, use",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.03,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "If dealing",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "bridge the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.52,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "gap before",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.78,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.72,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.7,
+        "final_annotation": true
+      },
+      {
+        "chunk": "the fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.77,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.88,
+        "final_annotation": false
+      },
+      {
+        "chunk": "attaching",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "to bridge",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.47,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel to",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.1,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "dealing",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.95,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "a blind",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.35,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "use the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.95,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the gap",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.21,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "corner",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.19,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "bridge",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.2,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "before",
+        "stage1_choice": "generic",
+        "stage1_conf": 1.0,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with a",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.68,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.76,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.83,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.88,
+        "final_annotation": false
+      },
+      {
+        "chunk": "blind",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.48,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.45,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "use",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.95,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.94,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "gap",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.38,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.95,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      }
+    ]
+  },
+  {
+    "text": "If dealing with a blind corner, use the filler panel to bridge the gap before attaching the fascia.",
+    "expected": [
+      {
+        "type": "ambiguous_term",
+        "text": "blind corner"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      }
+    ],
+    "final_produced": [
+      {
+        "text": "attaching the fascia",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "blind corner, use",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "panel to bridge",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "the filler",
+        "type": "ambiguous_term"
+      }
+    ],
+    "chunk_tracing": [
+      {
+        "chunk": "gap before attaching",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.54,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "before attaching the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.88,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "attaching the fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.54,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.9,
+        "final_annotation": true
+      },
+      {
+        "chunk": "blind corner, use",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.78,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.9,
+        "final_annotation": true
+      },
+      {
+        "chunk": "before attaching",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.78,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.42,
+        "final_annotation": false
+      },
+      {
+        "chunk": "If dealing with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.94,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "corner, use the",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.02,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel to",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.42,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel to bridge",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.52,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.9,
+        "final_annotation": true
+      },
+      {
+        "chunk": "dealing with a",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "bridge the gap",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.24,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the gap before",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.7,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "a blind corner",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.82,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.9,
+        "final_annotation": false
+      },
+      {
+        "chunk": "use the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.66,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.74,
+        "final_annotation": false
+      },
+      {
+        "chunk": "attaching the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "to bridge the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.68,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "dealing with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "blind corner",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.84,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.88,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.78,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.4,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with a blind",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.56,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.88,
+        "final_annotation": false
+      },
+      {
+        "chunk": "corner, use",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.06,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "If dealing",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.94,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "bridge the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.54,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "gap before",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.8,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.68,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.7,
+        "final_annotation": true
+      },
+      {
+        "chunk": "the fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.74,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.92,
+        "final_annotation": false
+      },
+      {
+        "chunk": "attaching",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.84,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "to bridge",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.62,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel to",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.1,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "dealing",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.94,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "a blind",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.42,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "use the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.98,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the gap",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.26,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "corner",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.32,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "bridge",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.16,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "before",
+        "stage1_choice": "generic",
+        "stage1_conf": 1.0,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with a",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.78,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.6,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.74,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.82,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.88,
+        "final_annotation": false
+      },
+      {
+        "chunk": "blind",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.6,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.88,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.54,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "use",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.94,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "gap",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.28,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.94,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      }
+    ]
+  },
+  {
+    "text": "Attach the filler panel.",
+    "expected": [
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ],
+    "final_produced": [
+      {
+        "text": "the filler panel",
+        "type": "ambiguous_term"
+      }
+    ],
+    "chunk_tracing": [
+      {
+        "chunk": "Attach the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.48,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.86,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.58,
+        "final_annotation": true
+      },
+      {
+        "chunk": "filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.94,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.3,
+        "final_annotation": false
+      },
+      {
+        "chunk": "Attach the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.88,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.48,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "Attach",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.82,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.54,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.86,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.88,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      }
+    ]
+  },
+  {
+    "text": "The fascia must be aligned with the filler panel carefully.",
+    "expected": [
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ],
+    "final_produced": [
+      {
+        "text": "filler panel carefully",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "The fascia must",
+        "type": "ambiguous_term"
+      }
+    ],
+    "chunk_tracing": [
+      {
+        "chunk": "filler panel carefully",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.72,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.88,
+        "final_annotation": true
+      },
+      {
+        "chunk": "aligned with the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.36,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.9,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.72,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel carefully",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.12,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must be aligned",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.04,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "be aligned with",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.04,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The fascia must",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.96,
+        "final_annotation": true
+      },
+      {
+        "chunk": "with the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.8,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia must be",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": false
+      },
+      {
+        "chunk": "aligned with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.12,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.92,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.44,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia must",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.8,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.9,
+        "final_annotation": false
+      },
+      {
+        "chunk": "be aligned",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.06,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.84,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.72,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.84,
+        "final_annotation": false
+      },
+      {
+        "chunk": "carefully",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.98,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "aligned",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.08,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must be",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.88,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.9,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.86,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.8,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.68,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.98,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.46,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.7,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      }
+    ]
+  },
+  {
+    "text": "The fascia must be aligned with the filler panel carefully.",
+    "expected": [
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ],
+    "final_produced": [
+      {
+        "text": "filler panel carefully",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "The fascia must",
+        "type": "ambiguous_term"
+      }
+    ],
+    "chunk_tracing": [
+      {
+        "chunk": "filler panel carefully",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.86,
+        "final_annotation": true
+      },
+      {
+        "chunk": "aligned with the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.4,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.9,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.7,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel carefully",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.08,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must be aligned",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.1,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "be aligned with",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.04,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The fascia must",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.8,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": true
+      },
+      {
+        "chunk": "with the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.76,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia must be",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.7,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.92,
+        "final_annotation": false
+      },
+      {
+        "chunk": "aligned with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.16,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.92,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.46,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia must",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.8,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": false
+      },
+      {
+        "chunk": "be aligned",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.06,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.86,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.78,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.84,
+        "final_annotation": false
+      },
+      {
+        "chunk": "carefully",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.98,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "aligned",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.02,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must be",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.88,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.92,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.88,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.8,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.7,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.98,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.88,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.42,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.72,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      }
+    ]
+  },
+  {
+    "text": "The fascia must be aligned with the filler panel carefully.",
+    "expected": [
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ],
+    "final_produced": [
+      {
+        "text": "filler panel carefully",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "The fascia must",
+        "type": "ambiguous_term"
+      }
+    ],
+    "chunk_tracing": [
+      {
+        "chunk": "filler panel carefully",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.78,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.88,
+        "final_annotation": true
+      },
+      {
+        "chunk": "aligned with the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.4,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.88,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.72,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel carefully",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.04,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must be aligned",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.12,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "be aligned with",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.02,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The fascia must",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.78,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": true
+      },
+      {
+        "chunk": "with the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.8,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia must be",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": false
+      },
+      {
+        "chunk": "aligned with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.16,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.9,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.44,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia must",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.78,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.92,
+        "final_annotation": false
+      },
+      {
+        "chunk": "be aligned",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.12,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.86,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.96,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.78,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.88,
+        "final_annotation": false
+      },
+      {
+        "chunk": "carefully",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.98,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "aligned",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.0,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must be",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.88,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.86,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.82,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.72,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.98,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.5,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.68,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      }
+    ]
+  },
+  {
+    "text": "Attach the filler panel.",
+    "expected": [
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ],
+    "final_produced": [
+      {
+        "text": "the filler panel",
+        "type": "ambiguous_term"
+      }
+    ],
+    "chunk_tracing": [
+      {
+        "chunk": "Attach the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.46,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.84,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.5,
+        "final_annotation": true
+      },
+      {
+        "chunk": "filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.9,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.28,
+        "final_annotation": false
+      },
+      {
+        "chunk": "Attach the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.84,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.46,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "Attach",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.86,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.4,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.72,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      }
+    ]
+  },
+  {
+    "text": "Attach the filler panel.",
+    "expected": [
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ],
+    "final_produced": [
+      {
+        "text": "the filler panel",
+        "type": "ambiguous_term"
+      }
+    ],
+    "chunk_tracing": [
+      {
+        "chunk": "Attach the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.4,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.84,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.5,
+        "final_annotation": true
+      },
+      {
+        "chunk": "filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.9,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.34,
+        "final_annotation": false
+      },
+      {
+        "chunk": "Attach the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.22,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "Attach",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.82,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.44,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.68,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      }
+    ]
+  },
+  {
+    "text": "Attach the filler panel.",
+    "expected": [
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ],
+    "final_produced": [
+      {
+        "text": "the filler panel",
+        "type": "ambiguous_term"
+      }
+    ],
+    "chunk_tracing": [
+      {
+        "chunk": "Attach the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.42,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.82,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.52,
+        "final_annotation": true
+      },
+      {
+        "chunk": "filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.9,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.28,
+        "final_annotation": false
+      },
+      {
+        "chunk": "Attach the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.22,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "Attach",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.84,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.46,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.68,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      }
+    ]
+  },
+  {
+    "text": "If dealing with a blind corner, use the filler panel to bridge the gap before attaching the fascia.",
+    "expected": [
+      {
+        "type": "ambiguous_term",
+        "text": "blind corner"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      }
+    ],
+    "final_produced": [
+      {
+        "text": "attaching the fascia",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "blind corner, use",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "filler panel to",
+        "type": "ambiguous_term"
+      }
+    ],
+    "chunk_tracing": [
+      {
+        "chunk": "gap before attaching",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.56,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "before attaching the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.88,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "attaching the fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.62,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.86,
+        "final_annotation": true
+      },
+      {
+        "chunk": "blind corner, use",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.82,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.88,
+        "final_annotation": true
+      },
+      {
+        "chunk": "before attaching",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.8,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.4,
+        "final_annotation": false
+      },
+      {
+        "chunk": "If dealing with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.94,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "corner, use the",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.1,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel to bridge",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.46,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel to",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.5,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.58,
+        "final_annotation": true
+      },
+      {
+        "chunk": "dealing with a",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "bridge the gap",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.36,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the gap before",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.74,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "a blind corner",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.8,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.84,
+        "final_annotation": false
+      },
+      {
+        "chunk": "use the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.7,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.7,
+        "final_annotation": false
+      },
+      {
+        "chunk": "attaching the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.94,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "to bridge the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.72,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "dealing with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "blind corner",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.86,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.82,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.72,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.12,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with a blind",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.58,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.88,
+        "final_annotation": false
+      },
+      {
+        "chunk": "corner, use",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.18,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "If dealing",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "bridge the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.62,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "gap before",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.8,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.68,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.64,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.9,
+        "final_annotation": false
+      },
+      {
+        "chunk": "attaching",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.86,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "to bridge",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.52,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel to",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.02,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "dealing",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "a blind",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.4,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "use the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the gap",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.3,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "corner",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.24,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "bridge",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.12,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "before",
+        "stage1_choice": "generic",
+        "stage1_conf": 1.0,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with a",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.82,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.72,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.74,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.82,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.86,
+        "final_annotation": false
+      },
+      {
+        "chunk": "blind",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.52,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.88,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.5,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.86,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "use",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "gap",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.44,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      }
+    ]
+  },
+  {
+    "text": "Attach the filler panel.",
+    "expected": [
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ],
+    "final_produced": [
+      {
+        "text": "the filler",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "panel",
+        "type": "ambiguous_term"
+      }
+    ],
+    "chunk_tracing": [
+      {
+        "chunk": "Attach the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.46,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.86,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.46,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.92,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.26,
+        "final_annotation": false
+      },
+      {
+        "chunk": "Attach the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.5,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.86,
+        "final_annotation": true
+      },
+      {
+        "chunk": "Attach",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.78,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.56,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.84,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.92,
+        "final_annotation": true
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.88,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      }
+    ]
+  },
+  {
+    "text": "Attach the filler panel.",
+    "expected": [
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ],
+    "final_produced": [
+      {
+        "text": "filler",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "panel",
+        "type": "ambiguous_term"
+      }
+    ],
+    "chunk_tracing": [
+      {
+        "chunk": "Attach the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.48,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.84,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.48,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.94,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.32,
+        "final_annotation": false
+      },
+      {
+        "chunk": "Attach the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.84,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.48,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "Attach",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.86,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.52,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.84,
+        "final_annotation": true
+      },
+      {
+        "chunk": "panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": true
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      }
+    ]
+  },
+  {
+    "text": "If dealing with a blind corner, use the filler panel to bridge the gap before attaching the fascia.",
+    "expected": [
+      {
+        "type": "ambiguous_term",
+        "text": "blind corner"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      }
+    ],
+    "final_produced": [
+      {
+        "text": "attaching the fascia",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "blind corner, use",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "filler panel to",
+        "type": "ambiguous_term"
+      }
+    ],
+    "chunk_tracing": [
+      {
+        "chunk": "gap before attaching",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.5,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "before attaching the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.86,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "attaching the fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.62,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.92,
+        "final_annotation": true
+      },
+      {
+        "chunk": "blind corner, use",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.88,
+        "final_annotation": true
+      },
+      {
+        "chunk": "before attaching",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.78,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.4,
+        "final_annotation": false
+      },
+      {
+        "chunk": "If dealing with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.94,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "corner, use the",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.04,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel to",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.56,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.66,
+        "final_annotation": true
+      },
+      {
+        "chunk": "panel to bridge",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.5,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.88,
+        "final_annotation": false
+      },
+      {
+        "chunk": "dealing with a",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "bridge the gap",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.22,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the gap before",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.76,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "a blind corner",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.82,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.84,
+        "final_annotation": false
+      },
+      {
+        "chunk": "use the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.54,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.74,
+        "final_annotation": false
+      },
+      {
+        "chunk": "attaching the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "to bridge the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.64,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "dealing with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "blind corner",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.84,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.84,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.74,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.34,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with a blind",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.52,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.86,
+        "final_annotation": false
+      },
+      {
+        "chunk": "corner, use",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.08,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "If dealing",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "bridge the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.38,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "gap before",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.74,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.72,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.72,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.9,
+        "final_annotation": false
+      },
+      {
+        "chunk": "attaching",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.84,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "to bridge",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.52,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel to",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.04,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "dealing",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "a blind",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.44,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "use the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the gap",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.32,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "corner",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.14,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "bridge",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.1,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "before",
+        "stage1_choice": "generic",
+        "stage1_conf": 1.0,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with a",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.68,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.7,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.82,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.86,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.42,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "blind",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.56,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.9,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "use",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "gap",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.36,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      }
+    ]
+  },
+  {
+    "text": "The fascia must be aligned with the filler panel carefully.",
+    "expected": [
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      }
+    ],
+    "final_produced": [
+      {
+        "text": "filler panel carefully",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "The fascia must",
+        "type": "ambiguous_term"
+      }
+    ],
+    "chunk_tracing": [
+      {
+        "chunk": "filler panel carefully",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.72,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.88,
+        "final_annotation": true
+      },
+      {
+        "chunk": "aligned with the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.36,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.86,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.72,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel carefully",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.16,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must be aligned",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.08,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "be aligned with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.0,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The fascia must",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": true
+      },
+      {
+        "chunk": "with the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.78,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.76,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia must be",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.72,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": false
+      },
+      {
+        "chunk": "aligned with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.16,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.92,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.4,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia must",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.92,
+        "final_annotation": false
+      },
+      {
+        "chunk": "be aligned",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.0,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.82,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.96,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.72,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.86,
+        "final_annotation": false
+      },
+      {
+        "chunk": "carefully",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.98,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "aligned",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.04,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must be",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.88,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.92,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.8,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.82,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.74,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.98,
+        "final_annotation": false
+      },
+      {
+        "chunk": "must",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "The",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.52,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.7,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      }
+    ]
+  },
+  {
+    "text": "If dealing with a blind corner, use the filler panel to bridge the gap before attaching the fascia.",
+    "expected": [
+      {
+        "type": "ambiguous_term",
+        "text": "blind corner"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "filler panel"
+      },
+      {
+        "type": "ambiguous_term",
+        "text": "fascia"
+      }
+    ],
+    "final_produced": [
+      {
+        "text": "attaching the fascia",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "blind corner, use",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "panel to bridge",
+        "type": "ambiguous_term"
+      },
+      {
+        "text": "the filler",
+        "type": "ambiguous_term"
+      }
+    ],
+    "chunk_tracing": [
+      {
+        "chunk": "gap before attaching",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.54,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "before attaching the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.86,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "attaching the fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.6,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.86,
+        "final_annotation": true
+      },
+      {
+        "chunk": "blind corner, use",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.82,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.86,
+        "final_annotation": true
+      },
+      {
+        "chunk": "before attaching",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.84,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.36,
+        "final_annotation": false
+      },
+      {
+        "chunk": "If dealing with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.94,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "corner, use the",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.04,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel to",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.4,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel to bridge",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.52,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.88,
+        "final_annotation": true
+      },
+      {
+        "chunk": "dealing with a",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.84,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "bridge the gap",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.28,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the gap before",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.74,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "a blind corner",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.78,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.86,
+        "final_annotation": false
+      },
+      {
+        "chunk": "use the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.68,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.7,
+        "final_annotation": false
+      },
+      {
+        "chunk": "attaching the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.9,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "to bridge the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.64,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "dealing with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.98,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "blind corner",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.88,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.84,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.76,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.28,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with a blind",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.52,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.88,
+        "final_annotation": false
+      },
+      {
+        "chunk": "corner, use",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.16,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "If dealing",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "bridge the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.44,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "gap before",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.78,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.72,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.72,
+        "final_annotation": true
+      },
+      {
+        "chunk": "the fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.8,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.9,
+        "final_annotation": false
+      },
+      {
+        "chunk": "attaching",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.86,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "to bridge",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.56,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel to",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.04,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "dealing",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "a blind",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.48,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "use the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the gap",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.28,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "corner",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.28,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "bridge",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.2,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "before",
+        "stage1_choice": "generic",
+        "stage1_conf": 1.0,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with a",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.84,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "filler",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.74,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.68,
+        "final_annotation": false
+      },
+      {
+        "chunk": "fascia",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.82,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.84,
+        "final_annotation": false
+      },
+      {
+        "chunk": "blind",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.64,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.86,
+        "final_annotation": false
+      },
+      {
+        "chunk": "panel",
+        "stage1_choice": "specialized",
+        "stage1_conf": 0.6,
+        "stage2_choice": "ambiguous_term",
+        "stage2_conf": 0.94,
+        "final_annotation": false
+      },
+      {
+        "chunk": "with",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.86,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "use",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.96,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "gap",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.4,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      },
+      {
+        "chunk": "the",
+        "stage1_choice": "generic",
+        "stage1_conf": 0.92,
+        "stage2_choice": null,
+        "stage2_conf": null,
+        "final_annotation": false
+      }
+    ]
+  }
+]

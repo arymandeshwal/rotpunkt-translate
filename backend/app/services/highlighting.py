@@ -1,7 +1,7 @@
 import re
 from typing import Any
 
-from app.services.translation_service import GlossaryTermInfo
+from app.services.models import GlossaryTermInfo
 
 
 def compute_deterministic_annotations(

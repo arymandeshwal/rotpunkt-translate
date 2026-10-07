@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     translation_provider: str = "mock"  # 'mock', 'deepl', or 'gemini'
     deepl_api_key: str | None = None
     gemini_api_key: str | None = None
+    openrouter_api_key: str | None = None
 
 
 @lru_cache

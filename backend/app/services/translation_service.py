@@ -1,6 +1,5 @@
 import logging
 import uuid
-from dataclasses import dataclass
 
 from sqlalchemy import and_, select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -9,19 +8,11 @@ from sqlalchemy.orm import selectinload
 from app.db import SessionLocal
 from app.models.glossary import GlossaryEntry
 from app.models.project import Document, DocumentSegment, ProjectStatus
-from app.services.highlighting import compute_deterministic_annotations
+from app.services.jev_annotator import compute_ai_annotations
+from app.services.models import GlossaryTermInfo
 from app.services.translation.factory import get_translation_provider
 
 logger = logging.getLogger(__name__)
-
-
-@dataclass
-class GlossaryTermInfo:
-    entry_id: int
-    source_text: str
-    target_text: str
-    is_dnt: bool
-    is_case_sensitive: bool
 
 
 async def get_glossary_for_languages(
@@ -163,18 +154,25 @@ async def run_document_translation(document_id: uuid.UUID, target_language: str)
                         f"Provider returned {len(translated_texts)} items, expected {len(batch)}."
                     )
 
+                # Compute F3/F4 annotations via JEV
+                ai_annotations_batch = await compute_ai_annotations(translated_texts)
+
                 # 4. Save results to DB
-                for seg, translation in zip(batch, translated_texts, strict=False):
+                for seg, translation, ai_annotations in zip(
+                    batch, translated_texts, ai_annotations_batch, strict=False
+                ):
                     # Update translations
                     current_translations = dict(seg.translations or {})
                     current_translations[target_language] = translation
                     seg.translations = current_translations
 
-                    # Update annotations
+                    # Update annotations (Deterministic + AI)
                     det_annotations = compute_deterministic_annotations(translation, glossary_infos)
+                    combined_annotations = det_annotations + ai_annotations
+                    combined_annotations.sort(key=lambda x: x["start"])
 
                     current_annotations = dict(seg.annotations or {})
-                    current_annotations[target_language] = det_annotations
+                    current_annotations[target_language] = combined_annotations
                     seg.annotations = current_annotations
 
             except Exception as e:
