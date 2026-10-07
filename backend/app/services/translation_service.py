@@ -8,6 +8,7 @@ from sqlalchemy.orm import selectinload
 from app.db import SessionLocal
 from app.models.glossary import GlossaryEntry
 from app.models.project import Document, DocumentSegment, ProjectStatus
+from app.services.highlighting import compute_deterministic_annotations
 from app.services.jev_annotator import compute_ai_annotations
 from app.services.models import GlossaryTermInfo
 from app.services.translation.factory import get_translation_provider
