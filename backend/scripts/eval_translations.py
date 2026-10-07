@@ -27,47 +27,55 @@ async def run_eval(provider_name: str, provider, dataset: list[dict]):
     dnt_hits = 0
     dnt_total = 0
     
-    # We batch requests to speed up the eval
-    batch_size = 20
-    for i in range(0, len(dataset), batch_size):
-        batch = dataset[i : i + batch_size]
-        texts_de = [item["source_de"] for item in batch]
+    # Group dataset by language pair
+    from collections import defaultdict
+    batches_by_lang = defaultdict(list)
+    for item in dataset:
+        src = item.get("source_lang", "de")
+        tgt = item.get("target_lang", "en")
+        batches_by_lang[(src, tgt)].append(item)
         
-        # Build the combined glossary for this batch
-        combined_glossary = {}
-        for item in batch:
-            combined_glossary.update(item.get("required_glossary", {}))
-            for dnt in item.get("do_not_translate", []):
-                combined_glossary[dnt] = dnt
-                
-        try:
-            translations = await provider.translate(
-                texts_de, "de", "en", glossary=combined_glossary
-            )
-        except Exception as e:
-            print(f"Error during {provider_name} translation: {e}")
-            translations = [""] * len(batch)
-
-        for item, trans in zip(batch, translations, strict=True):
-            # 1. Glossary Adherence
-            for src, tgt in item.get("required_glossary", {}).items():
-                glossary_total += 1
-                if tgt.lower() in trans.lower():
-                    glossary_hits += 1
+    for (src, tgt), items in batches_by_lang.items():
+        batch_size = 20
+        for i in range(0, len(items), batch_size):
+            batch = items[i : i + batch_size]
+            texts_source = [item["source_text"] for item in batch]
+            
+            # Build the combined glossary for this batch
+            combined_glossary = {}
+            for item in batch:
+                combined_glossary.update(item.get("required_glossary", {}))
+                for dnt in item.get("do_not_translate", []):
+                    combined_glossary[dnt] = dnt
                     
-            # 2. DNT Adherence
-            for dnt in item.get("do_not_translate", []):
-                dnt_total += 1
-                if dnt in trans:
-                    dnt_hits += 1
+            try:
+                translations = await provider.translate(
+                    texts_source, src, tgt, glossary=combined_glossary
+                )
+            except Exception as e:
+                print(f"Error during {provider_name} translation for {src}->{tgt}: {e}")
+                translations = [""] * len(batch)
 
-            results.append({
-                "id": item["id"],
-                "source": item["source_de"],
-                "ground_truth": item["ground_truth_en"],
-                "output": trans,
-                "category": item["category"]
-            })
+            for item, trans in zip(batch, translations, strict=True):
+                # 1. Glossary Adherence
+                for source_term, tgt_term in item.get("required_glossary", {}).items():
+                    glossary_total += 1
+                    if tgt_term.lower() in trans.lower():
+                        glossary_hits += 1
+                        
+                # 2. DNT Adherence
+                for dnt in item.get("do_not_translate", []):
+                    dnt_total += 1
+                    if dnt in trans:
+                        dnt_hits += 1
+
+                results.append({
+                    "id": item["id"],
+                    "source": item["source_text"],
+                    "ground_truth": item["ground_truth"],
+                    "output": trans,
+                    "category": item["category"]
+                })
             
     # Calculate chrF and BLEU over the whole corpus
     refs = [[r["ground_truth"] for r in results]]
