@@ -55,7 +55,7 @@ A2, B3 (PDF), B5, B6, B7, B8, C1, C2, D1, D2, D4, E2, F1–F5, G5, H1–H3, I1, 
 | 3 | **Upload + project** | B3, B8, A2, B7, C1 | ✅ |
 | 4 | **Translation providers** | D1, D2, C2 | ✅ |
 | 5 | **Glossary enforcement** | D4 | ✅ |
-| 6 | **Translation job** (background, batched, status) | – | ⬜ |
+| 6 | **Translation job** (background, batched, status) | – | ✅ |
 | 7 | **Term highlighting** | F1, F2, then F3–F5 | ⬜ |
 | 8 | **Side-by-side preview** | E2 | ⬜ |
 | 9 | **Re-translate segment** | G5 | ⬜ |
@@ -120,13 +120,13 @@ Includes an end-to-end check of all sample PDFs: upload → database contents vs
 | 3e | E2E tests: Upload sample PDFs and verify database contents | ✅ |
 | 3f | Frontend UI: File dropzone, project setup view, confirm source language | ✅ |
 
-### Steps 4–11 ⬜
-- **4 – Providers:** one interface; DeepL, Gemini and a mock provider (used in CI). Shared contract tests.
-- **5 – Glossary enforcement:** the experiment showed DeepL translates product/colour/brand
-  names ("Class VI Black" → "Klasse VI Schwarz") and ignores Rotpunkt terms
-  (Korpus → "body" instead of "carcase").
-- **6 – Translation job:** background job with queued → running → done/failed, batching,
-  partial failures.
+### Steps 7–11 ⬜
+
+**Steps 4–6 are completed:**
+- **4 – Providers:** DeepL, Gemini (JSON structured) and Mock. Contract tests passed. ✅
+- **5 – Glossary enforcement:** Pre-filtering, JSON target array mapping, and 100-string evaluation suite (chrF/BLEU) passed (Gemini > DeepL). ✅
+- **6 – Translation job:** FastAPI BackgroundTasks, DB batching (size=50), partial failure tolerance, and ProjectStatus lifecycle (Draft → Translating → Review). ✅
+
 - **7 – Highlighting:** F1/F2 deterministic (glossary, protected names), then F3–F5 via an
   LLM annotation pass that works for any provider.
 - **8 – Preview:** side by side; fix form/table reading order here.
