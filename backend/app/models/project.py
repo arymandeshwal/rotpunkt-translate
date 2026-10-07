@@ -103,5 +103,6 @@ class DocumentSegment(Base):
     bounding_box: Mapped[list[float]] = mapped_column(JSON)
     detected_language: Mapped[str | None] = mapped_column(String(8))
     is_translatable: Mapped[bool | None] = mapped_column(Boolean)
+    translations: Mapped[dict[str, str]] = mapped_column(JSON, default=dict, server_default="{}")
 
     document: Mapped[Document] = relationship(back_populates="segments")

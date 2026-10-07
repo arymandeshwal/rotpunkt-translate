@@ -1,5 +1,6 @@
 import uuid
 from datetime import datetime
+
 from pydantic import BaseModel, ConfigDict
 
 from app.languages import LanguageCode
@@ -25,6 +26,7 @@ class DocumentSegmentSchema(BaseModel):
     bounding_box: list[float]
     detected_language: str | None
     is_translatable: bool | None
+    translations: dict[str, str]
 
     model_config = ConfigDict(from_attributes=True)
 
@@ -33,7 +35,7 @@ class DocumentSchema(BaseModel):
     id: uuid.UUID
     original_filename: str
     source_language: LanguageCode | None
-    
+
     pages: list[DocumentPageSchema]
     segments: list[DocumentSegmentSchema]
 
@@ -44,13 +46,17 @@ class ProjectUpdateRequest(BaseModel):
     source_language: LanguageCode
 
 
+class TranslateRequest(BaseModel):
+    target_language: LanguageCode
+
+
 class ProjectResponse(BaseModel):
     id: uuid.UUID
     name: str
     status: ProjectStatus
     created_at: datetime
     updated_at: datetime
-    
+
     documents: list[DocumentSchema]
 
     model_config = ConfigDict(from_attributes=True)
