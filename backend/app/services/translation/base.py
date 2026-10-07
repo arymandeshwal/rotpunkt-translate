@@ -10,11 +10,11 @@ class TranslationProvider(ABC):
 
     @abstractmethod
     async def translate(
-        self, 
-        texts: list[str], 
-        source_language: str, 
+        self,
+        texts: list[str],
+        source_language: str,
         target_language: str,
-        glossary: dict[str, str] | None = None
+        glossary: dict[str, str] | None = None,
     ) -> list[str]:
         """
         Translate a list of strings from source_language to target_language.

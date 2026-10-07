@@ -22,11 +22,11 @@ class DeepLProvider(TranslationProvider):
         self.translator = deepl.Translator(api_key)
 
     async def translate(
-        self, 
-        texts: list[str], 
-        source_language: str, 
+        self,
+        texts: list[str],
+        source_language: str,
         target_language: str,
-        glossary: dict[str, str] | None = None
+        glossary: dict[str, str] | None = None,
     ) -> list[str]:
         """
         Translate texts using the DeepL API.
@@ -60,20 +60,20 @@ class DeepLProvider(TranslationProvider):
         # DeepL glossary creation and deletion are synchronous
         deepl_glossary = None
         relevant_glossary = filter_relevant_glossary(texts, glossary)
-        
+
         loop = asyncio.get_running_loop()
-        
+
         if relevant_glossary:
             if not source:
                 raise ValueError("DeepL glossaries require a defined source_language.")
-                
+
             # Create a temporary glossary on DeepL servers
             create_func = partial(
                 self.translator.create_glossary,
                 name="rotpunkt_temp_glossary",
                 source_lang=source,
                 target_lang=target,
-                entries=relevant_glossary
+                entries=relevant_glossary,
             )
             deepl_glossary = await loop.run_in_executor(None, create_func)
 

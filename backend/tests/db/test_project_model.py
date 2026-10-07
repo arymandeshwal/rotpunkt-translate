@@ -1,4 +1,3 @@
-import pytest
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -23,7 +22,7 @@ async def test_document_and_children_cascade(db_session: AsyncSession) -> None:
     project = Project(name="Upload Test")
     db_session.add(project)
     await db_session.commit()
-    
+
     doc = Document(
         project_id=project.id,
         original_filename="test.pdf",
@@ -42,25 +41,29 @@ async def test_document_and_children_cascade(db_session: AsyncSession) -> None:
                 detected_language="de",
                 is_translatable=True,
             )
-        ]
+        ],
     )
     db_session.add(doc)
     await db_session.commit()
     await db_session.refresh(doc)
-    
+
     assert doc.id is not None
     assert len(doc.pages) == 1
     assert doc.pages[0].warnings == ["no_text_layer"]
     assert len(doc.segments) == 1
     assert doc.segments[0].detected_language == "de"
-    
+
     # Test cascade delete
     doc_id = doc.id
     await db_session.delete(doc)
     await db_session.commit()
-    
-    result_pages = await db_session.scalars(select(DocumentPage).where(DocumentPage.document_id == doc_id))
+
+    result_pages = await db_session.scalars(
+        select(DocumentPage).where(DocumentPage.document_id == doc_id)
+    )
     assert len(result_pages.all()) == 0
-    
-    result_segments = await db_session.scalars(select(DocumentSegment).where(DocumentSegment.document_id == doc_id))
+
+    result_segments = await db_session.scalars(
+        select(DocumentSegment).where(DocumentSegment.document_id == doc_id)
+    )
     assert len(result_segments.all()) == 0

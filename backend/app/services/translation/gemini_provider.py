@@ -21,22 +21,19 @@ class GeminiProvider(TranslationProvider):
     def __init__(self, api_key: str):
         """
         Initialize the Gemini provider.
-        
+
         Args:
             api_key: The authentication key for the Gemini API.
         """
-        self.client = genai.Client(
-            vertexai=True,
-            api_key=api_key
-        )
+        self.client = genai.Client(vertexai=True, api_key=api_key)
         self.model = "gemini-3.5-flash-lite"
 
     async def translate(
-        self, 
-        texts: list[str], 
-        source_language: str, 
+        self,
+        texts: list[str],
+        source_language: str,
         target_language: str,
-        glossary: dict[str, str] | None = None
+        glossary: dict[str, str] | None = None,
     ) -> list[str]:
         """
         Translate texts using Gemini 1.5 Flash.
@@ -72,7 +69,7 @@ class GeminiProvider(TranslationProvider):
 
         # Filter the glossary down to only terms present in the text to save tokens
         relevant_glossary = filter_relevant_glossary(to_translate, glossary)
-        
+
         glossary_rules = ""
         if relevant_glossary:
             do_not_translate = []
@@ -82,7 +79,7 @@ class GeminiProvider(TranslationProvider):
                     do_not_translate.append(k)
                 else:
                     forced_translations[k] = v
-            
+
             if forced_translations:
                 glossary_json = json.dumps(forced_translations, ensure_ascii=False)
                 glossary_rules += f"\nGlossary (Force these exact translations): {glossary_json}"
@@ -119,9 +116,9 @@ Input array:
             # The SDK parses the structured output into a Pydantic object if possible,
             # or we parse the JSON string manually.
             if hasattr(response, "parsed") and response.parsed:
-                parsed_translations = response.parsed.translations
+                parsed_translations: list[str] = getattr(response.parsed, "translations", [])
             else:
-                parsed_translations = json.loads(response.text)["translations"]
+                parsed_translations = json.loads(str(response.text))["translations"]
 
             # Fallback if the LLM hallucinated the wrong length
             if len(parsed_translations) != len(to_translate):

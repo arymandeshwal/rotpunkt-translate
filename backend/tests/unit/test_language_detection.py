@@ -11,7 +11,7 @@ def test_is_translatable_high_confidence_foreign() -> None:
     # High confidence English/French, should be skipped (False) when source is German
     assert is_translatable("Please note the new assembly instructions.", "de") is False
     assert is_translatable("Armoires hautes et meubles bas", "de") is False
-    
+
     # If the source is actually English, the English text should be translated
     assert is_translatable("Please note the new assembly instructions.", "en") is True
 
@@ -19,13 +19,13 @@ def test_is_translatable_high_confidence_foreign() -> None:
 def test_is_translatable_mixed_and_low_confidence() -> None:
     # Mixed German and English (Top language might be English, but confidence < 0.70)
     assert is_translatable("Grifflos / Handleless design", "de") is True
-    
+
     # Mixed German and English (Top language is German)
     assert is_translatable("Korpusstärke (Carcase thickness): 19mm", "de") is True
-    
+
     # Short foreign phrase, confidence < 0.70, should be safely sent to translation
     assert is_translatable("Tall units and base units", "de") is True
-    
+
     # Single obscure words sometimes get misclassified by Lingua
     assert is_translatable("Korpusdekore", "de") is True
 

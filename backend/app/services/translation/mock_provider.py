@@ -8,11 +8,11 @@ class MockProvider(TranslationProvider):
     """
 
     async def translate(
-        self, 
-        texts: list[str], 
-        source_language: str, 
+        self,
+        texts: list[str],
+        source_language: str,
         target_language: str,
-        glossary: dict[str, str] | None = None
+        glossary: dict[str, str] | None = None,
     ) -> list[str]:
         """
         Simulate translating a list of strings by prefixing them with the target language.
