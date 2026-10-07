@@ -84,7 +84,7 @@ def process_single_text(client: TypeSafeClient, text: str) -> list[dict[str, Any
         is_spec = bool(ans and ans.choice == "specialized" and prob >= PROBABILITY_THRESHOLD)
 
         # Populate unigram lookup
-        for u_chunk, u_start, u_end in unigrams:
+        for _, u_start, u_end in unigrams:
             if start == u_start and end == u_end:
                 unigram_is_specialized[(u_start, u_end)] = is_spec
                 break
