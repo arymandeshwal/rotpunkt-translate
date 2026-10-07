@@ -445,7 +445,7 @@
           "projects"
         ],
         "summary": "Create Project",
-        "description": "Upload a PDF, parse its contents, detect languages, and create a new project.",
+        "description": "Upload a PDF, parse its contents, detect languages, and create a new project.\n\nArgs:\n    file: The uploaded PDF file payload.\n    db_session: The active asynchronous database session.\n\nReturns:\n    ProjectResponse containing the new project's metadata, parsed pages, and segments.\n\nRaises:\n    HTTPException: 400 for missing filename or bad PDF, 500 for unhandled parsing errors.",
         "operationId": "create_project_api_projects_post",
         "requestBody": {
           "content": {
@@ -487,7 +487,7 @@
           "projects"
         ],
         "summary": "Get Project",
-        "description": "Get a project and all its parsed contents.",
+        "description": "Get a project and all its parsed contents.\n\nArgs:\n    project_id: The UUID of the project to retrieve.\n    db_session: The active asynchronous database session.\n\nReturns:\n    ProjectResponse representing the requested project.",
         "operationId": "get_project_api_projects__project_id__get",
         "parameters": [
           {
@@ -529,7 +529,7 @@
           "projects"
         ],
         "summary": "Update Project",
-        "description": "Update a project, typically to confirm or change its source language.\n\nChanging the source language recalculates the 'is_translatable' flag\nfor every segment in the project.",
+        "description": "Update a project, typically to confirm or change its source language.\n\nChanging the source language recalculates the 'is_translatable' flag\nfor every segment in the project.\n\nArgs:\n    project_id: The UUID of the project to update.\n    payload: ProjectUpdateRequest containing the new source language.\n    db_session: The active asynchronous database session.\n\nReturns:\n    ProjectResponse representing the updated project.",
         "operationId": "update_project_api_projects__project_id__patch",
         "parameters": [
           {
@@ -560,6 +560,64 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProjectResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/projects/{project_id}/translate": {
+      "post": {
+        "tags": [
+          "projects"
+        ],
+        "summary": "Translate Project",
+        "description": "Trigger the translation of a project.\n\nThis endpoint returns immediately (202 Accepted) while the translation\norchestrator processes the document segments in the background.\n\nArgs:\n    project_id: The UUID of the project to translate.\n    payload: TranslateRequest containing the target language code.\n    background_tasks: FastAPI BackgroundTasks runner.\n    db_session: The active asynchronous database session.\n\nReturns:\n    A dictionary containing a success message indicating background processing started.\n\nRaises:\n    HTTPException: 400 if the project has no documents or is missing a source language.",
+        "operationId": "translate_project_api_projects__project_id__translate_post",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Project Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TranslateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Translate Project Api Projects  Project Id  Translate Post"
                 }
               }
             }
@@ -738,6 +796,24 @@
               }
             ],
             "title": "Is Translatable"
+          },
+          "translations": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Translations"
+          },
+          "annotations": {
+            "additionalProperties": {
+              "items": {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "type": "object",
+            "title": "Annotations"
           }
         },
         "type": "object",
@@ -749,7 +825,8 @@
           "text",
           "bounding_box",
           "detected_language",
-          "is_translatable"
+          "is_translatable",
+          "translations"
         ],
         "title": "DocumentSegmentSchema"
       },
@@ -1221,6 +1298,28 @@
           "text"
         ],
         "title": "TermOut"
+      },
+      "TranslateRequest": {
+        "properties": {
+          "target_language": {
+            "type": "string",
+            "enum": [
+              "de",
+              "en",
+              "fr",
+              "nl",
+              "da",
+              "nb",
+              "es"
+            ],
+            "title": "Target Language"
+          }
+        },
+        "type": "object",
+        "required": [
+          "target_language"
+        ],
+        "title": "TranslateRequest"
       },
       "ValidationError": {
         "properties": {

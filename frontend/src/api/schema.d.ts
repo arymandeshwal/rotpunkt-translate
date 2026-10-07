@@ -87,6 +87,16 @@ export interface paths {
         /**
          * Create Project
          * @description Upload a PDF, parse its contents, detect languages, and create a new project.
+         *
+         *     Args:
+         *         file: The uploaded PDF file payload.
+         *         db_session: The active asynchronous database session.
+         *
+         *     Returns:
+         *         ProjectResponse containing the new project's metadata, parsed pages, and segments.
+         *
+         *     Raises:
+         *         HTTPException: 400 for missing filename or bad PDF, 500 for unhandled parsing errors.
          */
         post: operations["create_project_api_projects_post"];
         delete?: never;
@@ -105,6 +115,13 @@ export interface paths {
         /**
          * Get Project
          * @description Get a project and all its parsed contents.
+         *
+         *     Args:
+         *         project_id: The UUID of the project to retrieve.
+         *         db_session: The active asynchronous database session.
+         *
+         *     Returns:
+         *         ProjectResponse representing the requested project.
          */
         get: operations["get_project_api_projects__project_id__get"];
         put?: never;
@@ -118,8 +135,51 @@ export interface paths {
          *
          *     Changing the source language recalculates the 'is_translatable' flag
          *     for every segment in the project.
+         *
+         *     Args:
+         *         project_id: The UUID of the project to update.
+         *         payload: ProjectUpdateRequest containing the new source language.
+         *         db_session: The active asynchronous database session.
+         *
+         *     Returns:
+         *         ProjectResponse representing the updated project.
          */
         patch: operations["update_project_api_projects__project_id__patch"];
+        trace?: never;
+    };
+    "/api/projects/{project_id}/translate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Translate Project
+         * @description Trigger the translation of a project.
+         *
+         *     This endpoint returns immediately (202 Accepted) while the translation
+         *     orchestrator processes the document segments in the background.
+         *
+         *     Args:
+         *         project_id: The UUID of the project to translate.
+         *         payload: TranslateRequest containing the target language code.
+         *         background_tasks: FastAPI BackgroundTasks runner.
+         *         db_session: The active asynchronous database session.
+         *
+         *     Returns:
+         *         A dictionary containing a success message indicating background processing started.
+         *
+         *     Raises:
+         *         HTTPException: 400 if the project has no documents or is missing a source language.
+         */
+        post: operations["translate_project_api_projects__project_id__translate_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
         trace?: never;
     };
 }
@@ -184,6 +244,16 @@ export interface components {
             detected_language: string | null;
             /** Is Translatable */
             is_translatable: boolean | null;
+            /** Translations */
+            translations: {
+                [key: string]: string;
+            };
+            /** Annotations */
+            annotations?: {
+                [key: string]: {
+                    [key: string]: unknown;
+                }[];
+            };
         };
         /** DuplicateTermsDetail */
         DuplicateTermsDetail: {
@@ -365,6 +435,14 @@ export interface components {
             language: "de" | "en" | "fr" | "nl" | "da" | "nb" | "es";
             /** Text */
             text: string;
+        };
+        /** TranslateRequest */
+        TranslateRequest: {
+            /**
+             * Target Language
+             * @enum {string}
+             */
+            target_language: "de" | "en" | "fr" | "nl" | "da" | "nb" | "es";
         };
         /** ValidationError */
         ValidationError: {
@@ -731,6 +809,43 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ProjectResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    translate_project_api_projects__project_id__translate_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                project_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TranslateRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: string;
+                    };
                 };
             };
             /** @description Validation Error */

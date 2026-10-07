@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 from app.languages import LanguageCode
 from app.models.project import ProjectStatus
@@ -27,6 +27,7 @@ class DocumentSegmentSchema(BaseModel):
     detected_language: str | None
     is_translatable: bool | None
     translations: dict[str, str]
+    annotations: dict[str, list[dict]] = Field(default_factory=dict)
 
     model_config = ConfigDict(from_attributes=True)
 

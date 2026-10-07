@@ -1,5 +1,6 @@
 import logging
 import uuid
+from dataclasses import dataclass
 
 from sqlalchemy import and_, select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -8,33 +9,41 @@ from sqlalchemy.orm import selectinload
 from app.db import SessionLocal
 from app.models.glossary import GlossaryEntry
 from app.models.project import Document, DocumentSegment, ProjectStatus
+from app.services.highlighting import compute_deterministic_annotations
 from app.services.translation.factory import get_translation_provider
 
 logger = logging.getLogger(__name__)
 
 
+@dataclass
+class GlossaryTermInfo:
+    entry_id: int
+    source_text: str
+    target_text: str
+    is_dnt: bool
+    is_case_sensitive: bool
+
+
 async def get_glossary_for_languages(
     session: AsyncSession, source_lang: str, target_lang: str
-) -> dict[str, str]:
+) -> list[GlossaryTermInfo]:
     """
-    Query the database to build a flat translation dictionary for a specific language pair.
-    Only approved terms should ideally be fetched, but for now we fetch all terms
-    associated with an entry that has both languages.
-    """
-    # For now, we join GlossaryTerm to itself via the entry_id
-    # where t1.language == source_lang and t2.language == target_lang
-    # Since SQLAlchemy makes self-joins a bit verbose, let's just query the entries
-    # that have both, using selectinload.
+    Query the database to build a list of glossary terms for a specific language pair.
 
-    # A cleaner approach using standard ORM filtering:
-    # Actually, let's fetch all terms for these languages and build it in memory
-    # since the dataset for MVP is small.
+    Args:
+        session: The SQLAlchemy async database session.
+        source_lang: The source language code (e.g., 'de').
+        target_lang: The target language code (e.g., 'en').
+
+    Returns:
+        A list of GlossaryTermInfo objects for active glossary and DNT terms.
+    """
     stmt = select(GlossaryEntry).options(selectinload(GlossaryEntry.terms))
 
     result = await session.execute(stmt)
     entries = result.scalars().all()
 
-    glossary_dict = {}
+    glossary_terms = []
     for entry in entries:
         source_text = None
         target_text = None
@@ -45,16 +54,35 @@ async def get_glossary_for_languages(
             elif term.language == target_lang:
                 target_text = term.text
 
+        # DNT terms might only have the source term
+        if entry.do_not_translate and source_text:
+            target_text = source_text
+
         # If the entry has both the source and target languages defined
         if source_text and target_text:
-            glossary_dict[source_text] = target_text
+            glossary_terms.append(
+                GlossaryTermInfo(
+                    entry_id=entry.id,
+                    source_text=source_text,
+                    target_text=target_text,
+                    is_dnt=entry.do_not_translate,
+                    is_case_sensitive=entry.case_sensitive,
+                )
+            )
 
-    return glossary_dict
+    return glossary_terms
 
 
 async def run_document_translation(document_id: uuid.UUID, target_language: str) -> None:
     """
     Background worker that orchestrates the translation of a document.
+
+    Args:
+        document_id: The UUID of the document being translated.
+        target_language: The target language code to translate the text into.
+
+    Returns:
+        None. Updates the database records in place.
     """
     logger.info(f"Starting translation for document {document_id} to {target_language}")
 
@@ -83,9 +111,12 @@ async def run_document_translation(document_id: uuid.UUID, target_language: str)
         await session.commit()
 
         # 1. Fetch the master glossary for this language pair
-        master_glossary = await get_glossary_for_languages(
+        glossary_infos = await get_glossary_for_languages(
             session, document.source_language, target_language
         )
+
+        # Build the flat dict for the translation provider
+        master_glossary = {item.source_text: item.target_text for item in glossary_infos}
 
         # 2. Fetch all translatable segments ordered by index
         seg_stmt = (
@@ -112,6 +143,7 @@ async def run_document_translation(document_id: uuid.UUID, target_language: str)
 
         # 3. Batch translate
         batch_size = 50
+
         for i in range(0, len(segments), batch_size):
             batch = segments[i : i + batch_size]
             texts = [seg.text for seg in batch]
@@ -133,11 +165,17 @@ async def run_document_translation(document_id: uuid.UUID, target_language: str)
 
                 # 4. Save results to DB
                 for seg, translation in zip(batch, translated_texts, strict=False):
-                    # We need to copy the JSON dict, update it, and set it back
-                    # so SQLAlchemy knows it changed.
+                    # Update translations
                     current_translations = dict(seg.translations or {})
                     current_translations[target_language] = translation
                     seg.translations = current_translations
+
+                    # Update annotations
+                    det_annotations = compute_deterministic_annotations(translation, glossary_infos)
+
+                    current_annotations = dict(seg.annotations or {})
+                    current_annotations[target_language] = det_annotations
+                    seg.annotations = current_annotations
 
             except Exception as e:
                 logger.error(f"Error translating batch {i} for document {document_id}: {e}")
