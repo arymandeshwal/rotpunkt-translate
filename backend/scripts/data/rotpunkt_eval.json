@@ -1,0 +1,1006 @@
+[
+  {
+    "id": 43,
+    "category": "dnt_brands",
+    "source_de": "Modell Zerox SY mit Anti-Fingerprint.",
+    "ground_truth_en": "Zerox SY model with anti-fingerprint.",
+    "required_glossary": {},
+    "do_not_translate": [
+      "Zerox SY"
+    ]
+  },
+  {
+    "id": 42,
+    "category": "dnt_brands",
+    "source_de": "Rotpunkt Küchen - Qualität aus Deutschland.",
+    "ground_truth_en": "Rotpunkt Küchen - quality from Germany.",
+    "required_glossary": {},
+    "do_not_translate": [
+      "Rotpunkt Küchen"
+    ]
+  },
+  {
+    "id": 92,
+    "category": "formatting",
+    "source_de": " (siehe Seite 42)",
+    "ground_truth_en": " (see page 42)",
+    "required_glossary": {},
+    "do_not_translate": []
+  },
+  {
+    "id": 10,
+    "category": "core_terminology",
+    "source_de": "Einlegeboden aus Glas, 8 mm stark.",
+    "ground_truth_en": "Glass shelf, 8 mm thick.",
+    "required_glossary": {
+      "Einlegeboden": "Glass shelf"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 66,
+    "category": "technical",
+    "source_de": "B = 600 mm",
+    "ground_truth_en": "W = 600 mm",
+    "required_glossary": {
+      "B": "W"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 51,
+    "category": "dnt_brands",
+    "source_de": "Die neue Greenline Serie.",
+    "ground_truth_en": "The new Greenline series.",
+    "required_glossary": {},
+    "do_not_translate": [
+      "Greenline"
+    ]
+  },
+  {
+    "id": 2,
+    "category": "core_terminology",
+    "source_de": "Bitte die Front vorsichtig reinigen.",
+    "ground_truth_en": "Please clean the Front carefully.",
+    "required_glossary": {
+      "Front": "Front"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 71,
+    "category": "technical",
+    "source_de": "B = 600 mm",
+    "ground_truth_en": "W = 600 mm",
+    "required_glossary": {
+      "B": "W"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 16,
+    "category": "core_terminology",
+    "source_de": "Der Korpus ist in verschiedenen Farben erhältlich.",
+    "ground_truth_en": "The Cabinet Body is available in various colors.",
+    "required_glossary": {
+      "Korpus": "Cabinet Body"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 79,
+    "category": "compound_nouns",
+    "source_de": "Eckunterschrank mit Schwenkauszug",
+    "ground_truth_en": "Corner base cabinet with swivel pull-out",
+    "required_glossary": {
+      "Eckunterschrank": "Corner base cabinet",
+      "Schwenkauszug": "swivel pull-out"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 74,
+    "category": "technical",
+    "source_de": "1 VPE = 10 Stück",
+    "ground_truth_en": "1 PU = 10 pieces",
+    "required_glossary": {
+      "VPE": "PU",
+      "Stück": "pieces"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 11,
+    "category": "core_terminology",
+    "source_de": "Der Korpus ist in verschiedenen Farben erhältlich.",
+    "ground_truth_en": "The Cabinet Body is available in various colors.",
+    "required_glossary": {
+      "Korpus": "Cabinet Body"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 56,
+    "category": "dnt_brands",
+    "source_de": "Die neue Greenline Serie.",
+    "ground_truth_en": "The new Greenline series.",
+    "required_glossary": {},
+    "do_not_translate": [
+      "Greenline"
+    ]
+  },
+  {
+    "id": 57,
+    "category": "dnt_brands",
+    "source_de": "Rotpunkt Küchen - Qualität aus Deutschland.",
+    "ground_truth_en": "Rotpunkt Küchen - quality from Germany.",
+    "required_glossary": {},
+    "do_not_translate": [
+      "Rotpunkt Küchen"
+    ]
+  },
+  {
+    "id": 73,
+    "category": "technical",
+    "source_de": "Korpusmaß: 723 mm",
+    "ground_truth_en": "Cabinet Body dimension: 723 mm",
+    "required_glossary": {
+      "Korpusmaß": "Cabinet Body dimension"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 46,
+    "category": "dnt_brands",
+    "source_de": "Die neue Greenline Serie.",
+    "ground_truth_en": "The new Greenline series.",
+    "required_glossary": {},
+    "do_not_translate": [
+      "Greenline"
+    ]
+  },
+  {
+    "id": 49,
+    "category": "dnt_brands",
+    "source_de": "Griffprofil H203 in Schwarz.",
+    "ground_truth_en": "Handle profile H203 in black.",
+    "required_glossary": {},
+    "do_not_translate": [
+      "H203"
+    ]
+  },
+  {
+    "id": 93,
+    "category": "formatting",
+    "source_de": "Achtung!!! ",
+    "ground_truth_en": "Attention!!! ",
+    "required_glossary": {},
+    "do_not_translate": []
+  },
+  {
+    "id": 77,
+    "category": "compound_nouns",
+    "source_de": "Hochschrank-Kühlkombination",
+    "ground_truth_en": "Tall unit fridge combination",
+    "required_glossary": {
+      "Hochschrank": "Tall unit"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 38,
+    "category": "core_terminology",
+    "source_de": "Der Auszug schließt gedämpft.",
+    "ground_truth_en": "The Pull-out closes softly.",
+    "required_glossary": {
+      "Auszug": "Pull-out"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 31,
+    "category": "core_terminology",
+    "source_de": "Der Korpus ist in verschiedenen Farben erhältlich.",
+    "ground_truth_en": "The Cabinet Body is available in various colors.",
+    "required_glossary": {
+      "Korpus": "Cabinet Body"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 22,
+    "category": "core_terminology",
+    "source_de": "Bitte die Front vorsichtig reinigen.",
+    "ground_truth_en": "Please clean the Front carefully.",
+    "required_glossary": {
+      "Front": "Front"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 33,
+    "category": "core_terminology",
+    "source_de": "Der Auszug schließt gedämpft.",
+    "ground_truth_en": "The Pull-out closes softly.",
+    "required_glossary": {
+      "Auszug": "Pull-out"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 97,
+    "category": "formatting",
+    "source_de": " (siehe Seite 42)",
+    "ground_truth_en": " (see page 42)",
+    "required_glossary": {},
+    "do_not_translate": []
+  },
+  {
+    "id": 81,
+    "category": "compound_nouns",
+    "source_de": "Spülenunterschrank für Einbauspülen.",
+    "ground_truth_en": "Sink base cabinet for built-in sinks.",
+    "required_glossary": {
+      "Spülenunterschrank": "Sink base cabinet",
+      "Einbauspülen": "built-in sinks"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 50,
+    "category": "dnt_brands",
+    "source_de": "Beschlag Blumotion für sanftes Schließen.",
+    "ground_truth_en": "Blumotion fitting for soft closing.",
+    "required_glossary": {},
+    "do_not_translate": [
+      "Blumotion"
+    ]
+  },
+  {
+    "id": 84,
+    "category": "compound_nouns",
+    "source_de": "Eckunterschrank mit Schwenkauszug",
+    "ground_truth_en": "Corner base cabinet with swivel pull-out",
+    "required_glossary": {
+      "Eckunterschrank": "Corner base cabinet",
+      "Schwenkauszug": "swivel pull-out"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 27,
+    "category": "core_terminology",
+    "source_de": "Bitte die Front vorsichtig reinigen.",
+    "ground_truth_en": "Please clean the Front carefully.",
+    "required_glossary": {
+      "Front": "Front"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 88,
+    "category": "compound_nouns",
+    "source_de": "Besteckeinsatz-Organisation",
+    "ground_truth_en": "Cutlery insert organization",
+    "required_glossary": {
+      "Besteckeinsatz": "Cutlery insert"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 34,
+    "category": "core_terminology",
+    "source_de": "Sockelblende in Dekorfarbe.",
+    "ground_truth_en": "Plinth panel in decor color.",
+    "required_glossary": {
+      "Sockelblende": "Plinth panel"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 9,
+    "category": "core_terminology",
+    "source_de": "Sockelblende in Dekorfarbe.",
+    "ground_truth_en": "Plinth panel in decor color.",
+    "required_glossary": {
+      "Sockelblende": "Plinth panel"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 48,
+    "category": "dnt_brands",
+    "source_de": "Modell Zerox SY mit Anti-Fingerprint.",
+    "ground_truth_en": "Zerox SY model with anti-fingerprint.",
+    "required_glossary": {},
+    "do_not_translate": [
+      "Zerox SY"
+    ]
+  },
+  {
+    "id": 60,
+    "category": "dnt_brands",
+    "source_de": "Beschlag Blumotion für sanftes Schließen.",
+    "ground_truth_en": "Blumotion fitting for soft closing.",
+    "required_glossary": {},
+    "do_not_translate": [
+      "Blumotion"
+    ]
+  },
+  {
+    "id": 64,
+    "category": "technical",
+    "source_de": "1 VPE = 10 Stück",
+    "ground_truth_en": "1 PU = 10 pieces",
+    "required_glossary": {
+      "VPE": "PU",
+      "Stück": "pieces"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 75,
+    "category": "technical",
+    "source_de": "Nischenmaß 1780 mm",
+    "ground_truth_en": "Niche dimension 1780 mm",
+    "required_glossary": {
+      "Nischenmaß": "Niche dimension"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 45,
+    "category": "dnt_brands",
+    "source_de": "Beschlag Blumotion für sanftes Schließen.",
+    "ground_truth_en": "Blumotion fitting for soft closing.",
+    "required_glossary": {},
+    "do_not_translate": [
+      "Blumotion"
+    ]
+  },
+  {
+    "id": 99,
+    "category": "formatting",
+    "source_de": ">> Neues Dekor <<",
+    "ground_truth_en": ">> New decor <<",
+    "required_glossary": {
+      "Dekor": "decor"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 53,
+    "category": "dnt_brands",
+    "source_de": "Modell Zerox SY mit Anti-Fingerprint.",
+    "ground_truth_en": "Zerox SY model with anti-fingerprint.",
+    "required_glossary": {},
+    "do_not_translate": [
+      "Zerox SY"
+    ]
+  },
+  {
+    "id": 86,
+    "category": "compound_nouns",
+    "source_de": "Spülenunterschrank für Einbauspülen.",
+    "ground_truth_en": "Sink base cabinet for built-in sinks.",
+    "required_glossary": {
+      "Spülenunterschrank": "Sink base cabinet",
+      "Einbauspülen": "built-in sinks"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 13,
+    "category": "core_terminology",
+    "source_de": "Der Auszug schließt gedämpft.",
+    "ground_truth_en": "The Pull-out closes softly.",
+    "required_glossary": {
+      "Auszug": "Pull-out"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 37,
+    "category": "core_terminology",
+    "source_de": "Bitte die Front vorsichtig reinigen.",
+    "ground_truth_en": "Please clean the Front carefully.",
+    "required_glossary": {
+      "Front": "Front"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 24,
+    "category": "core_terminology",
+    "source_de": "Sockelblende in Dekorfarbe.",
+    "ground_truth_en": "Plinth panel in decor color.",
+    "required_glossary": {
+      "Sockelblende": "Plinth panel"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 40,
+    "category": "core_terminology",
+    "source_de": "Einlegeboden aus Glas, 8 mm stark.",
+    "ground_truth_en": "Glass shelf, 8 mm thick.",
+    "required_glossary": {
+      "Einlegeboden": "Glass shelf"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 41,
+    "category": "dnt_brands",
+    "source_de": "Die neue Greenline Serie.",
+    "ground_truth_en": "The new Greenline series.",
+    "required_glossary": {},
+    "do_not_translate": [
+      "Greenline"
+    ]
+  },
+  {
+    "id": 19,
+    "category": "core_terminology",
+    "source_de": "Sockelblende in Dekorfarbe.",
+    "ground_truth_en": "Plinth panel in decor color.",
+    "required_glossary": {
+      "Sockelblende": "Plinth panel"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 67,
+    "category": "technical",
+    "source_de": "T: 56 cm, H: 78 cm",
+    "ground_truth_en": "D: 56 cm, H: 78 cm",
+    "required_glossary": {
+      "T": "D",
+      "H": "H"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 62,
+    "category": "technical",
+    "source_de": "T: 56 cm, H: 78 cm",
+    "ground_truth_en": "D: 56 cm, H: 78 cm",
+    "required_glossary": {
+      "T": "D",
+      "H": "H"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 61,
+    "category": "technical",
+    "source_de": "B = 600 mm",
+    "ground_truth_en": "W = 600 mm",
+    "required_glossary": {
+      "B": "W"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 8,
+    "category": "core_terminology",
+    "source_de": "Der Auszug schließt gedämpft.",
+    "ground_truth_en": "The Pull-out closes softly.",
+    "required_glossary": {
+      "Auszug": "Pull-out"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 35,
+    "category": "core_terminology",
+    "source_de": "Einlegeboden aus Glas, 8 mm stark.",
+    "ground_truth_en": "Glass shelf, 8 mm thick.",
+    "required_glossary": {
+      "Einlegeboden": "Glass shelf"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 100,
+    "category": "formatting",
+    "source_de": "1. Montage des Sockels",
+    "ground_truth_en": "1. Assembly of the plinth",
+    "required_glossary": {
+      "Sockel": "plinth"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 47,
+    "category": "dnt_brands",
+    "source_de": "Rotpunkt Küchen - Qualität aus Deutschland.",
+    "ground_truth_en": "Rotpunkt Küchen - quality from Germany.",
+    "required_glossary": {},
+    "do_not_translate": [
+      "Rotpunkt Küchen"
+    ]
+  },
+  {
+    "id": 3,
+    "category": "core_terminology",
+    "source_de": "Der Auszug schließt gedämpft.",
+    "ground_truth_en": "The Pull-out closes softly.",
+    "required_glossary": {
+      "Auszug": "Pull-out"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 52,
+    "category": "dnt_brands",
+    "source_de": "Rotpunkt Küchen - Qualität aus Deutschland.",
+    "ground_truth_en": "Rotpunkt Küchen - quality from Germany.",
+    "required_glossary": {},
+    "do_not_translate": [
+      "Rotpunkt Küchen"
+    ]
+  },
+  {
+    "id": 17,
+    "category": "core_terminology",
+    "source_de": "Bitte die Front vorsichtig reinigen.",
+    "ground_truth_en": "Please clean the Front carefully.",
+    "required_glossary": {
+      "Front": "Front"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 39,
+    "category": "core_terminology",
+    "source_de": "Sockelblende in Dekorfarbe.",
+    "ground_truth_en": "Plinth panel in decor color.",
+    "required_glossary": {
+      "Sockelblende": "Plinth panel"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 59,
+    "category": "dnt_brands",
+    "source_de": "Griffprofil H203 in Schwarz.",
+    "ground_truth_en": "Handle profile H203 in black.",
+    "required_glossary": {},
+    "do_not_translate": [
+      "H203"
+    ]
+  },
+  {
+    "id": 69,
+    "category": "technical",
+    "source_de": "1 VPE = 10 Stück",
+    "ground_truth_en": "1 PU = 10 pieces",
+    "required_glossary": {
+      "VPE": "PU",
+      "Stück": "pieces"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 23,
+    "category": "core_terminology",
+    "source_de": "Der Auszug schließt gedämpft.",
+    "ground_truth_en": "The Pull-out closes softly.",
+    "required_glossary": {
+      "Auszug": "Pull-out"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 63,
+    "category": "technical",
+    "source_de": "Korpusmaß: 723 mm",
+    "ground_truth_en": "Cabinet Body dimension: 723 mm",
+    "required_glossary": {
+      "Korpusmaß": "Cabinet Body dimension"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 25,
+    "category": "core_terminology",
+    "source_de": "Einlegeboden aus Glas, 8 mm stark.",
+    "ground_truth_en": "Glass shelf, 8 mm thick.",
+    "required_glossary": {
+      "Einlegeboden": "Glass shelf"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 6,
+    "category": "core_terminology",
+    "source_de": "Der Korpus ist in verschiedenen Farben erhältlich.",
+    "ground_truth_en": "The Cabinet Body is available in various colors.",
+    "required_glossary": {
+      "Korpus": "Cabinet Body"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 7,
+    "category": "core_terminology",
+    "source_de": "Bitte die Front vorsichtig reinigen.",
+    "ground_truth_en": "Please clean the Front carefully.",
+    "required_glossary": {
+      "Front": "Front"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 68,
+    "category": "technical",
+    "source_de": "Korpusmaß: 723 mm",
+    "ground_truth_en": "Cabinet Body dimension: 723 mm",
+    "required_glossary": {
+      "Korpusmaß": "Cabinet Body dimension"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 83,
+    "category": "compound_nouns",
+    "source_de": "Besteckeinsatz-Organisation",
+    "ground_truth_en": "Cutlery insert organization",
+    "required_glossary": {
+      "Besteckeinsatz": "Cutlery insert"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 20,
+    "category": "core_terminology",
+    "source_de": "Einlegeboden aus Glas, 8 mm stark.",
+    "ground_truth_en": "Glass shelf, 8 mm thick.",
+    "required_glossary": {
+      "Einlegeboden": "Glass shelf"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 80,
+    "category": "compound_nouns",
+    "source_de": "Geräteumbauschrank",
+    "ground_truth_en": "Appliance housing cabinet",
+    "required_glossary": {
+      "Geräteumbauschrank": "Appliance housing cabinet"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 44,
+    "category": "dnt_brands",
+    "source_de": "Griffprofil H203 in Schwarz.",
+    "ground_truth_en": "Handle profile H203 in black.",
+    "required_glossary": {},
+    "do_not_translate": [
+      "H203"
+    ]
+  },
+  {
+    "id": 91,
+    "category": "formatting",
+    "source_de": "- Innenfarbe: weiß ",
+    "ground_truth_en": "- Interior color: white ",
+    "required_glossary": {
+      "Innenfarbe": "Interior color"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 21,
+    "category": "core_terminology",
+    "source_de": "Der Korpus ist in verschiedenen Farben erhältlich.",
+    "ground_truth_en": "The Cabinet Body is available in various colors.",
+    "required_glossary": {
+      "Korpus": "Cabinet Body"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 1,
+    "category": "core_terminology",
+    "source_de": "Der Korpus ist in verschiedenen Farben erhältlich.",
+    "ground_truth_en": "The Cabinet Body is available in various colors.",
+    "required_glossary": {
+      "Korpus": "Cabinet Body"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 96,
+    "category": "formatting",
+    "source_de": "- Innenfarbe: weiß ",
+    "ground_truth_en": "- Interior color: white ",
+    "required_glossary": {
+      "Innenfarbe": "Interior color"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 58,
+    "category": "dnt_brands",
+    "source_de": "Modell Zerox SY mit Anti-Fingerprint.",
+    "ground_truth_en": "Zerox SY model with anti-fingerprint.",
+    "required_glossary": {},
+    "do_not_translate": [
+      "Zerox SY"
+    ]
+  },
+  {
+    "id": 94,
+    "category": "formatting",
+    "source_de": ">> Neues Dekor <<",
+    "ground_truth_en": ">> New decor <<",
+    "required_glossary": {
+      "Dekor": "decor"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 54,
+    "category": "dnt_brands",
+    "source_de": "Griffprofil H203 in Schwarz.",
+    "ground_truth_en": "Handle profile H203 in black.",
+    "required_glossary": {},
+    "do_not_translate": [
+      "H203"
+    ]
+  },
+  {
+    "id": 90,
+    "category": "compound_nouns",
+    "source_de": "Geräteumbauschrank",
+    "ground_truth_en": "Appliance housing cabinet",
+    "required_glossary": {
+      "Geräteumbauschrank": "Appliance housing cabinet"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 26,
+    "category": "core_terminology",
+    "source_de": "Der Korpus ist in verschiedenen Farben erhältlich.",
+    "ground_truth_en": "The Cabinet Body is available in various colors.",
+    "required_glossary": {
+      "Korpus": "Cabinet Body"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 72,
+    "category": "technical",
+    "source_de": "T: 56 cm, H: 78 cm",
+    "ground_truth_en": "D: 56 cm, H: 78 cm",
+    "required_glossary": {
+      "T": "D",
+      "H": "H"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 85,
+    "category": "compound_nouns",
+    "source_de": "Geräteumbauschrank",
+    "ground_truth_en": "Appliance housing cabinet",
+    "required_glossary": {
+      "Geräteumbauschrank": "Appliance housing cabinet"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 78,
+    "category": "compound_nouns",
+    "source_de": "Besteckeinsatz-Organisation",
+    "ground_truth_en": "Cutlery insert organization",
+    "required_glossary": {
+      "Besteckeinsatz": "Cutlery insert"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 65,
+    "category": "technical",
+    "source_de": "Nischenmaß 1780 mm",
+    "ground_truth_en": "Niche dimension 1780 mm",
+    "required_glossary": {
+      "Nischenmaß": "Niche dimension"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 30,
+    "category": "core_terminology",
+    "source_de": "Einlegeboden aus Glas, 8 mm stark.",
+    "ground_truth_en": "Glass shelf, 8 mm thick.",
+    "required_glossary": {
+      "Einlegeboden": "Glass shelf"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 28,
+    "category": "core_terminology",
+    "source_de": "Der Auszug schließt gedämpft.",
+    "ground_truth_en": "The Pull-out closes softly.",
+    "required_glossary": {
+      "Auszug": "Pull-out"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 89,
+    "category": "compound_nouns",
+    "source_de": "Eckunterschrank mit Schwenkauszug",
+    "ground_truth_en": "Corner base cabinet with swivel pull-out",
+    "required_glossary": {
+      "Eckunterschrank": "Corner base cabinet",
+      "Schwenkauszug": "swivel pull-out"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 98,
+    "category": "formatting",
+    "source_de": "Achtung!!! ",
+    "ground_truth_en": "Attention!!! ",
+    "required_glossary": {},
+    "do_not_translate": []
+  },
+  {
+    "id": 5,
+    "category": "core_terminology",
+    "source_de": "Einlegeboden aus Glas, 8 mm stark.",
+    "ground_truth_en": "Glass shelf, 8 mm thick.",
+    "required_glossary": {
+      "Einlegeboden": "Glass shelf"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 55,
+    "category": "dnt_brands",
+    "source_de": "Beschlag Blumotion für sanftes Schließen.",
+    "ground_truth_en": "Blumotion fitting for soft closing.",
+    "required_glossary": {},
+    "do_not_translate": [
+      "Blumotion"
+    ]
+  },
+  {
+    "id": 76,
+    "category": "compound_nouns",
+    "source_de": "Spülenunterschrank für Einbauspülen.",
+    "ground_truth_en": "Sink base cabinet for built-in sinks.",
+    "required_glossary": {
+      "Spülenunterschrank": "Sink base cabinet",
+      "Einbauspülen": "built-in sinks"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 12,
+    "category": "core_terminology",
+    "source_de": "Bitte die Front vorsichtig reinigen.",
+    "ground_truth_en": "Please clean the Front carefully.",
+    "required_glossary": {
+      "Front": "Front"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 70,
+    "category": "technical",
+    "source_de": "Nischenmaß 1780 mm",
+    "ground_truth_en": "Niche dimension 1780 mm",
+    "required_glossary": {
+      "Nischenmaß": "Niche dimension"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 87,
+    "category": "compound_nouns",
+    "source_de": "Hochschrank-Kühlkombination",
+    "ground_truth_en": "Tall unit fridge combination",
+    "required_glossary": {
+      "Hochschrank": "Tall unit"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 14,
+    "category": "core_terminology",
+    "source_de": "Sockelblende in Dekorfarbe.",
+    "ground_truth_en": "Plinth panel in decor color.",
+    "required_glossary": {
+      "Sockelblende": "Plinth panel"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 18,
+    "category": "core_terminology",
+    "source_de": "Der Auszug schließt gedämpft.",
+    "ground_truth_en": "The Pull-out closes softly.",
+    "required_glossary": {
+      "Auszug": "Pull-out"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 29,
+    "category": "core_terminology",
+    "source_de": "Sockelblende in Dekorfarbe.",
+    "ground_truth_en": "Plinth panel in decor color.",
+    "required_glossary": {
+      "Sockelblende": "Plinth panel"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 32,
+    "category": "core_terminology",
+    "source_de": "Bitte die Front vorsichtig reinigen.",
+    "ground_truth_en": "Please clean the Front carefully.",
+    "required_glossary": {
+      "Front": "Front"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 36,
+    "category": "core_terminology",
+    "source_de": "Der Korpus ist in verschiedenen Farben erhältlich.",
+    "ground_truth_en": "The Cabinet Body is available in various colors.",
+    "required_glossary": {
+      "Korpus": "Cabinet Body"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 95,
+    "category": "formatting",
+    "source_de": "1. Montage des Sockels",
+    "ground_truth_en": "1. Assembly of the plinth",
+    "required_glossary": {
+      "Sockel": "plinth"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 4,
+    "category": "core_terminology",
+    "source_de": "Sockelblende in Dekorfarbe.",
+    "ground_truth_en": "Plinth panel in decor color.",
+    "required_glossary": {
+      "Sockelblende": "Plinth panel"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 15,
+    "category": "core_terminology",
+    "source_de": "Einlegeboden aus Glas, 8 mm stark.",
+    "ground_truth_en": "Glass shelf, 8 mm thick.",
+    "required_glossary": {
+      "Einlegeboden": "Glass shelf"
+    },
+    "do_not_translate": []
+  },
+  {
+    "id": 82,
+    "category": "compound_nouns",
+    "source_de": "Hochschrank-Kühlkombination",
+    "ground_truth_en": "Tall unit fridge combination",
+    "required_glossary": {
+      "Hochschrank": "Tall unit"
+    },
+    "do_not_translate": []
+  }
+]
