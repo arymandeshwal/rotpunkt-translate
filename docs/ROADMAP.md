@@ -57,7 +57,7 @@ A2, B3 (PDF), B5, B6, B7, B8, C1, C2, D1, D2, D4, E2, F1–F5, G5, H1–H3, I1, 
 | 5 | **Glossary enforcement** | D4 | ✅ |
 | 6 | **Translation job** (background, batched, status) | – | ✅ |
 | 7 | **Term highlighting** | F1, F2, then F3–F5 | ✅ |
-| 8 | **Side-by-side preview** | E2 | ⬜ |
+| 8 | **Side-by-side preview** | E2 | ✅ |
 | 9 | **Re-translate segment** | G5 | ⬜ |
 | 10 | **Quality checks** | I1, I2 | ⬜ |
 | 11 | **End-to-end test** (Playwright) | – | ⬜ |
@@ -121,6 +121,8 @@ Includes an end-to-end check of all sample PDFs: upload → database contents vs
 | 3f | Frontend UI: File dropzone, project setup view, confirm source language | ✅ |
 
 ### Steps 8–11 ⬜
+> Note: We built F1/F2 highlighting via Regex, and F3/F4 via JEV. The Side-by-Side UI renders them properly, but the annotation quality (especially false positives/negatives) needs further refinement in Part 2.
+
 
 **Steps 4–7 are completed:**
 - **4 – Providers:** DeepL, Gemini (JSON structured) and Mock. Contract tests passed. ✅

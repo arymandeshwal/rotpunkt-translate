@@ -1,6 +1,7 @@
 import json
 import os
 import sys
+import time
 from collections import defaultdict
 from pathlib import Path
 
@@ -63,6 +64,7 @@ def run_jev_eval():
     stats = defaultdict(lambda: {"tp": 0, "fp": 0, "fn": 0})
 
     print("Running JEV Eval for F3, F4, and Clean...")
+    start_time = time.perf_counter()
 
     # Filter dataset to just F3, F4, and Clean to save time/tokens for this specific metric check
     eval_subset = [d for d in dataset if d["category"] in ["F3", "F4", "Clean"]]
@@ -137,6 +139,8 @@ def run_jev_eval():
     print(" ROTPUNKT F3/F4 (JEV) EVALUATION REPORT ".center(80))
     print("=" * 80 + "\n")
     print(tabulate(summary, headers="keys", tablefmt="github"))
+    elapsed = time.perf_counter() - start_time
+    print(f"\nTotal Runtime: {elapsed:.2f} seconds")
     print("\n" + "=" * 80)
 
 
