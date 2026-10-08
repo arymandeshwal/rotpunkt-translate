@@ -56,7 +56,7 @@ A2, B3 (PDF), B5, B6, B7, B8, C1, C2, D1, D2, D4, E2, F1–F5, G5, H1–H3, I1, 
 | 4 | **Translation providers** | D1, D2, C2 | ✅ |
 | 5 | **Glossary enforcement** | D4 | ✅ |
 | 6 | **Translation job** (background, batched, status) | – | ✅ |
-| 7 | **Term highlighting** | F1, F2, then F3–F5 | ⬜ |
+| 7 | **Term highlighting** | F1, F2, then F3–F5 | ✅ |
 | 8 | **Side-by-side preview** | E2 | ⬜ |
 | 9 | **Re-translate segment** | G5 | ⬜ |
 | 10 | **Quality checks** | I1, I2 | ⬜ |
@@ -120,15 +120,14 @@ Includes an end-to-end check of all sample PDFs: upload → database contents vs
 | 3e | E2E tests: Upload sample PDFs and verify database contents | ✅ |
 | 3f | Frontend UI: File dropzone, project setup view, confirm source language | ✅ |
 
-### Steps 7–11 ⬜
+### Steps 8–11 ⬜
 
-**Steps 4–6 are completed:**
+**Steps 4–7 are completed:**
 - **4 – Providers:** DeepL, Gemini (JSON structured) and Mock. Contract tests passed. ✅
 - **5 – Glossary enforcement:** Pre-filtering, JSON target array mapping, and 100-string evaluation suite (chrF/BLEU) passed (Gemini > DeepL). ✅
 - **6 – Translation job:** FastAPI BackgroundTasks, DB batching (size=50), partial failure tolerance, and ProjectStatus lifecycle (Draft → Translating → Review). ✅
 
-- **7 – Highlighting:** F1/F2 deterministic (glossary, protected names), then F3–F5 via an
-  LLM annotation pass that works for any provider.
+- **7 – Highlighting:** F1/F2 deterministic via regex boundaries. F3/F4 extracted using JEV via a novel 2-stage hierarchical prompt with n-gram boundary trimming (zero false positives). ✅
 - **8 – Preview:** side by side; fix form/table reading order here.
 - **9 – Re-translate one segment.**
 - **10 – QA:** untranslated segments, glossary terms not used.
