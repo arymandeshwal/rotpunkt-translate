@@ -6,6 +6,7 @@ import { Layout } from "./components/Layout";
 import { Toaster } from "./components/ui/sonner";
 import { GlossaryPage } from "./pages/GlossaryPage";
 import { ProjectSetupPage } from "./pages/ProjectSetupPage";
+import { ProjectEditorPage } from "./pages/ProjectEditorPage";
 import { ProjectsPage } from "./pages/ProjectsPage";
 
 export function AppRoutes() {
@@ -14,6 +15,7 @@ export function AppRoutes() {
       <Route element={<Layout />}>
         <Route index element={<ProjectsPage />} />
         <Route path="projects/:id/setup" element={<ProjectSetupPage />} />
+        <Route path="projects/:id" element={<ProjectEditorPage />} />
         <Route path="glossary" element={<GlossaryPage />} />
       </Route>
     </Routes>

@@ -93,7 +93,8 @@ describe("Projects Upload Flow", () => {
               text: "Hello",
               bounding_box: [0,0,10,10],
               detected_language: "en",
-              is_translatable: false
+              is_translatable: false,
+              translations: {}
             }
           ] 
         }]

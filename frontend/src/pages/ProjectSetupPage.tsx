@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../components/ui/select";
-import { useProject, useUpdateProjectLanguage } from "../hooks/useProjects";
+import { useProject, useUpdateProjectLanguage, useTranslateProject } from "../hooks/useProjects";
 
 import type { components } from "../api/schema";
 
@@ -32,9 +32,11 @@ export function ProjectSetupPage() {
   
   const { data: project, isLoading, error } = useProject(id!);
   const updateMutation = useUpdateProjectLanguage();
+  const translateMutation = useTranslateProject();
 
   // Initialize with 'de' but update once data loads
   const [sourceLang, setSourceLang] = useState<LanguageCode>("de");
+  const [targetLang, setTargetLang] = useState<LanguageCode>("en");
   const [isInitialized, setIsInitialized] = useState(false);
 
   if (project && !isInitialized) {
@@ -64,13 +66,27 @@ export function ProjectSetupPage() {
   const skippedCount = (doc?.segments?.length || 0) - translatableCount;
 
   const handleConfirm = () => {
+    if (sourceLang === targetLang) {
+      toast.error("Source and target languages cannot be the same");
+      return;
+    }
+
     updateMutation.mutate(
       { id: project.id, sourceLanguage: sourceLang },
       {
         onSuccess: () => {
-          toast.success("Project setup complete");
-          // Redirect to a placeholder for the actual translation view
-          navigate("/"); 
+          translateMutation.mutate(
+            { id: project.id, targetLanguage: targetLang },
+            {
+              onSuccess: () => {
+                toast.success("Translation started");
+                navigate(`/projects/${project.id}`);
+              },
+              onError: (err) => {
+                toast.error("Failed to start translation", { description: err.message });
+              }
+            }
+          );
         },
         onError: (err) => {
           toast.error("Failed to update project", { description: err.message });
@@ -83,7 +99,7 @@ export function ProjectSetupPage() {
     <div className="mx-auto max-w-2xl space-y-6">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Project Setup</h1>
-        <p className="text-muted-foreground">Confirm the document's source language.</p>
+        <p className="text-muted-foreground">Confirm languages to start translation.</p>
       </div>
 
       <div className="rounded-xl border bg-card text-card-foreground shadow">
@@ -106,35 +122,56 @@ export function ProjectSetupPage() {
       </div>
 
       <div className="space-y-4">
-        <div className="space-y-2">
-          <label className="text-sm font-medium leading-none">
-            Detected Source Language
-          </label>
-          <Select value={sourceLang} onValueChange={(val) => setSourceLang(val as LanguageCode)}>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select language" />
-            </SelectTrigger>
-            <SelectContent>
-              {LANGUAGES.map((lang) => (
-                <SelectItem key={lang.code} value={lang.code}>
-                  {lang.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <p className="text-[0.8rem] text-muted-foreground">
-            Segments in other languages will be marked as "do not translate".
-            Currently, {skippedCount} out of {doc?.segments?.length || 0} segments will be skipped.
-          </p>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <label className="text-sm font-medium leading-none">
+              Source Language
+            </label>
+            <Select value={sourceLang} onValueChange={(val) => setSourceLang(val as LanguageCode)}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select language" />
+              </SelectTrigger>
+              <SelectContent>
+                {LANGUAGES.map((lang) => (
+                  <SelectItem key={lang.code} value={lang.code}>
+                    {lang.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium leading-none">
+              Target Language
+            </label>
+            <Select value={targetLang} onValueChange={(val) => setTargetLang(val as LanguageCode)}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select language" />
+              </SelectTrigger>
+              <SelectContent>
+                {LANGUAGES.map((lang) => (
+                  <SelectItem key={lang.code} value={lang.code} disabled={lang.code === sourceLang}>
+                    {lang.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
+
+        <p className="text-[0.8rem] text-muted-foreground">
+          Segments in languages other than the Source Language will be marked as "do not translate".
+          Currently, {skippedCount} out of {doc?.segments?.length || 0} segments will be skipped.
+        </p>
 
         <Button 
           onClick={handleConfirm} 
-          disabled={updateMutation.isPending}
+          disabled={updateMutation.isPending || translateMutation.isPending}
           className="w-full"
         >
-          {updateMutation.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          Confirm & Continue
+          {(updateMutation.isPending || translateMutation.isPending) && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+          Start Translation
         </Button>
       </div>
     </div>

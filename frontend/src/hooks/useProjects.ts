@@ -24,7 +24,7 @@ export function useUploadProject() {
   });
 }
 
-export function useProject(id: string) {
+export function useProject(id: string, refetchInterval?: number | false) {
   return useQuery({
     queryKey: ["projects", id],
     queryFn: async () => {
@@ -35,6 +35,7 @@ export function useProject(id: string) {
       return data as ProjectResponse;
     },
     enabled: !!id,
+    refetchInterval,
   });
 }
 
@@ -58,6 +59,30 @@ export function useUpdateProjectLanguage() {
     },
     onSuccess: (data, variables) => {
       queryClient.setQueryData(["projects", variables.id], data);
+    },
+  });
+}
+
+export function useTranslateProject() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({
+      id,
+      targetLanguage,
+    }: {
+      id: string;
+      targetLanguage: components["schemas"]["TranslateRequest"]["target_language"];
+    }) => {
+      const { data, error } = await api.POST("/api/projects/{project_id}/translate", {
+        params: { path: { project_id: id } },
+        body: { target_language: targetLanguage },
+      });
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["projects", variables.id] });
     },
   });
 }
