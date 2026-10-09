@@ -287,6 +287,12 @@ export interface components {
                     [key: string]: unknown;
                 }[];
             };
+            /** Issues */
+            issues?: {
+                [key: string]: {
+                    [key: string]: unknown;
+                }[];
+            };
         };
         /** DuplicateTermsDetail */
         DuplicateTermsDetail: {

@@ -12,7 +12,12 @@ from app.db import get_session
 from app.languages import DEFAULT_SOURCE_LANGUAGE
 from app.models.project import Document, DocumentPage, DocumentSegment, Project
 from app.parsers.pdf import PdfError, parse_pdf
-from app.schemas.project import ProjectResponse, ProjectUpdateRequest, TranslateRequest, DocumentSegmentSchema
+from app.schemas.project import (
+    DocumentSegmentSchema,
+    ProjectResponse,
+    ProjectUpdateRequest,
+    TranslateRequest,
+)
 from app.services.language_detection import detect_primary_language, is_translatable
 from app.services.translation_service import run_document_translation
 
@@ -214,10 +219,11 @@ async def retranslate_segment(
         HTTPException: 404 if the project or segment is not found.
         HTTPException: 400 if the document has no source language or segment is not translatable.
     """
-    from app.services.translation.factory import get_translation_provider
-    from app.services.translation_service import get_glossary_for_languages
     from app.services.highlighting import compute_deterministic_annotations
     from app.services.jev_annotator import compute_ai_annotations
+    from app.services.qa_checks import compute_qa_issues
+    from app.services.translation.factory import get_translation_provider
+    from app.services.translation_service import get_glossary_for_languages
 
     # 1. Fetch the project and document
     project = await _get_project_or_404(project_id, db_session)
@@ -263,7 +269,7 @@ async def retranslate_segment(
     ai_annotations_batch = await compute_ai_annotations([new_translation])
     ai_annotations = ai_annotations_batch[0]
     det_annotations = compute_deterministic_annotations(new_translation, glossary_infos)
-    
+
     new_annotations = det_annotations + ai_annotations
     new_annotations.sort(key=lambda x: x["start"])
 
@@ -276,6 +282,14 @@ async def retranslate_segment(
     current_annotations = dict(segment.annotations or {})
     current_annotations[target_lang] = new_annotations
     segment.annotations = current_annotations
+
+    # Compute QA issues
+    issues = compute_qa_issues(
+        segment.text, new_translation, glossary_infos, segment.is_translatable
+    )
+    current_issues = dict(segment.issues or {})
+    current_issues[target_lang] = issues
+    segment.issues = current_issues
 
     await db_session.commit()
 

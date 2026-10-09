@@ -28,6 +28,7 @@ class DocumentSegmentSchema(BaseModel):
     is_translatable: bool | None
     translations: dict[str, str]
     annotations: dict[str, list[dict]] = Field(default_factory=dict)
+    issues: dict[str, list[dict]] = Field(default_factory=dict)
 
     model_config = ConfigDict(from_attributes=True)
 

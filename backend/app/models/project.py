@@ -107,5 +107,6 @@ class DocumentSegment(Base):
     annotations: Mapped[dict[str, list[dict]]] = mapped_column(
         JSON, default=dict, server_default="{}"
     )
+    issues: Mapped[dict[str, list[dict]]] = mapped_column(JSON, default=dict, server_default="{}")
 
     document: Mapped[Document] = relationship(back_populates="segments")

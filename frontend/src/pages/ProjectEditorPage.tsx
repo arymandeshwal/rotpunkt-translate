@@ -1,6 +1,6 @@
 import { useProject, useRetranslateSegment } from "../hooks/useProjects";
 import { useParams } from "react-router";
-import { Loader2, RefreshCw } from "lucide-react";
+import { Loader2, RefreshCw, AlertTriangle } from "lucide-react";
 import { HighlightedText, type Annotation } from "../components/HighlightedText";
 import { Button } from "../components/ui/button";
 import { toast } from "sonner";
@@ -67,6 +67,7 @@ export function ProjectEditorPage() {
             {doc.segments.map((segment) => {
               const translation = targetLanguage ? (segment.translations as Record<string, string>)?.[targetLanguage] : null;
               const annotations = targetLanguage ? (segment.annotations as Record<string, Annotation[]>)?.[targetLanguage] || [] : [];
+              const issues = targetLanguage ? (segment.issues as Record<string, {type: string; message: string; term?: string; expected?: string}[]>)?.[targetLanguage] || [] : [];
               
               return (
                 <div key={segment.id} className="grid grid-cols-2 gap-4 p-4 hover:bg-muted/50 transition-colors group">
@@ -74,11 +75,23 @@ export function ProjectEditorPage() {
                     {segment.text}
                   </div>
                   <div className="text-sm flex items-start justify-between gap-4">
-                    <div className="flex-1">
+                    <div className="flex-1 flex flex-col gap-2">
                       {!segment.is_translatable ? (
                         <span className="text-muted-foreground italic">Skipped (Not in source language)</span>
                       ) : translation ? (
-                        <HighlightedText text={translation} annotations={annotations} />
+                        <>
+                          <HighlightedText text={translation} annotations={annotations} />
+                          {issues.length > 0 && (
+                            <div className="flex flex-col gap-1 mt-2">
+                              {issues.map((issue, idx) => (
+                                <div key={idx} className="flex items-start gap-2 text-xs font-medium text-amber-600 bg-amber-50 dark:text-amber-400 dark:bg-amber-950/30 p-2 rounded-md border border-amber-200 dark:border-amber-900/50">
+                                  <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5" />
+                                  <span>{issue.message}</span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </>
                       ) : (
                         <span className="text-muted-foreground italic">No translation available</span>
                       )}

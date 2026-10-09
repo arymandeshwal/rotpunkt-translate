@@ -11,6 +11,7 @@ from app.models.project import Document, DocumentSegment, ProjectStatus
 from app.services.highlighting import compute_deterministic_annotations
 from app.services.jev_annotator import compute_ai_annotations
 from app.services.models import GlossaryTermInfo
+from app.services.qa_checks import compute_qa_issues
 from app.services.translation.factory import get_translation_provider
 
 logger = logging.getLogger(__name__)
@@ -175,6 +176,14 @@ async def run_document_translation(document_id: uuid.UUID, target_language: str)
                     current_annotations = dict(seg.annotations or {})
                     current_annotations[target_language] = combined_annotations
                     seg.annotations = current_annotations
+
+                    # Update QA issues
+                    issues = compute_qa_issues(
+                        seg.text, translation, glossary_infos, seg.is_translatable
+                    )
+                    current_issues = dict(seg.issues or {})
+                    current_issues[target_language] = issues
+                    seg.issues = current_issues
 
             except Exception as e:
                 logger.error(f"Error translating batch {i} for document {document_id}: {e}")

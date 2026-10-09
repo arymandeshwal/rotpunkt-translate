@@ -59,7 +59,7 @@ A2, B3 (PDF), B5, B6, B7, B8, C1, C2, D1, D2, D4, E2, F1–F5, G5, H1–H3, I1, 
 | 7 | **Term highlighting** | F1, F2, then F3–F5 | ✅ |
 | 8 | **Side-by-side preview** | E2 | ✅ |
 | 9 | **Re-translate segment** | G5 | ✅ |
-| 10 | **Quality checks** | I1, I2 | ⬜ |
+| 10 | **Quality checks** | I1, I2 | ✅ |
 | 11 | **End-to-end test** (Playwright) | – | ⬜ |
 
 ### Step 1 – Glossary ✅

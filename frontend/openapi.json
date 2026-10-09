@@ -878,6 +878,17 @@
             },
             "type": "object",
             "title": "Annotations"
+          },
+          "issues": {
+            "additionalProperties": {
+              "items": {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "type": "object",
+            "title": "Issues"
           }
         },
         "type": "object",
