@@ -1,13 +1,16 @@
-import { useProject } from "../hooks/useProjects";
+import { useProject, useRetranslateSegment } from "../hooks/useProjects";
 import { useParams } from "react-router";
-import { Loader2 } from "lucide-react";
+import { Loader2, RefreshCw } from "lucide-react";
 import { HighlightedText, type Annotation } from "../components/HighlightedText";
+import { Button } from "../components/ui/button";
+import { toast } from "sonner";
 
 export function ProjectEditorPage() {
   const { id } = useParams<{ id: string }>();
 
   // Poll every 3 seconds if status is "translating", otherwise stop polling
   const { data: project, isLoading, error } = useProject(id!, 3000);
+  const retranslateMutation = useRetranslateSegment();
 
   if (isLoading || !project) {
     return (
@@ -66,17 +69,41 @@ export function ProjectEditorPage() {
               const annotations = targetLanguage ? (segment.annotations as Record<string, Annotation[]>)?.[targetLanguage] || [] : [];
               
               return (
-                <div key={segment.id} className="grid grid-cols-2 gap-4 p-4 hover:bg-muted/50 transition-colors">
+                <div key={segment.id} className="grid grid-cols-2 gap-4 p-4 hover:bg-muted/50 transition-colors group">
                   <div className="text-sm">
                     {segment.text}
                   </div>
-                  <div className="text-sm">
-                    {!segment.is_translatable ? (
-                      <span className="text-muted-foreground italic">Skipped (Not in source language)</span>
-                    ) : translation ? (
-                      <HighlightedText text={translation} annotations={annotations} />
-                    ) : (
-                      <span className="text-muted-foreground italic">No translation available</span>
+                  <div className="text-sm flex items-start justify-between gap-4">
+                    <div className="flex-1">
+                      {!segment.is_translatable ? (
+                        <span className="text-muted-foreground italic">Skipped (Not in source language)</span>
+                      ) : translation ? (
+                        <HighlightedText text={translation} annotations={annotations} />
+                      ) : (
+                        <span className="text-muted-foreground italic">No translation available</span>
+                      )}
+                    </div>
+                    {segment.is_translatable && targetLanguage && (
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="opacity-0 group-hover:opacity-100 transition-opacity h-8 w-8 text-muted-foreground hover:text-primary"
+                        disabled={retranslateMutation.isPending && retranslateMutation.variables?.segmentId === segment.id}
+                        onClick={() => {
+                          retranslateMutation.mutate(
+                            { projectId: project.id, segmentId: segment.id, targetLanguage },
+                            {
+                              onError: (err) => {
+                                toast.error("Retranslation failed", { description: err.message });
+                              }
+                            }
+                          );
+                        }}
+                        title="Re-translate segment"
+                      >
+                        <RefreshCw className={`h-4 w-4 ${retranslateMutation.isPending && retranslateMutation.variables?.segmentId === segment.id ? 'animate-spin text-primary' : ''}`} />
+                        <span className="sr-only">Re-translate segment</span>
+                      </Button>
                     )}
                   </div>
                 </div>
