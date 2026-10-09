@@ -2,6 +2,7 @@
 
 from app.models.glossary import GlossaryCategory, GlossaryEntry, GlossaryTerm
 from app.models.project import Document, DocumentPage, DocumentSegment, Project, ProjectStatus
+from app.models.user import User, Role
 
 __all__ = [
     "GlossaryCategory",
@@ -12,4 +13,6 @@ __all__ = [
     "Document",
     "DocumentPage",
     "DocumentSegment",
+    "User",
+    "Role",
 ]
