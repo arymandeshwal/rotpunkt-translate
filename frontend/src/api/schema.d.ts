@@ -147,6 +147,39 @@ export interface paths {
         patch: operations["update_project_api_projects__project_id__patch"];
         trace?: never;
     };
+    "/api/projects/{project_id}/segments/{segment_id}/retranslate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Retranslate Segment
+         * @description Re-translate a single document segment synchronously.
+         *
+         *     Args:
+         *         project_id: The UUID of the project.
+         *         segment_id: The UUID of the segment to re-translate.
+         *         payload: TranslateRequest containing the target language code.
+         *         db_session: The active asynchronous database session.
+         *
+         *     Returns:
+         *         The updated DocumentSegment object.
+         *
+         *     Raises:
+         *         HTTPException: 404 if the project or segment is not found.
+         *         HTTPException: 400 if the document has no source language or segment is not translatable.
+         */
+        post: operations["retranslate_segment_api_projects__project_id__segments__segment_id__retranslate_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/projects/{project_id}/translate": {
         parameters: {
             query?: never;
@@ -809,6 +842,42 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ProjectResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    retranslate_segment_api_projects__project_id__segments__segment_id__retranslate_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                project_id: string;
+                segment_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TranslateRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentSegmentSchema"];
                 };
             };
             /** @description Validation Error */

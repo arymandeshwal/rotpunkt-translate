@@ -86,3 +86,46 @@ export function useTranslateProject() {
     },
   });
 }
+
+export function useRetranslateSegment() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({
+      projectId,
+      segmentId,
+      targetLanguage,
+    }: {
+      projectId: string;
+      segmentId: string;
+      targetLanguage: components["schemas"]["TranslateRequest"]["target_language"];
+    }) => {
+      const { data, error } = await api.POST(
+        "/api/projects/{project_id}/segments/{segment_id}/retranslate",
+        {
+          params: { path: { project_id: projectId, segment_id: segmentId } },
+          body: { target_language: targetLanguage },
+        }
+      );
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: (newSegment, variables) => {
+      // Optimistically update the cache for the specific segment
+      queryClient.setQueryData(
+        ["projects", variables.projectId],
+        (oldData: ProjectResponse | undefined) => {
+          if (!oldData || !oldData.documents || oldData.documents.length === 0) return oldData;
+          
+          const newDocs = [...oldData.documents];
+          const newSegments = newDocs[0].segments.map((seg) => 
+            seg.id === variables.segmentId ? newSegment : seg
+          );
+          
+          newDocs[0] = { ...newDocs[0], segments: newSegments };
+          return { ...oldData, documents: newDocs };
+        }
+      );
+    },
+  });
+}

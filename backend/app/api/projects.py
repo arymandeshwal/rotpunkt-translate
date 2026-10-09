@@ -12,7 +12,7 @@ from app.db import get_session
 from app.languages import DEFAULT_SOURCE_LANGUAGE
 from app.models.project import Document, DocumentPage, DocumentSegment, Project
 from app.parsers.pdf import PdfError, parse_pdf
-from app.schemas.project import ProjectResponse, ProjectUpdateRequest, TranslateRequest
+from app.schemas.project import ProjectResponse, ProjectUpdateRequest, TranslateRequest, DocumentSegmentSchema
 from app.services.language_detection import detect_primary_language, is_translatable
 from app.services.translation_service import run_document_translation
 
@@ -185,6 +185,102 @@ async def update_project(
     await db_session.commit()
     # Refresh to ensure we return the latest state
     return ProjectResponse.model_validate(await _get_project_or_404(project_id, db_session))
+
+
+@router.post(
+    "/{project_id}/segments/{segment_id}/retranslate",
+    response_model=DocumentSegmentSchema,
+    status_code=status.HTTP_200_OK,
+)
+async def retranslate_segment(
+    project_id: uuid.UUID,
+    segment_id: uuid.UUID,
+    payload: TranslateRequest,
+    db_session: Annotated[AsyncSession, Depends(get_session)],
+) -> DocumentSegment:
+    """
+    Re-translate a single document segment synchronously.
+
+    Args:
+        project_id: The UUID of the project.
+        segment_id: The UUID of the segment to re-translate.
+        payload: TranslateRequest containing the target language code.
+        db_session: The active asynchronous database session.
+
+    Returns:
+        The updated DocumentSegment object.
+
+    Raises:
+        HTTPException: 404 if the project or segment is not found.
+        HTTPException: 400 if the document has no source language or segment is not translatable.
+    """
+    from app.services.translation.factory import get_translation_provider
+    from app.services.translation_service import get_glossary_for_languages
+    from app.services.highlighting import compute_deterministic_annotations
+    from app.services.jev_annotator import compute_ai_annotations
+
+    # 1. Fetch the project and document
+    project = await _get_project_or_404(project_id, db_session)
+    if not project.documents:
+        raise HTTPException(status_code=400, detail="Project has no documents.")
+
+    document = project.documents[0]
+    if not document.source_language:
+        raise HTTPException(status_code=400, detail="Document source language must be set.")
+
+    # 2. Fetch the specific segment
+    segment = None
+    for seg in document.segments:
+        if seg.id == segment_id:
+            segment = seg
+            break
+
+    if not segment:
+        raise HTTPException(status_code=404, detail="Segment not found.")
+
+    if not segment.is_translatable:
+        raise HTTPException(status_code=400, detail="Segment is not translatable.")
+
+    target_lang = payload.target_language
+    provider = get_translation_provider()
+
+    # 3. Fetch glossary and translate
+    glossary_infos = await get_glossary_for_languages(
+        db_session, document.source_language, target_lang
+    )
+    master_glossary = {item.source_text: item.target_text for item in glossary_infos}
+
+    translated_texts = await provider.translate(
+        texts=[segment.text],
+        source_language=document.source_language,
+        target_language=target_lang,
+        glossary=master_glossary,
+    )
+
+    new_translation = translated_texts[0]
+
+    # 4. Compute annotations
+    ai_annotations_batch = await compute_ai_annotations([new_translation])
+    ai_annotations = ai_annotations_batch[0]
+    det_annotations = compute_deterministic_annotations(new_translation, glossary_infos)
+    
+    new_annotations = det_annotations + ai_annotations
+    new_annotations.sort(key=lambda x: x["start"])
+
+    # 5. Update DB
+    # We must explicitly create new dicts so SQLAlchemy detects the mutation on the JSON column
+    current_translations = dict(segment.translations or {})
+    current_translations[target_lang] = new_translation
+    segment.translations = current_translations
+
+    current_annotations = dict(segment.annotations or {})
+    current_annotations[target_lang] = new_annotations
+    segment.annotations = current_annotations
+
+    await db_session.commit()
+
+    # Return the segment (it will be serialized by Pydantic response_model)
+    return segment
 
 
 @router.post("/{project_id}/translate", status_code=status.HTTP_202_ACCEPTED)

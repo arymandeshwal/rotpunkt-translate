@@ -577,6 +577,70 @@
         }
       }
     },
+    "/api/projects/{project_id}/segments/{segment_id}/retranslate": {
+      "post": {
+        "tags": [
+          "projects"
+        ],
+        "summary": "Retranslate Segment",
+        "description": "Re-translate a single document segment synchronously.\n\nArgs:\n    project_id: The UUID of the project.\n    segment_id: The UUID of the segment to re-translate.\n    payload: TranslateRequest containing the target language code.\n    db_session: The active asynchronous database session.\n\nReturns:\n    The updated DocumentSegment object.\n\nRaises:\n    HTTPException: 404 if the project or segment is not found.\n    HTTPException: 400 if the document has no source language or segment is not translatable.",
+        "operationId": "retranslate_segment_api_projects__project_id__segments__segment_id__retranslate_post",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Project Id"
+            }
+          },
+          {
+            "name": "segment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Segment Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TranslateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentSegmentSchema"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/projects/{project_id}/translate": {
       "post": {
         "tags": [
