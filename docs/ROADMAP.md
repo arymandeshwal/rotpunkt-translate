@@ -120,7 +120,7 @@ Includes an end-to-end check of all sample PDFs: upload → database contents vs
 | 3e | E2E tests: Upload sample PDFs and verify database contents | ✅ |
 | 3f | Frontend UI: File dropzone, project setup view, confirm source language | ✅ |
 
-### Steps 8–11 ⬜
+### Steps 8–11 ✅
 > Note: We built F1/F2 highlighting via Regex, and F3/F4 via JEV. The Side-by-Side UI renders them properly, but the annotation quality (especially false positives/negatives) needs further refinement in Part 2.
 
 
