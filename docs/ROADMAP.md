@@ -122,6 +122,7 @@ Includes an end-to-end check of all sample PDFs: upload → database contents vs
 
 ### Steps 8–11 ✅
 > Note: We built F1/F2 highlighting via Regex, and F3/F4 via JEV. The Side-by-Side UI renders them properly, but the annotation quality (especially false positives/negatives) needs further refinement in Part 2.
+> Note 2 (G3): The "Add to Glossary" popover trigger currently struggles with overflowing bounds in the Side-by-Side UI. Its visual positioning (clipping into the main white document area instead of floating perfectly in the gray margin) needs to be fixed.
 
 
 **Steps 4–7 are completed:**
