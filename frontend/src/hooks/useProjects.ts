@@ -123,7 +123,7 @@ export function useEditSegment() {
             seg.id === variables.segmentId ? newSegment : seg
           );
           
-          newDocs[0] = { ...newDocs[0], segments: newSegments };
+          newDocs[0] = { ...newDocs[0]!, segments: newSegments };
           return { ...oldData, documents: newDocs };
         }
       );
@@ -166,7 +166,99 @@ export function useRetranslateSegment() {
             seg.id === variables.segmentId ? newSegment : seg
           );
           
-          newDocs[0] = { ...newDocs[0], segments: newSegments };
+          newDocs[0] = { ...newDocs[0]!, segments: newSegments };
+          return { ...oldData, documents: newDocs };
+        }
+      );
+    },
+  });
+}
+
+export function useAddSegmentComment() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({
+      projectId,
+      segmentId,
+      text,
+    }: {
+      projectId: string;
+      segmentId: string;
+      text: string;
+    }) => {
+      const { data, error } = await api.POST(
+        "/api/projects/{project_id}/segments/{segment_id}/comments",
+        {
+          params: { path: { project_id: projectId, segment_id: segmentId } },
+          body: { text },
+        }
+      );
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: (newComment, variables) => {
+      queryClient.setQueryData(
+        ["projects", variables.projectId],
+        (oldData: ProjectResponse | undefined) => {
+          if (!oldData || !oldData.documents || oldData.documents.length === 0) return oldData;
+          
+          const newDocs = [...oldData.documents];
+          const newSegments = newDocs[0].segments.map((seg) => {
+            if (seg.id === variables.segmentId) {
+              return { ...seg, comments: [...(seg.comments || []), newComment] };
+            }
+            return seg;
+          });
+          
+          newDocs[0] = { ...newDocs[0]!, segments: newSegments };
+          return { ...oldData, documents: newDocs };
+        }
+      );
+    },
+  });
+}
+
+export function useDeleteSegmentComment() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({
+      projectId,
+      segmentId,
+      commentId,
+    }: {
+      projectId: string;
+      segmentId: string;
+      commentId: string;
+    }) => {
+      const { error } = await api.DELETE(
+        "/api/projects/{project_id}/segments/{segment_id}/comments/{comment_id}",
+        {
+          params: { path: { project_id: projectId, segment_id: segmentId, comment_id: commentId } },
+        }
+      );
+      if (error) throw error;
+      return commentId;
+    },
+    onSuccess: (deletedCommentId, variables) => {
+      queryClient.setQueryData(
+        ["projects", variables.projectId],
+        (oldData: ProjectResponse | undefined) => {
+          if (!oldData || !oldData.documents || oldData.documents.length === 0) return oldData;
+          
+          const newDocs = [...oldData.documents];
+          const newSegments = newDocs[0].segments.map((seg) => {
+            if (seg.id === variables.segmentId) {
+              return { 
+                ...seg, 
+                comments: (seg.comments || []).filter(c => c.id !== deletedCommentId) 
+              };
+            }
+            return seg;
+          });
+          
+          newDocs[0] = { ...newDocs[0]!, segments: newSegments };
           return { ...oldData, documents: newDocs };
         }
       );

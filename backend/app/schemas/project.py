@@ -17,6 +17,29 @@ class DocumentPageSchema(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
+class SegmentCommentCreate(BaseModel):
+    text: str = Field(..., min_length=1, max_length=10000, description="Comment text")
+
+
+class SegmentCommentAuthor(BaseModel):
+    id: uuid.UUID
+    email: str
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class SegmentCommentResponse(BaseModel):
+    id: uuid.UUID
+    segment_id: uuid.UUID
+    user_id: uuid.UUID
+    text: str
+    created_at: datetime
+    updated_at: datetime
+    user: SegmentCommentAuthor | None = None
+
+    model_config = ConfigDict(from_attributes=True)
+
+
 class DocumentSegmentSchema(BaseModel):
     id: uuid.UUID
     page_number: int
@@ -29,6 +52,7 @@ class DocumentSegmentSchema(BaseModel):
     translations: dict[str, str]
     annotations: dict[str, list[dict]] = Field(default_factory=dict)
     issues: dict[str, list[dict]] = Field(default_factory=dict)
+    comments: list[SegmentCommentResponse] = Field(default_factory=list)
 
     model_config = ConfigDict(from_attributes=True)
 

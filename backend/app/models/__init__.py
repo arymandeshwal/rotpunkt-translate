@@ -1,7 +1,7 @@
 """Import every model here so Base.metadata is complete for Alembic."""
 
 from app.models.glossary import GlossaryCategory, GlossaryEntry, GlossaryTerm
-from app.models.project import Document, DocumentPage, DocumentSegment, Project, ProjectStatus
+from app.models.project import Document, DocumentPage, DocumentSegment, Project, ProjectStatus, SegmentComment
 from app.models.user import Role, User
 
 __all__ = [
@@ -13,6 +13,7 @@ __all__ = [
     "Document",
     "DocumentPage",
     "DocumentSegment",
+    "SegmentComment",
     "User",
     "Role",
 ]

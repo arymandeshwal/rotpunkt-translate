@@ -44,9 +44,13 @@ async def db_session() -> AsyncIterator[AsyncSession]:
 
 
 @pytest.fixture
-def current_user_override():
+async def current_user_override(db_session: AsyncSession):
     """Provides a default admin user for tests that don't need specific auth testing."""
-    return User(email="test@example.com", role=Role.ADMIN, is_active=True, hashed_password="fake")
+    user = User(email="test@example.com", role=Role.ADMIN, is_active=True, hashed_password="fake")
+    db_session.add(user)
+    await db_session.commit()
+    await db_session.refresh(user)
+    return user
 
 
 @pytest.fixture

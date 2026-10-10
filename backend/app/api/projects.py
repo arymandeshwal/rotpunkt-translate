@@ -11,7 +11,7 @@ from app.api.dependencies import get_current_user
 from app.config import get_settings
 from app.db import get_session
 from app.languages import DEFAULT_SOURCE_LANGUAGE
-from app.models.project import Document, DocumentPage, DocumentSegment, Project
+from app.models.project import Document, DocumentPage, DocumentSegment, Project, SegmentComment
 from app.models.user import User
 from app.parsers.pdf import PdfError, parse_pdf
 from app.schemas.project import (
@@ -20,6 +20,8 @@ from app.schemas.project import (
     ProjectUpdateRequest,
     SegmentEditRequest,
     TranslateRequest,
+    SegmentCommentCreate,
+    SegmentCommentResponse,
 )
 from app.services.language_detection import detect_primary_language, is_translatable
 from app.services.translation_service import run_document_translation
@@ -46,7 +48,10 @@ async def _get_project_or_404(project_id: uuid.UUID, db_session: AsyncSession) -
         .where(Project.id == project_id)
         .options(
             selectinload(Project.documents).selectinload(Document.pages),
-            selectinload(Project.documents).selectinload(Document.segments),
+            selectinload(Project.documents)
+            .selectinload(Document.segments)
+            .selectinload(DocumentSegment.comments)
+            .selectinload(SegmentComment.user),
         )
     )
     result = await db_session.execute(stmt)
@@ -437,3 +442,71 @@ async def translate_project(
     )
 
     return {"message": "Translation started in the background."}
+
+@router.post(
+    "/{project_id}/segments/{segment_id}/comments",
+    response_model=SegmentCommentResponse,
+    status_code=status.HTTP_201_CREATED,
+)
+async def add_segment_comment(
+    project_id: uuid.UUID,
+    segment_id: uuid.UUID,
+    payload: SegmentCommentCreate,
+    db_session: Annotated[AsyncSession, Depends(get_session)],
+    current_user: Annotated[User, Depends(get_current_user)],
+) -> SegmentCommentResponse:
+    """Add a new comment to a specific segment."""
+    # Ensure project and segment exist
+    project = await _get_project_or_404(project_id, db_session)
+    if not project.documents:
+        raise HTTPException(status_code=400, detail="Project has no documents.")
+    
+    document = project.documents[0]
+    segment = next((seg for seg in document.segments if seg.id == segment_id), None)
+    if not segment:
+        raise HTTPException(status_code=404, detail="Segment not found.")
+        
+    comment = SegmentComment(
+        segment_id=segment_id,
+        user_id=current_user.id,
+        text=payload.text.strip(),
+    )
+    db_session.add(comment)
+    await db_session.commit()
+    await db_session.refresh(comment)
+    
+    # Reload with user relationship to populate author details
+    stmt = (
+        select(SegmentComment)
+        .where(SegmentComment.id == comment.id)
+        .options(selectinload(SegmentComment.user))
+    )
+    result = await db_session.execute(stmt)
+    loaded_comment = result.scalar_one()
+    
+    return SegmentCommentResponse.model_validate(loaded_comment)
+
+@router.delete(
+    "/{project_id}/segments/{segment_id}/comments/{comment_id}",
+    status_code=status.HTTP_204_NO_CONTENT,
+)
+async def delete_segment_comment(
+    project_id: uuid.UUID,
+    segment_id: uuid.UUID,
+    comment_id: uuid.UUID,
+    db_session: Annotated[AsyncSession, Depends(get_session)],
+    current_user: Annotated[User, Depends(get_current_user)],
+) -> None:
+    """Delete a specific comment."""
+    stmt = select(SegmentComment).where(SegmentComment.id == comment_id, SegmentComment.segment_id == segment_id)
+    result = await db_session.execute(stmt)
+    comment = result.scalar_one_or_none()
+    
+    if not comment:
+        raise HTTPException(status_code=404, detail="Comment not found.")
+        
+    if comment.user_id != current_user.id and current_user.role != "admin":
+        raise HTTPException(status_code=403, detail="Not authorized to delete this comment.")
+        
+    await db_session.delete(comment)
+    await db_session.commit()

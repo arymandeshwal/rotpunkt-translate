@@ -9,6 +9,8 @@ import { Textarea } from "../components/ui/textarea";
 
 import { Popover, PopoverContent, PopoverTrigger } from "../components/ui/popover";
 import { Label } from "../components/ui/label";
+import { MessageSquare } from "lucide-react";
+import { CommentsPanel } from "../components/CommentsPanel";
 import { Input } from "../components/ui/input";
 import { useCreateEntry } from "../hooks/useGlossary";
 
@@ -102,6 +104,11 @@ export function ProjectEditorPage() {
   
   const [editingSegmentId, setEditingSegmentId] = useState<string | null>(null);
   const [draftText, setDraftText] = useState<string>("");
+  const [openComments, setOpenComments] = useState<Record<string, boolean>>({});
+
+  const toggleComments = (segmentId: string) => {
+    setOpenComments(prev => ({ ...prev, [segmentId]: !prev[segmentId] }));
+  };
 
   const [glossaryPopState, setGlossaryPopState] = useState<{
     segmentId: string | null;
@@ -325,31 +332,60 @@ export function ProjectEditorPage() {
                         <span className="text-muted-foreground italic">No translation available</span>
                       )}
                     </div>
-                    {segment.is_translatable && targetLanguage && (
+                    
+                    <div className="absolute right-2 top-2 flex flex-col gap-1">
+                      {segment.is_translatable && targetLanguage && (
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="opacity-0 group-hover:opacity-100 transition-opacity h-8 w-8 text-muted-foreground hover:text-primary bg-background/50 backdrop-blur-sm border shadow-sm"
+                          disabled={retranslateMutation.isPending && retranslateMutation.variables?.segmentId === segment.id}
+                          onClick={() => {
+                            retranslateMutation.mutate(
+                              { projectId: project.id, segmentId: segment.id, targetLanguage },
+                              {
+                                onError: (err) => {
+                                  toast.error("Retranslation failed", { description: err.message });
+                                }
+                              }
+                            );
+                          }}
+                          title="Re-translate segment"
+                        >
+                          <RefreshCw className={`h-4 w-4 ${retranslateMutation.isPending && retranslateMutation.variables?.segmentId === segment.id ? 'animate-spin text-primary' : ''}`} />
+                          <span className="sr-only">Re-translate segment</span>
+                        </Button>
+                      )}
+                      
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="opacity-0 group-hover:opacity-100 transition-opacity h-8 w-8 text-muted-foreground hover:text-primary"
-                        disabled={retranslateMutation.isPending && retranslateMutation.variables?.segmentId === segment.id}
-                        onClick={() => {
-                          retranslateMutation.mutate(
-                            { projectId: project.id, segmentId: segment.id, targetLanguage },
-                            {
-                              onError: (err) => {
-                                toast.error("Retranslation failed", { description: err.message });
-                              }
-                            }
-                          );
-                        }}
-                        title="Re-translate segment"
+                        className={`h-8 w-8 transition-opacity bg-background/50 backdrop-blur-sm border shadow-sm ${openComments[segment.id] || (segment.comments && segment.comments.length > 0) ? 'opacity-100 text-primary' : 'opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-primary'}`}
+                        onClick={() => toggleComments(segment.id)}
+                        title="Comments"
                       >
-                        <RefreshCw className={`h-4 w-4 ${retranslateMutation.isPending && retranslateMutation.variables?.segmentId === segment.id ? 'animate-spin text-primary' : ''}`} />
-                        <span className="sr-only">Re-translate segment</span>
+                        <div className="relative">
+                          <MessageSquare className="h-4 w-4" />
+                          {segment.comments && segment.comments.length > 0 && (
+                            <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-primary-foreground border-2 border-background shadow-sm">
+                              {segment.comments.length}
+                            </span>
+                          )}
+                        </div>
+                        <span className="sr-only">Comments</span>
                       </Button>
-                    )}
+                    </div>
                   </div>
+                  </div>
+
+                  {openComments[segment.id] && (
+                    <CommentsPanel 
+                      projectId={project.id} 
+                      segmentId={segment.id} 
+                      comments={segment.comments || []} 
+                    />
+                  )}
                 </div>
-              </div>
               );
             })}
           </div>

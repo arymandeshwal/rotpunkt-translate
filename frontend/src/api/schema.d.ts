@@ -248,6 +248,46 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/projects/{project_id}/segments/{segment_id}/comments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Add Segment Comment
+         * @description Add a new comment to a specific segment.
+         */
+        post: operations["add_segment_comment_api_projects__project_id__segments__segment_id__comments_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/projects/{project_id}/segments/{segment_id}/comments/{comment_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /**
+         * Delete Segment Comment
+         * @description Delete a specific comment.
+         */
+        delete: operations["delete_segment_comment_api_projects__project_id__segments__segment_id__comments__comment_id__delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/auth/token": {
         parameters: {
             query?: never;
@@ -448,6 +488,8 @@ export interface components {
                     [key: string]: unknown;
                 }[];
             };
+            /** Comments */
+            comments?: components["schemas"]["SegmentCommentResponse"][];
         };
         /** DuplicateTermsDetail */
         DuplicateTermsDetail: {
@@ -603,6 +645,55 @@ export interface components {
          * @enum {string}
          */
         Role: "admin" | "reviewer" | "translator";
+        /** SegmentCommentAuthor */
+        SegmentCommentAuthor: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Email */
+            email: string;
+        };
+        /** SegmentCommentCreate */
+        SegmentCommentCreate: {
+            /**
+             * Text
+             * @description Comment text
+             */
+            text: string;
+        };
+        /** SegmentCommentResponse */
+        SegmentCommentResponse: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Segment Id
+             * Format: uuid
+             */
+            segment_id: string;
+            /**
+             * User Id
+             * Format: uuid
+             */
+            user_id: string;
+            /** Text */
+            text: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+            user?: components["schemas"]["SegmentCommentAuthor"] | null;
+        };
         /** SegmentEditRequest */
         SegmentEditRequest: {
             /**
@@ -1164,6 +1255,73 @@ export interface operations {
                         [key: string]: string;
                     };
                 };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    add_segment_comment_api_projects__project_id__segments__segment_id__comments_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                project_id: string;
+                segment_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SegmentCommentCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SegmentCommentResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_segment_comment_api_projects__project_id__segments__segment_id__comments__comment_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                project_id: string;
+                segment_id: string;
+                comment_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
             /** @description Validation Error */
             422: {

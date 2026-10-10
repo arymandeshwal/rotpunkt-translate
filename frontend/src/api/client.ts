@@ -13,6 +13,10 @@ export type GlossaryEntryCreate = Schemas["GlossaryEntryCreate"];
 export type GlossaryEntryUpdate = Schemas["GlossaryEntryUpdate"];
 export type GlossaryPage = Schemas["GlossaryPage"];
 
+export type DocumentSegment = Schemas["DocumentSegmentSchema"];
+export type SegmentCommentResponse = Schemas["SegmentCommentResponse"];
+export type SegmentCommentCreate = Schemas["SegmentCommentCreate"];
+
 export const api = createClient<paths>({
   // Requests must be absolute; the dev server proxies /api to the backend.
   baseUrl: globalThis.location.origin,

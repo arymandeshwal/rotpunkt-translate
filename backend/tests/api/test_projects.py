@@ -131,3 +131,55 @@ async def test_patch_project_not_found(client: AsyncClient) -> None:
     random_uuid = str(uuid.uuid4())
     response = await client.patch(f"/api/projects/{random_uuid}", json={"source_language": "en"})
     assert response.status_code == 404
+
+async def test_add_comment_success(client: AsyncClient) -> None:
+    # Setup project and segment
+    pdf_content = make_pdf([Text("Hello world", x=10, y=10, size=12)])
+    upload_res = await client.post(
+        "/api/projects", files={"file": ("test.pdf", pdf_content, "application/pdf")}
+    )
+    assert upload_res.status_code == 201
+    project_id = upload_res.json()["id"]
+    segment_id = upload_res.json()["documents"][0]["segments"][0]["id"]
+    
+    # Add a comment
+    payload = {"text": "This is a tricky segment."}
+    comment_res = await client.post(
+        f"/api/projects/{project_id}/segments/{segment_id}/comments",
+        json=payload,
+    )
+    assert comment_res.status_code == 201
+    data = comment_res.json()
+    assert data["text"] == "This is a tricky segment."
+    assert data["segment_id"] == segment_id
+    assert "user" in data
+    assert data["user"]["email"] == "test@example.com"
+
+async def test_add_comment_empty_text(client: AsyncClient) -> None:
+    pdf_content = make_pdf([Text("Hello", x=10, y=10, size=12)])
+    upload_res = await client.post(
+        "/api/projects", files={"file": ("test.pdf", pdf_content, "application/pdf")}
+    )
+    project_id = upload_res.json()["id"]
+    segment_id = upload_res.json()["documents"][0]["segments"][0]["id"]
+    
+    res2 = await client.post(
+        f"/api/projects/{project_id}/segments/{segment_id}/comments",
+        json={"text": ""},
+    )
+    assert res2.status_code == 422
+
+async def test_add_comment_invalid_segment(client: AsyncClient) -> None:
+    pdf_content = make_pdf([Text("Hello", x=10, y=10, size=12)])
+    upload_res = await client.post(
+        "/api/projects", files={"file": ("test.pdf", pdf_content, "application/pdf")}
+    )
+    project_id = upload_res.json()["id"]
+    fake_segment_id = str(uuid.uuid4())
+    
+    res = await client.post(
+        f"/api/projects/{project_id}/segments/{fake_segment_id}/comments",
+        json={"text": "Hello"},
+    )
+    assert res.status_code == 404
+

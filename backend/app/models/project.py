@@ -110,3 +110,24 @@ class DocumentSegment(Base):
     issues: Mapped[dict[str, list[dict]]] = mapped_column(JSON, default=dict, server_default="{}")
 
     document: Mapped[Document] = relationship(back_populates="segments")
+    comments: Mapped[list["SegmentComment"]] = relationship(
+        back_populates="segment",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
+    )
+
+
+class SegmentComment(TimestampMixin, Base):
+    __tablename__ = "segment_comments"
+
+    id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
+    segment_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("document_segments.id", ondelete="CASCADE"), index=True
+    )
+    user_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE"), index=True
+    )
+    text: Mapped[str] = mapped_column(String(10000))
+
+    segment: Mapped[DocumentSegment] = relationship(back_populates="comments")
+    user: Mapped["User"] = relationship()
