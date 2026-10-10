@@ -146,7 +146,7 @@ features that complete the core workflow (users → editing → approval → exp
 | # | Area | Features |
 |---|---|---|
 | 1 | **Users & roles** | M1 login, M2 roles (translator, reviewer, admin), M3 user management |
-| 2 | **Manual editing** | G1 edit text, G2 replace terms ✅, G3 add term to glossary from the editor, G4 comments |
+| 2 | **Manual editing** | G1 edit text ✅, G2 replace terms ✅, G3 add term to glossary from the editor ✅, G4 comments ✅ |
 | 3 | **Approval** | J1 "approve translation" locks it and produces the final version |
 | 4 | **Export** | K1 Word, K2 Excel, K3 PDF, K4 Excel column mapping, K5 export templates, K6 export modes (translation only, original + translation, QA report, comments) |
 | 5 | **More input formats** | B1 DOCX, B2 XLSX, B4 InDesign (IDML) |
