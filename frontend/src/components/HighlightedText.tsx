@@ -1,5 +1,6 @@
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { Info } from "lucide-react";
+import { Info, Replace } from "lucide-react";
+import { Button } from "./ui/button";
 import { cn } from "../lib/utils";
 
 export type Annotation = {
@@ -7,11 +8,13 @@ export type Annotation = {
   end: number;
   type: "glossary" | "dnt" | "kitchen_trade_term" | "ambiguous_term" | "faulty_term";
   text: string;
+  preferred_target?: string;
 };
 
 interface HighlightedTextProps {
   text: string;
   annotations: Annotation[];
+  onReplaceTerm?: (newText: string) => void;
 }
 
 const TYPE_STYLES = {
@@ -30,7 +33,7 @@ const TYPE_LABELS = {
   faulty_term: "Faulty / OCR Error",
 };
 
-export function HighlightedText({ text, annotations }: HighlightedTextProps) {
+export function HighlightedText({ text, annotations, onReplaceTerm }: HighlightedTextProps) {
   if (!annotations || annotations.length === 0) {
     return <span>{text}</span>;
   }
@@ -65,23 +68,44 @@ export function HighlightedText({ text, annotations }: HighlightedTextProps) {
             {markedText}
           </mark>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-3 flex items-start space-x-2 text-sm shadow-md">
-          <Info className="w-4 h-4 text-muted-foreground mt-0.5" />
-          <div>
-            <p className="font-semibold">{label}</p>
-            {ann.type === "glossary" && (
-              <p className="text-muted-foreground text-xs">Standardized kitchen term.</p>
-            )}
-            {ann.type === "dnt" && (
-              <p className="text-muted-foreground text-xs">Protected brand or product name.</p>
-            )}
-            {ann.type === "kitchen_trade_term" && (
-              <p className="text-muted-foreground text-xs">Industry jargon identified by AI.</p>
-            )}
-            {ann.type === "ambiguous_term" && (
-              <p className="text-muted-foreground text-xs">Meaning depends on kitchen context. Please review.</p>
-            )}
+        <PopoverContent className="w-auto p-3 flex flex-col gap-3 text-sm shadow-md">
+          <div className="flex items-start space-x-2">
+            <Info className="w-4 h-4 text-muted-foreground mt-0.5" />
+            <div>
+              <p className="font-semibold">{label}</p>
+              {ann.type === "glossary" && (
+                <p className="text-muted-foreground text-xs">Standardized kitchen term.</p>
+              )}
+              {ann.type === "dnt" && (
+                <p className="text-muted-foreground text-xs">Protected brand or product name.</p>
+              )}
+              {ann.type === "kitchen_trade_term" && (
+                <p className="text-muted-foreground text-xs">Industry jargon identified by AI.</p>
+              )}
+              {ann.type === "ambiguous_term" && (
+                <p className="text-muted-foreground text-xs">Meaning depends on kitchen context. Please review.</p>
+              )}
+            </div>
           </div>
+          {onReplaceTerm && ann.preferred_target && ann.preferred_target.toLowerCase() !== markedText.toLowerCase() && (
+            <div className="border-t pt-2 mt-1">
+              <p className="text-xs text-muted-foreground mb-2">
+                Preferred translation: <span className="font-semibold text-foreground">{ann.preferred_target}</span>
+              </p>
+              <Button 
+                size="sm" 
+                variant="secondary" 
+                className="w-full text-xs h-7"
+                onClick={() => {
+                  const newFullText = text.substring(0, ann.start) + ann.preferred_target + text.substring(ann.end);
+                  onReplaceTerm(newFullText);
+                }}
+              >
+                <Replace className="w-3 h-3 mr-2" />
+                Replace
+              </Button>
+            </div>
+          )}
         </PopoverContent>
       </Popover>
     );

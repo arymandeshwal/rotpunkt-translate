@@ -138,13 +138,30 @@ export function ProjectEditorPage() {
                         <>
                           <div 
                             className="cursor-text hover:bg-muted/50 p-1 -m-1 rounded transition-colors group/text relative min-h-6"
-                            onClick={() => {
+                            onClick={(e) => {
+                              // Don't trigger edit mode if they clicked a highlight popover trigger
+                              if ((e.target as HTMLElement).closest('mark') || (e.target as HTMLElement).closest('[data-radix-popper-content-wrapper]')) {
+                                return;
+                              }
                               setDraftText(translation);
                               setEditingSegmentId(segment.id);
                             }}
                           >
                             {translation ? (
-                              <HighlightedText text={translation} annotations={annotations} />
+                              <HighlightedText 
+                                text={translation} 
+                                annotations={annotations} 
+                                onReplaceTerm={targetLanguage ? (newText) => {
+                                  editMutation.mutate(
+                                    { projectId: project.id, segmentId: segment.id, targetLanguage, newText },
+                                    {
+                                      onError: (err) => {
+                                        toast.error("Failed to replace term", { description: err.message });
+                                      }
+                                    }
+                                  );
+                                } : undefined}
+                              />
                             ) : (
                               <span className="text-muted-foreground italic">&lt;Empty translation&gt;</span>
                             )}

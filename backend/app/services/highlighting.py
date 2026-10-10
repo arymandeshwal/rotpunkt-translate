@@ -54,6 +54,7 @@ def compute_deterministic_annotations(
                         "type": "dnt" if info.is_dnt else "glossary",
                         "term_id": info.entry_id,
                         "text": match.group(0),
+                        "preferred_target": target, # Added to support G2 Replace term
                     }
                 )
 
