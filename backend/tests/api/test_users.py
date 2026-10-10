@@ -36,6 +36,11 @@ async def translator_user(db_session):
 
 
 async def test_login_success(client: AsyncClient, admin_user):
+    # Ensure this test removes the global current_user override so real auth happens
+    from app.main import app
+    from app.api.dependencies import get_current_user
+    app.dependency_overrides.pop(get_current_user, None)
+    
     response = await client.post(
         "/api/auth/token", data={"username": "admin_test@rotpunkt.de", "password": "testpass"}
     )
@@ -44,6 +49,10 @@ async def test_login_success(client: AsyncClient, admin_user):
 
 
 async def test_login_failure(client: AsyncClient, admin_user):
+    from app.main import app
+    from app.api.dependencies import get_current_user
+    app.dependency_overrides.pop(get_current_user, None)
+    
     response = await client.post(
         "/api/auth/token", data={"username": "admin_test@rotpunkt.de", "password": "wrongpass"}
     )
@@ -51,6 +60,10 @@ async def test_login_failure(client: AsyncClient, admin_user):
 
 
 async def test_create_user_as_admin(client: AsyncClient, admin_user):
+    from app.main import app
+    from app.api.dependencies import get_current_user
+    app.dependency_overrides.pop(get_current_user, None)
+    
     # Login first
     login = await client.post(
         "/api/auth/token", data={"username": "admin_test@rotpunkt.de", "password": "testpass"}
@@ -68,6 +81,10 @@ async def test_create_user_as_admin(client: AsyncClient, admin_user):
 
 
 async def test_create_user_as_translator_is_forbidden(client: AsyncClient, translator_user):
+    from app.main import app
+    from app.api.dependencies import get_current_user
+    app.dependency_overrides.pop(get_current_user, None)
+    
     login = await client.post(
         "/api/auth/token", data={"username": "translator_test@rotpunkt.de", "password": "testpass"}
     )

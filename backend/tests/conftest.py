@@ -16,6 +16,8 @@ os.environ["DATABASE_URL"] = render(TEST_DATABASE_URL)
 
 from app.db import engine, get_session  # noqa: E402
 from app.main import app  # noqa: E402
+from app.api.dependencies import get_current_user  # noqa: E402
+from app.models.user import User, Role  # noqa: E402
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -42,13 +44,22 @@ async def db_session() -> AsyncIterator[AsyncSession]:
 
 
 @pytest.fixture
-async def client(db_session: AsyncSession) -> AsyncIterator[AsyncClient]:
-    """API client whose requests share the test's rolled-back session."""
+def current_user_override():
+    """Provides a default admin user for tests that don't need specific auth testing."""
+    return User(email="test@example.com", role=Role.ADMIN, is_active=True, hashed_password="fake")
+
+@pytest.fixture
+async def client(db_session: AsyncSession, current_user_override) -> AsyncIterator[AsyncClient]:
+    """API client whose requests share the test's rolled-back session and bypass auth by default."""
 
     async def test_session() -> AsyncIterator[AsyncSession]:
         yield db_session
 
+    async def override_get_current_user():
+        return current_user_override
+
     app.dependency_overrides[get_session] = test_session
+    app.dependency_overrides[get_current_user] = override_get_current_user
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as c:
         yield c
     app.dependency_overrides.clear()

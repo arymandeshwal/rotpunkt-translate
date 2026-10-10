@@ -5,6 +5,8 @@ from typing import Annotated
 from fastapi import APIRouter, BackgroundTasks, Depends, File, HTTPException, UploadFile, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
+from app.api.dependencies import get_current_user
+from app.models.user import User
 from sqlalchemy.orm import selectinload
 
 from app.config import get_settings
@@ -57,6 +59,7 @@ async def _get_project_or_404(project_id: uuid.UUID, db_session: AsyncSession) -
 async def create_project(
     file: Annotated[UploadFile, File(...)],
     db_session: Annotated[AsyncSession, Depends(get_session)],
+    current_user: Annotated[User, Depends(get_current_user)],
 ) -> ProjectResponse:
     """
     Upload a PDF, parse its contents, detect languages, and create a new project.
@@ -145,6 +148,7 @@ async def create_project(
 async def get_project(
     project_id: uuid.UUID,
     db_session: Annotated[AsyncSession, Depends(get_session)],
+    current_user: Annotated[User, Depends(get_current_user)],
 ) -> ProjectResponse:
     """
     Get a project and all its parsed contents.
@@ -164,6 +168,7 @@ async def update_project(
     project_id: uuid.UUID,
     payload: ProjectUpdateRequest,
     db_session: Annotated[AsyncSession, Depends(get_session)],
+    current_user: Annotated[User, Depends(get_current_user)],
 ) -> ProjectResponse:
     """
     Update a project, typically to confirm or change its source language.
@@ -202,6 +207,7 @@ async def retranslate_segment(
     segment_id: uuid.UUID,
     payload: TranslateRequest,
     db_session: Annotated[AsyncSession, Depends(get_session)],
+    current_user: Annotated[User, Depends(get_current_user)],
 ) -> DocumentSegment:
     """
     Re-translate a single document segment synchronously.
@@ -303,6 +309,7 @@ async def translate_project(
     payload: TranslateRequest,
     background_tasks: BackgroundTasks,
     db_session: Annotated[AsyncSession, Depends(get_session)],
+    current_user: Annotated[User, Depends(get_current_user)],
 ) -> dict[str, str]:
     """
     Trigger the translation of a project.

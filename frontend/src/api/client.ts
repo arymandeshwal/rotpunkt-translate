@@ -17,7 +17,14 @@ export const api = createClient<paths>({
   // Requests must be absolute; the dev server proxies /api to the backend.
   baseUrl: globalThis.location.origin,
   // Resolve fetch per call (not at import time) so tests can stub it.
-  fetch: (request) => globalThis.fetch(request),
+  fetch: (request) => {
+    // Intercept and inject Authorization token if present
+    const token = localStorage.getItem("auth_token");
+    if (token) {
+      request.headers.set("Authorization", `Bearer ${token}`);
+    }
+    return globalThis.fetch(request);
+  },
 });
 
 export class ApiError extends Error {

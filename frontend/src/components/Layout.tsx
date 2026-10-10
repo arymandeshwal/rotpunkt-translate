@@ -1,13 +1,23 @@
-import { NavLink, Outlet } from "react-router";
-
+import { NavLink, Outlet, useNavigate } from "react-router";
+import { LogOut } from "lucide-react";
 import { HealthBadge } from "./HealthBadge";
-
-const navItems = [
-  { to: "/", label: "Projects" },
-  { to: "/glossary", label: "Glossary" },
-];
+import { useAuth } from "../contexts/AuthContext";
+import { Button } from "./ui/button";
 
 export function Layout() {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
+  const navItems = [
+    { to: "/", label: "Projects" },
+    { to: "/glossary", label: "Glossary" },
+  ];
+
   return (
     <div className="flex min-h-screen flex-col bg-stone-50 text-stone-900">
       <header className="border-b border-stone-200 bg-white">
@@ -34,8 +44,18 @@ export function Layout() {
               </NavLink>
             ))}
           </nav>
-          <div className="ml-auto">
+          <div className="ml-auto flex items-center gap-4">
             <HealthBadge />
+            {user && (
+              <div className="flex items-center gap-3 border-l border-stone-200 pl-4">
+                <span className="text-xs text-muted-foreground hidden sm:inline-block">
+                  {user.email} <span className="uppercase text-[10px] bg-stone-100 px-1 py-0.5 rounded ml-1">{user.role}</span>
+                </span>
+                <Button variant="ghost" size="icon" onClick={handleLogout} title="Log out" className="h-8 w-8 text-stone-500">
+                  <LogOut className="h-4 w-4" />
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </header>
