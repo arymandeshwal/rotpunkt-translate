@@ -191,13 +191,29 @@ export function ProjectEditorPage() {
               const isEditing = editingSegmentId === segment.id;
 
               return (
-                <Popover 
-                  key={`popover-${segment.id}`} 
-                  open={glossaryPopState.segmentId === segment.id} 
-                  onOpenChange={(open) => { if (!open) setGlossaryPopState(prev => ({ ...prev, segmentId: null })) }}
-                >
-                  <PopoverTrigger asChild>
-                    <div className={`grid grid-cols-2 gap-4 p-4 transition-colors group relative ${isEditing ? 'bg-muted/30 shadow-sm' : 'hover:bg-muted/50'}`}>
+                <div key={`wrapper-${segment.id}`} className="relative">
+                  {/* Floating Action Button / Popover anchor attached OUTSIDE the layout flow */}
+                  <div className="absolute left-[-16px] top-1/2 -translate-y-1/2 -translate-x-full">
+                    <Popover 
+                      key={`popover-${segment.id}`} 
+                      open={glossaryPopState.segmentId === segment.id} 
+                      onOpenChange={(open) => { if (!open) setGlossaryPopState(prev => ({ ...prev, segmentId: null })) }}
+                    >
+                      <PopoverTrigger asChild>
+                        <div className="w-1 h-1 pointer-events-none" />
+                      </PopoverTrigger>
+                      <PopoverContent side="left" align="center" sideOffset={16} collisionPadding={8} className="w-80 max-w-[95vw] p-0 overflow-hidden shadow-lg border-primary/20 z-50">
+                        <GlossaryQuickAddForm 
+                          sourceText={glossaryPopState.sourceText}
+                          sourceLang={glossaryPopState.sourceLang}
+                          targetLang={glossaryPopState.targetLang}
+                          onClose={() => setGlossaryPopState(prev => ({ ...prev, segmentId: null }))}
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+
+                  <div className={`grid grid-cols-2 gap-4 p-4 transition-colors relative ${isEditing ? 'bg-muted/30 shadow-sm' : 'hover:bg-muted/50'}`}>
                       <div 
                         className="text-sm selection:bg-primary/20"
                         onDoubleClick={(e) => handleDoubleClick(e, segment.id, "source")}
@@ -333,16 +349,7 @@ export function ProjectEditorPage() {
                     )}
                   </div>
                 </div>
-                </PopoverTrigger>
-                <PopoverContent side="bottom" align="start" sideOffset={8} collisionPadding={16} className="w-80 max-w-[95vw] p-0 overflow-hidden shadow-lg border-primary/20 z-50">
-                  <GlossaryQuickAddForm 
-                    sourceText={glossaryPopState.sourceText}
-                    sourceLang={glossaryPopState.sourceLang}
-                    targetLang={glossaryPopState.targetLang}
-                    onClose={() => setGlossaryPopState(prev => ({ ...prev, segmentId: null }))}
-                  />
-                </PopoverContent>
-              </Popover>
+              </div>
               );
             })}
           </div>
