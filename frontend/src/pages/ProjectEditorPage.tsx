@@ -1,6 +1,6 @@
 import { useProject, useRetranslateSegment, useEditSegment } from "../hooks/useProjects";
 import { useParams } from "react-router";
-import { Loader2, RefreshCw, AlertTriangle, Check, X, Pencil } from "lucide-react";
+import { Loader2, RefreshCw, AlertTriangle, Check, X } from "lucide-react";
 import { HighlightedText, type Annotation } from "../components/HighlightedText";
 import { Button } from "../components/ui/button";
 import { toast } from "sonner";
@@ -313,9 +313,6 @@ export function ProjectEditorPage() {
                             ) : (
                               <span className="text-muted-foreground italic">&lt;Empty translation&gt;</span>
                             )}
-                            <div className="absolute right-2 top-2 opacity-0 group-hover/text:opacity-100 transition-opacity bg-background border shadow-sm rounded p-1 text-muted-foreground pointer-events-none">
-                              <Pencil className="h-3.5 w-3.5" />
-                            </div>
                           </div>
                           {issues.length > 0 && (
                             <div className="flex flex-col gap-1 mt-2">
