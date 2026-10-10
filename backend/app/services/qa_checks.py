@@ -9,7 +9,7 @@ def compute_qa_issues(
     target_text: str,
     glossary_infos: list[GlossaryTermInfo],
     is_translatable: bool,
-) -> list[dict[str, Any]]:
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """
     Run automated QA checks on a translated segment.
 
@@ -20,12 +20,15 @@ def compute_qa_issues(
         is_translatable: Whether the segment was considered translatable.
 
     Returns:
-        A list of issue dictionaries suitable for the 'issues' JSON column.
+        A tuple of two lists:
+        1. issue dictionaries suitable for the 'issues' JSON column.
+        2. annotation dictionaries for 'faulty_term' missing target terms.
     """
     issues = []
+    annotations = []
 
     if not is_translatable:
-        return issues
+        return issues, annotations
 
     source_stripped = source_text.strip()
     target_stripped = target_text.strip()
@@ -81,4 +84,46 @@ def compute_qa_issues(
                     }
                 )
 
-    return issues
+                # Attempt to guess which word the AI got wrong by finding the closest match
+                words = target_text.split()
+                if words:
+                    expected_len = len(expected_target.split())
+                    best_ratio = 0
+                    best_match = None
+                    best_start = -1
+                    best_end = -1
+
+                    import difflib
+
+                    for n in range(max(1, expected_len - 1), expected_len + 2):
+                        for i in range(len(words) - n + 1):
+                            ngram_words = words[i : i + n]
+                            ngram = " ".join(ngram_words)
+                            clean_ngram = re.sub(r"[^\w\s]", "", ngram).lower()
+                            clean_expected = re.sub(r"[^\w\s]", "", expected_target).lower()
+
+                            ratio = difflib.SequenceMatcher(
+                                None, clean_ngram, clean_expected
+                            ).ratio()
+                            if ratio > best_ratio:
+                                best_ratio = ratio
+                                best_match = ngram
+                                # Find start and end indices of this ngram in the full string
+                                # We'll just search for the literal ngram to get bounds
+                                match = re.search(re.escape(ngram), target_text)
+                                if match:
+                                    best_start, best_end = match.span()
+
+                    # If we found a vaguely similar word (e.g. 'high cabinet' vs 'tall unit' -> ratio ~0.4)
+                    if best_match and best_ratio > 0.3 and best_start != -1:
+                        annotations.append(
+                            {
+                                "start": best_start,
+                                "end": best_end,
+                                "type": "faulty_term",
+                                "text": best_match,
+                                "preferred_target": expected_target,
+                            }
+                        )
+
+    return issues, annotations

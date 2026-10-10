@@ -261,13 +261,13 @@ async def edit_segment(
     ai_annotations = ai_annotations_batch[0]
     det_annotations = compute_deterministic_annotations(new_text, glossary_infos)
 
-    new_annotations = det_annotations + ai_annotations
-    new_annotations.sort(key=lambda x: x["start"])
-
-    # 5. Compute QA issues
-    issues = compute_qa_issues(
+    # 5. Compute QA issues & faulty term annotations
+    issues, qa_annotations = compute_qa_issues(
         segment.text, new_text, glossary_infos, segment.is_translatable or False
     )
+
+    new_annotations = det_annotations + ai_annotations + qa_annotations
+    new_annotations.sort(key=lambda x: x["start"])
 
     # 6. Update DB
     # We must explicitly create new dicts so SQLAlchemy detects the mutation on the JSON column
@@ -367,7 +367,12 @@ async def retranslate_segment(
     ai_annotations = ai_annotations_batch[0]
     det_annotations = compute_deterministic_annotations(new_translation, glossary_infos)
 
-    new_annotations = det_annotations + ai_annotations
+    # Compute QA issues
+    issues, qa_annotations = compute_qa_issues(
+        segment.text, new_translation, glossary_infos, segment.is_translatable
+    )
+
+    new_annotations = det_annotations + ai_annotations + qa_annotations
     new_annotations.sort(key=lambda x: x["start"])
 
     # 5. Update DB
@@ -380,10 +385,6 @@ async def retranslate_segment(
     current_annotations[target_lang] = new_annotations
     segment.annotations = current_annotations
 
-    # Compute QA issues
-    issues = compute_qa_issues(
-        segment.text, new_translation, glossary_infos, segment.is_translatable
-    )
     current_issues = dict(segment.issues or {})
     current_issues[target_lang] = issues
     segment.issues = current_issues

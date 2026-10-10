@@ -170,17 +170,18 @@ async def run_document_translation(document_id: uuid.UUID, target_language: str)
 
                     # Update annotations (Deterministic + AI)
                     det_annotations = compute_deterministic_annotations(translation, glossary_infos)
-                    combined_annotations = det_annotations + ai_annotations
+                    # Update QA issues and annotations
+                    issues, qa_annotations = compute_qa_issues(
+                        seg.text, translation, glossary_infos, seg.is_translatable
+                    )
+
+                    combined_annotations = det_annotations + ai_annotations + qa_annotations
                     combined_annotations.sort(key=lambda x: x["start"])
 
                     current_annotations = dict(seg.annotations or {})
                     current_annotations[target_language] = combined_annotations
                     seg.annotations = current_annotations
 
-                    # Update QA issues
-                    issues = compute_qa_issues(
-                        seg.text, translation, glossary_infos, seg.is_translatable
-                    )
                     current_issues = dict(seg.issues or {})
                     current_issues[target_language] = issues
                     seg.issues = current_issues
