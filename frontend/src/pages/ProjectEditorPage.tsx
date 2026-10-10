@@ -334,7 +334,7 @@ export function ProjectEditorPage() {
                   </div>
                 </div>
                 </PopoverTrigger>
-                <PopoverContent side="left" align="start" sideOffset={16} className="w-80 p-0 overflow-hidden shadow-lg border-primary/20">
+                <PopoverContent side="bottom" align="start" sideOffset={8} collisionPadding={16} className="w-80 max-w-[95vw] p-0 overflow-hidden shadow-lg border-primary/20 z-50">
                   <GlossaryQuickAddForm 
                     sourceText={glossaryPopState.sourceText}
                     sourceLang={glossaryPopState.sourceLang}
