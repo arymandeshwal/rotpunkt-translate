@@ -220,7 +220,7 @@ export function ProjectEditorPage() {
                     </Popover>
                   </div>
 
-                  <div className={`grid grid-cols-2 gap-4 p-4 transition-colors relative ${isEditing ? 'bg-muted/30 shadow-sm' : 'hover:bg-muted/50'}`}>
+                  <div className={`grid grid-cols-2 gap-4 p-4 transition-colors relative group ${isEditing ? 'bg-muted/30 shadow-sm' : 'hover:bg-muted/50'}`}>
                       <div 
                         className="text-sm selection:bg-primary/20"
                         onDoubleClick={(e) => handleDoubleClick(e, segment.id, "source")}
