@@ -954,6 +954,55 @@
         }
       }
     },
+    "/api/projects/{project_id}/approve": {
+      "post": {
+        "tags": [
+          "projects"
+        ],
+        "summary": "Approve Project",
+        "description": "Approve a translation project, locking it from further edits.",
+        "operationId": "approve_project_api_projects__project_id__approve_post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Project Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/auth/token": {
       "post": {
         "tags": [

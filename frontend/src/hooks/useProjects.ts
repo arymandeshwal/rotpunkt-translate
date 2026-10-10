@@ -265,3 +265,19 @@ export function useDeleteSegmentComment() {
     },
   });
 }
+export function useApproveProject() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const { data, error } = await api.POST("/api/projects/{project_id}/approve", {
+        params: { path: { project_id: id } },
+      });
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: (data, variables) => {
+      queryClient.setQueryData(["projects", variables], data);
+    },
+  });
+}

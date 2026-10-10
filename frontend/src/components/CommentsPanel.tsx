@@ -10,9 +10,10 @@ interface CommentsPanelProps {
   projectId: string;
   segmentId: string;
   comments: SegmentCommentResponse[];
+  isApproved?: boolean;
 }
 
-export function CommentsPanel({ projectId, segmentId, comments }: CommentsPanelProps) {
+export function CommentsPanel({ projectId, segmentId, comments, isApproved }: CommentsPanelProps) {
   const { user } = useAuth();
   const [newComment, setNewComment] = useState("");
   const addMutation = useAddSegmentComment();
@@ -41,7 +42,7 @@ export function CommentsPanel({ projectId, segmentId, comments }: CommentsPanelP
           {comments.map((comment) => {
             const isOwner = user?.id === comment.user_id;
             const isAdmin = user?.role === "admin";
-            const canDelete = isOwner || isAdmin;
+            const canDelete = (isOwner || isAdmin) && !isApproved;
             
             return (
               <div key={comment.id} className="bg-background rounded-lg p-3 border shadow-sm text-sm">
@@ -77,28 +78,30 @@ export function CommentsPanel({ projectId, segmentId, comments }: CommentsPanelP
         </div>
       )}
 
-      <div className="flex items-start gap-2 pt-2 border-t border-border/50">
-        <Textarea
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-          placeholder="Add a comment..."
-          className="min-h-[40px] h-[40px] max-h-[120px] resize-y text-sm py-2"
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              handleAddComment();
-            }
-          }}
-        />
-        <Button 
-          onClick={handleAddComment} 
-          disabled={!newComment.trim() || addMutation.isPending}
-          size="icon"
-          className="shrink-0"
-        >
-          <Send className="h-4 w-4" />
-        </Button>
-      </div>
+      {!isApproved && (
+        <div className="flex items-start gap-2 pt-2 border-t border-border/50">
+          <Textarea
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            placeholder="Add a comment..."
+            className="min-h-[40px] h-[40px] max-h-[120px] resize-y text-sm py-2"
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleAddComment();
+              }
+            }}
+          />
+          <Button 
+            onClick={handleAddComment} 
+            disabled={!newComment.trim() || addMutation.isPending}
+            size="icon"
+            className="shrink-0"
+          >
+            <Send className="h-4 w-4" />
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

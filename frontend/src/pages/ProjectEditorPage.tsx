@@ -1,4 +1,4 @@
-import { useProject, useRetranslateSegment, useEditSegment } from "../hooks/useProjects";
+import { useProject, useRetranslateSegment, useEditSegment, useApproveProject } from "../hooks/useProjects";
 import { useParams } from "react-router";
 import { Loader2, RefreshCw, AlertTriangle, Check, X } from "lucide-react";
 import { HighlightedText, type Annotation } from "../components/HighlightedText";
@@ -9,8 +9,9 @@ import { Textarea } from "../components/ui/textarea";
 
 import { Popover, PopoverContent, PopoverTrigger } from "../components/ui/popover";
 import { Label } from "../components/ui/label";
-import { MessageSquare } from "lucide-react";
+import { MessageSquare, Lock } from "lucide-react";
 import { CommentsPanel } from "../components/CommentsPanel";
+import { useAuth } from "../contexts/AuthContext";
 import { Input } from "../components/ui/input";
 import { useCreateEntry } from "../hooks/useGlossary";
 
@@ -96,11 +97,13 @@ function GlossaryQuickAddForm({
 
 export function ProjectEditorPage() {
   const { id } = useParams<{ id: string }>();
+  const { user } = useAuth();
 
   // Poll every 3 seconds if status is "translating", otherwise stop polling
   const { data: project, isLoading, error } = useProject(id!, 3000);
   const retranslateMutation = useRetranslateSegment();
   const editMutation = useEditSegment();
+  const approveMutation = useApproveProject();
   
   const [editingSegmentId, setEditingSegmentId] = useState<string | null>(null);
   const [draftText, setDraftText] = useState<string>("");
@@ -155,6 +158,7 @@ export function ProjectEditorPage() {
   }
 
   const isTranslating = project.status === "translating";
+  const isApproved = project.status === "done";
   const doc = project.documents?.[0];
 
   if (!doc) {
@@ -170,10 +174,29 @@ export function ProjectEditorPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">{project.name}</h1>
-          <p className="text-muted-foreground">
-            Status: <span className="font-semibold uppercase">{project.status}</span>
+          <p className="text-muted-foreground flex items-center gap-2">
+            <span>Status: <span className="font-semibold uppercase">{project.status}</span></span>
+            {isApproved && (
+              <span className="flex items-center gap-1 text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 px-2 py-0.5 rounded-full border border-green-200 dark:border-green-800/50">
+                <Lock className="h-3 w-3" /> Approved
+              </span>
+            )}
           </p>
         </div>
+        {!isApproved && !isTranslating && user && (user.role === "admin" || user.role === "reviewer") && (
+          <Button 
+            onClick={() => {
+              if (confirm("Are you sure you want to approve this translation? It will be locked from further edits.")) {
+                approveMutation.mutate(project.id);
+              }
+            }}
+            disabled={approveMutation.isPending}
+            className="gap-2"
+          >
+            {approveMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4" />}
+            Approve Translation
+          </Button>
+        )}
       </div>
 
       {isTranslating ? (
@@ -223,13 +246,13 @@ export function ProjectEditorPage() {
                   <div className={`grid grid-cols-2 gap-4 p-4 transition-colors relative group ${isEditing ? 'bg-muted/30 shadow-sm' : 'hover:bg-muted/50'}`}>
                       <div 
                         className="text-sm selection:bg-primary/20"
-                        onDoubleClick={(e) => handleDoubleClick(e, segment.id, "source")}
+                        onDoubleClick={!isApproved ? (e) => handleDoubleClick(e, segment.id, "source") : undefined}
                       >
                         {segment.text}
                       </div>
                       <div 
                         className="text-sm flex items-start justify-between gap-4 selection:bg-primary/20"
-                        onDoubleClick={(e) => handleDoubleClick(e, segment.id, "target")}
+                        onDoubleClick={!isApproved ? (e) => handleDoubleClick(e, segment.id, "target") : undefined}
                       >
                     <div className="flex-1 flex flex-col gap-2">
                       {!segment.is_translatable ? (
@@ -285,21 +308,21 @@ export function ProjectEditorPage() {
                       ) : translation !== null ? (
                         <>
                           <div 
-                            className="cursor-text hover:bg-muted/50 p-1 -m-1 rounded transition-colors group/text relative min-h-6"
-                            onClick={(e) => {
+                            className={`cursor-text ${!isApproved ? 'hover:bg-muted/50' : ''} p-1 -m-1 rounded transition-colors group/text relative min-h-6`}
+                            onClick={!isApproved ? (e) => {
                               // Don't trigger edit mode if they clicked a highlight popover trigger
                               if ((e.target as HTMLElement).closest('mark') || (e.target as HTMLElement).closest('[data-radix-popper-content-wrapper]')) {
                                 return;
                               }
                               setDraftText(translation);
                               setEditingSegmentId(segment.id);
-                            }}
+                            } : undefined}
                           >
                             {translation ? (
                               <HighlightedText 
                                 text={translation} 
                                 annotations={annotations} 
-                                onReplaceTerm={targetLanguage ? (newText) => {
+                                onReplaceTerm={targetLanguage && !isApproved ? (newText) => {
                                   editMutation.mutate(
                                     { projectId: project.id, segmentId: segment.id, targetLanguage, newText },
                                     {
@@ -331,7 +354,7 @@ export function ProjectEditorPage() {
                     </div>
                     
                     <div className="absolute right-2 top-2 flex flex-col gap-1">
-                      {segment.is_translatable && targetLanguage && (
+                      {segment.is_translatable && targetLanguage && !isApproved && (
                         <Button
                           variant="ghost"
                           size="icon"
@@ -380,6 +403,7 @@ export function ProjectEditorPage() {
                       projectId={project.id} 
                       segmentId={segment.id} 
                       comments={segment.comments || []} 
+                      isApproved={isApproved}
                     />
                   )}
                 </div>

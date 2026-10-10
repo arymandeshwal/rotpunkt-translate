@@ -11,7 +11,7 @@ from app.api.dependencies import get_current_user
 from app.config import get_settings
 from app.db import get_session
 from app.languages import DEFAULT_SOURCE_LANGUAGE
-from app.models.project import Document, DocumentPage, DocumentSegment, Project, SegmentComment
+from app.models.project import Document, DocumentPage, DocumentSegment, Project, SegmentComment, ProjectStatus
 from app.models.user import User
 from app.parsers.pdf import PdfError, parse_pdf
 from app.schemas.project import (
@@ -192,6 +192,9 @@ async def update_project(
     """
     project = await _get_project_or_404(project_id, db_session)
 
+    if project.status == ProjectStatus.DONE:
+        raise HTTPException(status_code=403, detail="Project is approved and cannot be modified.")
+
     # In MVP, a project has 1 document. We update the source language and recalculate.
     for doc in project.documents:
         doc.source_language = payload.source_language
@@ -238,6 +241,9 @@ async def edit_segment(
 
     # 1. Fetch the project and document
     project = await _get_project_or_404(project_id, db_session)
+    if project.status == ProjectStatus.DONE:
+        raise HTTPException(status_code=403, detail="Project is approved and cannot be modified.")
+        
     if not project.documents:
         raise HTTPException(status_code=400, detail="Project has no documents.")
 
@@ -329,6 +335,9 @@ async def retranslate_segment(
 
     # 1. Fetch the project and document
     project = await _get_project_or_404(project_id, db_session)
+    if project.status == ProjectStatus.DONE:
+        raise HTTPException(status_code=403, detail="Project is approved and cannot be modified.")
+        
     if not project.documents:
         raise HTTPException(status_code=400, detail="Project has no documents.")
 
@@ -458,6 +467,9 @@ async def add_segment_comment(
     """Add a new comment to a specific segment."""
     # Ensure project and segment exist
     project = await _get_project_or_404(project_id, db_session)
+    if project.status == ProjectStatus.DONE:
+        raise HTTPException(status_code=403, detail="Project is approved and cannot be modified.")
+        
     if not project.documents:
         raise HTTPException(status_code=400, detail="Project has no documents.")
     
@@ -498,6 +510,10 @@ async def delete_segment_comment(
     current_user: Annotated[User, Depends(get_current_user)],
 ) -> None:
     """Delete a specific comment."""
+    project = await _get_project_or_404(project_id, db_session)
+    if project.status == ProjectStatus.DONE:
+        raise HTTPException(status_code=403, detail="Project is approved and cannot be modified.")
+
     stmt = select(SegmentComment).where(SegmentComment.id == comment_id, SegmentComment.segment_id == segment_id)
     result = await db_session.execute(stmt)
     comment = result.scalar_one_or_none()
@@ -510,3 +526,30 @@ async def delete_segment_comment(
         
     await db_session.delete(comment)
     await db_session.commit()
+
+@router.post(
+    "/{project_id}/approve",
+    response_model=ProjectResponse,
+    status_code=status.HTTP_200_OK,
+)
+async def approve_project(
+    project_id: uuid.UUID,
+    db_session: Annotated[AsyncSession, Depends(get_session)],
+    current_user: Annotated[User, Depends(get_current_user)],
+) -> ProjectResponse:
+    """Approve a translation project, locking it from further edits."""
+    if current_user.role not in ("admin", "reviewer"):
+        raise HTTPException(status_code=403, detail="Only admins and reviewers can approve projects.")
+        
+    project = await _get_project_or_404(project_id, db_session)
+    if project.status == ProjectStatus.DONE:
+        return ProjectResponse.model_validate(project)
+        
+    project.status = ProjectStatus.DONE
+    await db_session.commit()
+    await db_session.refresh(project)
+    
+    # Reload with full relations for response
+    project = await _get_project_or_404(project_id, db_session)
+    return ProjectResponse.model_validate(project)
+

@@ -183,3 +183,57 @@ async def test_add_comment_invalid_segment(client: AsyncClient) -> None:
     )
     assert res.status_code == 404
 
+
+async def test_approve_project_success(client: AsyncClient) -> None:
+    # default client uses admin role
+    pdf_content = make_pdf([Text("Hello", x=10, y=10, size=12)])
+    upload_res = await client.post(
+        "/api/projects", files={"file": ("test.pdf", pdf_content, "application/pdf")}
+    )
+    project_id = upload_res.json()["id"]
+    
+    # Approve
+    res = await client.post(f"/api/projects/{project_id}/approve")
+    assert res.status_code == 200
+    assert res.json()["status"] == "done"
+
+async def test_approve_project_forbidden_role(client: AsyncClient, db_session) -> None:
+    from app.models.user import User, Role
+    from sqlalchemy import select
+    
+    # override user role in DB manually to test
+    user = await db_session.scalar(select(User).where(User.email == 'test@example.com'))
+    user.role = Role.TRANSLATOR
+    await db_session.commit()
+    
+    pdf_content = make_pdf([Text("Hello", x=10, y=10, size=12)])
+    upload_res = await client.post(
+        "/api/projects", files={"file": ("test.pdf", pdf_content, "application/pdf")}
+    )
+    project_id = upload_res.json()["id"]
+    
+    res = await client.post(f"/api/projects/{project_id}/approve")
+    assert res.status_code == 403
+
+    # reset role to keep the test environment clean just in case
+    user.role = Role.ADMIN
+    await db_session.commit()
+
+async def test_edit_segment_locked_project(client: AsyncClient) -> None:
+    pdf_content = make_pdf([Text("Hello", x=10, y=10, size=12)])
+    upload_res = await client.post(
+        "/api/projects", files={"file": ("test.pdf", pdf_content, "application/pdf")}
+    )
+    project_id = upload_res.json()["id"]
+    segment_id = upload_res.json()["documents"][0]["segments"][0]["id"]
+    
+    # lock it
+    await client.post(f"/api/projects/{project_id}/approve")
+    
+    # try editing
+    res = await client.patch(
+        f"/api/projects/{project_id}/segments/{segment_id}",
+        json={"target_language": "en", "new_text": "testing"}
+    )
+    assert res.status_code == 403
+
