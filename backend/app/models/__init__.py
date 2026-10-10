@@ -2,7 +2,7 @@
 
 from app.models.glossary import GlossaryCategory, GlossaryEntry, GlossaryTerm
 from app.models.project import Document, DocumentPage, DocumentSegment, Project, ProjectStatus
-from app.models.user import User, Role
+from app.models.user import Role, User
 
 __all__ = [
     "GlossaryCategory",

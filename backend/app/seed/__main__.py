@@ -5,6 +5,7 @@ import asyncio
 from app.db import SessionLocal, engine
 from app.seed import load_glossary_seed, seed_glossary, seed_users
 
+
 async def main() -> None:
     entries = load_glossary_seed()
     async with SessionLocal() as session:

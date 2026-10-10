@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import glossary, health, auth, users
+from app.api import auth, glossary, health, users
 from app.config import get_settings
 
 
