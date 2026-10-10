@@ -134,16 +134,20 @@ export function ProjectEditorPage() {
                             </Button>
                           </div>
                         </div>
-                      ) : translation ? (
+                      ) : translation !== null ? (
                         <>
                           <div 
-                            className="cursor-text hover:bg-muted/50 p-1 -m-1 rounded transition-colors group/text relative"
+                            className="cursor-text hover:bg-muted/50 p-1 -m-1 rounded transition-colors group/text relative min-h-6"
                             onClick={() => {
                               setDraftText(translation);
                               setEditingSegmentId(segment.id);
                             }}
                           >
-                            <HighlightedText text={translation} annotations={annotations} />
+                            {translation ? (
+                              <HighlightedText text={translation} annotations={annotations} />
+                            ) : (
+                              <span className="text-muted-foreground italic">&lt;Empty translation&gt;</span>
+                            )}
                             <div className="absolute right-2 top-2 opacity-0 group-hover/text:opacity-100 transition-opacity bg-background border shadow-sm rounded p-1 text-muted-foreground pointer-events-none">
                               <Pencil className="h-3.5 w-3.5" />
                             </div>
