@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 import { jwtDecode } from "jwt-decode";
-import { components } from "../api/schema";
+import type { components } from "../api/schema";
 
 type User = components["schemas"]["UserResponse"];
 

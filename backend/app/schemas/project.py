@@ -52,6 +52,11 @@ class TranslateRequest(BaseModel):
     target_language: LanguageCode
 
 
+class SegmentEditRequest(BaseModel):
+    target_language: LanguageCode
+    new_text: str
+
+
 class ProjectResponse(BaseModel):
     id: uuid.UUID
     name: str

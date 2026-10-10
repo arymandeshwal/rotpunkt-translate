@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
-import { components } from "../api/schema";
+import type { components } from "../api/schema";
 import { Loader2 } from "lucide-react";
 
 type Role = components["schemas"]["Role"];

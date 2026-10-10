@@ -58,7 +58,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/glossary": {
@@ -68,6 +73,11 @@
         ],
         "summary": "List Glossary Entries",
         "operationId": "list_glossary_entries_api_glossary_get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "q",
@@ -251,6 +261,11 @@
         ],
         "summary": "Create Glossary Entry",
         "operationId": "create_glossary_entry_api_glossary_post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -302,6 +317,11 @@
         ],
         "summary": "Get Glossary Entry",
         "operationId": "get_glossary_entry_api_glossary__entry_id__get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "entry_id",
@@ -345,6 +365,11 @@
         ],
         "summary": "Update Glossary Entry",
         "operationId": "update_glossary_entry_api_glossary__entry_id__patch",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "entry_id",
@@ -408,6 +433,11 @@
         ],
         "summary": "Delete Glossary Entry",
         "operationId": "delete_glossary_entry_api_glossary__entry_id__delete",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "entry_id",
@@ -478,7 +508,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/projects/{project_id}": {
@@ -489,6 +524,11 @@
         "summary": "Get Project",
         "description": "Get a project and all its parsed contents.\n\nArgs:\n    project_id: The UUID of the project to retrieve.\n    db_session: The active asynchronous database session.\n\nReturns:\n    ProjectResponse representing the requested project.",
         "operationId": "get_project_api_projects__project_id__get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "project_id",
@@ -531,6 +571,11 @@
         "summary": "Update Project",
         "description": "Update a project, typically to confirm or change its source language.\n\nChanging the source language recalculates the 'is_translatable' flag\nfor every segment in the project.\n\nArgs:\n    project_id: The UUID of the project to update.\n    payload: ProjectUpdateRequest containing the new source language.\n    db_session: The active asynchronous database session.\n\nReturns:\n    ProjectResponse representing the updated project.",
         "operationId": "update_project_api_projects__project_id__patch",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "project_id",
@@ -577,6 +622,75 @@
         }
       }
     },
+    "/api/projects/{project_id}/segments/{segment_id}": {
+      "patch": {
+        "tags": [
+          "projects"
+        ],
+        "summary": "Edit Segment",
+        "description": "Manually edit the translation for a single document segment.\n\nArgs:\n    project_id: The UUID of the project.\n    segment_id: The UUID of the segment to edit.\n    payload: SegmentEditRequest containing target language and new text.\n    db_session: The active asynchronous database session.\n    current_user: The authenticated user.\n\nReturns:\n    The updated DocumentSegment object.\n\nRaises:\n    HTTPException: 404 if the project or segment is not found.",
+        "operationId": "edit_segment_api_projects__project_id__segments__segment_id__patch",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Project Id"
+            }
+          },
+          {
+            "name": "segment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Segment Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentEditRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentSegmentSchema"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/projects/{project_id}/segments/{segment_id}/retranslate": {
       "post": {
         "tags": [
@@ -585,6 +699,11 @@
         "summary": "Retranslate Segment",
         "description": "Re-translate a single document segment synchronously.\n\nArgs:\n    project_id: The UUID of the project.\n    segment_id: The UUID of the segment to re-translate.\n    payload: TranslateRequest containing the target language code.\n    db_session: The active asynchronous database session.\n\nReturns:\n    The updated DocumentSegment object.\n\nRaises:\n    HTTPException: 404 if the project or segment is not found.\n    HTTPException: 400 if the document has no source language or segment is not translatable.",
         "operationId": "retranslate_segment_api_projects__project_id__segments__segment_id__retranslate_post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "project_id",
@@ -649,6 +768,11 @@
         "summary": "Translate Project",
         "description": "Trigger the translation of a project.\n\nThis endpoint returns immediately (202 Accepted) while the translation\norchestrator processes the document segments in the background.\n\nArgs:\n    project_id: The UUID of the project to translate.\n    payload: TranslateRequest containing the target language code.\n    background_tasks: FastAPI BackgroundTasks runner.\n    db_session: The active asynchronous database session.\n\nReturns:\n    A dictionary containing a success message indicating background processing started.\n\nRaises:\n    HTTPException: 400 if the project has no documents or is missing a source language.",
         "operationId": "translate_project_api_projects__project_id__translate_post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "project_id",
@@ -698,6 +822,151 @@
           }
         }
       }
+    },
+    "/api/auth/token": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Login For Access Token",
+        "description": "Authenticate a user and return a JWT access token.\n\nArgs:\n    form_data: OAuth2 form data containing the username (email) and password.\n    db_session: The active asynchronous database session.\n\nReturns:\n    A Token object containing the signed JWT access token.\n\nRaises:\n    HTTPException: 401 if the user is not found or the password does not match.",
+        "operationId": "login_for_access_token_api_auth_token_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_login_for_access_token_api_auth_token_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/me": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Read Users Me",
+        "description": "Get the currently authenticated user's profile.\n\nArgs:\n    current_user: The authenticated User object injected by the dependency.\n\nReturns:\n    The current User object.",
+        "operationId": "read_users_me_api_users_me_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/api/users": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Read Users",
+        "description": "List all users in the system. Only accessible by administrators.\n\nArgs:\n    db_session: The active asynchronous database session.\n    current_user: The authenticated admin User object injected by the dependency.\n\nReturns:\n    A list of User objects.",
+        "operationId": "read_users_api_users_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/UserResponse"
+                  },
+                  "type": "array",
+                  "title": "Response Read Users Api Users Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Create User",
+        "description": "Create a new user. Only accessible by administrators.\n\nArgs:\n    user_in: The UserCreate schema containing the new user's details.\n    db_session: The active asynchronous database session.\n    current_user: The authenticated admin User object injected by the dependency.\n\nReturns:\n    The newly created User object.\n\nRaises:\n    HTTPException: 400 if the email is already registered.",
+        "operationId": "create_user_api_users_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -715,6 +984,65 @@
           "file"
         ],
         "title": "Body_create_project_api_projects_post"
+      },
+      "Body_login_for_access_token_api_auth_token_post": {
+        "properties": {
+          "grant_type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^password$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Grant Type"
+          },
+          "username": {
+            "type": "string",
+            "title": "Username"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "title": "Password"
+          },
+          "scope": {
+            "type": "string",
+            "title": "Scope",
+            "default": ""
+          },
+          "client_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Id"
+          },
+          "client_secret": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "format": "password",
+            "title": "Client Secret"
+          }
+        },
+        "type": "object",
+        "required": [
+          "username",
+          "password"
+        ],
+        "title": "Body_login_for_access_token_api_auth_token_post"
       },
       "DocumentPageSchema": {
         "properties": {
@@ -1287,6 +1615,42 @@
         ],
         "title": "ProjectUpdateRequest"
       },
+      "Role": {
+        "type": "string",
+        "enum": [
+          "admin",
+          "reviewer",
+          "translator"
+        ],
+        "title": "Role"
+      },
+      "SegmentEditRequest": {
+        "properties": {
+          "target_language": {
+            "type": "string",
+            "enum": [
+              "de",
+              "en",
+              "fr",
+              "nl",
+              "da",
+              "nb",
+              "es"
+            ],
+            "title": "Target Language"
+          },
+          "new_text": {
+            "type": "string",
+            "title": "New Text"
+          }
+        },
+        "type": "object",
+        "required": [
+          "target_language",
+          "new_text"
+        ],
+        "title": "SegmentEditRequest"
+      },
       "TermConflict": {
         "properties": {
           "language": {
@@ -1374,6 +1738,24 @@
         ],
         "title": "TermOut"
       },
+      "Token": {
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "title": "Access Token"
+          },
+          "token_type": {
+            "type": "string",
+            "title": "Token Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "access_token",
+          "token_type"
+        ],
+        "title": "Token"
+      },
       "TranslateRequest": {
         "properties": {
           "target_language": {
@@ -1395,6 +1777,58 @@
           "target_language"
         ],
         "title": "TranslateRequest"
+      },
+      "UserCreate": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "role": {
+            "$ref": "#/components/schemas/Role",
+            "default": "translator"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password"
+          }
+        },
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "title": "UserCreate"
+      },
+      "UserResponse": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "role": {
+            "$ref": "#/components/schemas/Role",
+            "default": "translator"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active"
+          }
+        },
+        "type": "object",
+        "required": [
+          "email",
+          "id",
+          "is_active"
+        ],
+        "title": "UserResponse"
       },
       "ValidationError": {
         "properties": {
@@ -1435,6 +1869,17 @@
           "type"
         ],
         "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "OAuth2PasswordBearer": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "scopes": {},
+            "tokenUrl": "api/auth/token"
+          }
+        }
       }
     }
   }

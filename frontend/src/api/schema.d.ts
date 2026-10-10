@@ -147,6 +147,39 @@ export interface paths {
         patch: operations["update_project_api_projects__project_id__patch"];
         trace?: never;
     };
+    "/api/projects/{project_id}/segments/{segment_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /**
+         * Edit Segment
+         * @description Manually edit the translation for a single document segment.
+         *
+         *     Args:
+         *         project_id: The UUID of the project.
+         *         segment_id: The UUID of the segment to edit.
+         *         payload: SegmentEditRequest containing target language and new text.
+         *         db_session: The active asynchronous database session.
+         *         current_user: The authenticated user.
+         *
+         *     Returns:
+         *         The updated DocumentSegment object.
+         *
+         *     Raises:
+         *         HTTPException: 404 if the project or segment is not found.
+         */
+        patch: operations["edit_segment_api_projects__project_id__segments__segment_id__patch"];
+        trace?: never;
+    };
     "/api/projects/{project_id}/segments/{segment_id}/retranslate": {
         parameters: {
             query?: never;
@@ -215,6 +248,104 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/auth/token": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Login For Access Token
+         * @description Authenticate a user and return a JWT access token.
+         *
+         *     Args:
+         *         form_data: OAuth2 form data containing the username (email) and password.
+         *         db_session: The active asynchronous database session.
+         *
+         *     Returns:
+         *         A Token object containing the signed JWT access token.
+         *
+         *     Raises:
+         *         HTTPException: 401 if the user is not found or the password does not match.
+         */
+        post: operations["login_for_access_token_api_auth_token_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/users/me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Read Users Me
+         * @description Get the currently authenticated user's profile.
+         *
+         *     Args:
+         *         current_user: The authenticated User object injected by the dependency.
+         *
+         *     Returns:
+         *         The current User object.
+         */
+        get: operations["read_users_me_api_users_me_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/users": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Read Users
+         * @description List all users in the system. Only accessible by administrators.
+         *
+         *     Args:
+         *         db_session: The active asynchronous database session.
+         *         current_user: The authenticated admin User object injected by the dependency.
+         *
+         *     Returns:
+         *         A list of User objects.
+         */
+        get: operations["read_users_api_users_get"];
+        put?: never;
+        /**
+         * Create User
+         * @description Create a new user. Only accessible by administrators.
+         *
+         *     Args:
+         *         user_in: The UserCreate schema containing the new user's details.
+         *         db_session: The active asynchronous database session.
+         *         current_user: The authenticated admin User object injected by the dependency.
+         *
+         *     Returns:
+         *         The newly created User object.
+         *
+         *     Raises:
+         *         HTTPException: 400 if the email is already registered.
+         */
+        post: operations["create_user_api_users_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -223,6 +354,30 @@ export interface components {
         Body_create_project_api_projects_post: {
             /** File */
             file: string;
+        };
+        /** Body_login_for_access_token_api_auth_token_post */
+        Body_login_for_access_token_api_auth_token_post: {
+            /** Grant Type */
+            grant_type?: string | null;
+            /** Username */
+            username: string;
+            /**
+             * Password
+             * Format: password
+             */
+            password: string;
+            /**
+             * Scope
+             * @default
+             */
+            scope: string;
+            /** Client Id */
+            client_id?: string | null;
+            /**
+             * Client Secret
+             * Format: password
+             */
+            client_secret?: string | null;
         };
         /** DocumentPageSchema */
         DocumentPageSchema: {
@@ -443,6 +598,21 @@ export interface components {
              */
             source_language: "de" | "en" | "fr" | "nl" | "da" | "nb" | "es";
         };
+        /**
+         * Role
+         * @enum {string}
+         */
+        Role: "admin" | "reviewer" | "translator";
+        /** SegmentEditRequest */
+        SegmentEditRequest: {
+            /**
+             * Target Language
+             * @enum {string}
+             */
+            target_language: "de" | "en" | "fr" | "nl" | "da" | "nb" | "es";
+            /** New Text */
+            new_text: string;
+        };
         /** TermConflict */
         TermConflict: {
             /**
@@ -475,6 +645,13 @@ export interface components {
             /** Text */
             text: string;
         };
+        /** Token */
+        Token: {
+            /** Access Token */
+            access_token: string;
+            /** Token Type */
+            token_type: string;
+        };
         /** TranslateRequest */
         TranslateRequest: {
             /**
@@ -482,6 +659,35 @@ export interface components {
              * @enum {string}
              */
             target_language: "de" | "en" | "fr" | "nl" | "da" | "nb" | "es";
+        };
+        /** UserCreate */
+        UserCreate: {
+            /**
+             * Email
+             * Format: email
+             */
+            email: string;
+            /** @default translator */
+            role: components["schemas"]["Role"];
+            /** Password */
+            password: string;
+        };
+        /** UserResponse */
+        UserResponse: {
+            /**
+             * Email
+             * Format: email
+             */
+            email: string;
+            /** @default translator */
+            role: components["schemas"]["Role"];
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Is Active */
+            is_active: boolean;
         };
         /** ValidationError */
         ValidationError: {
@@ -861,6 +1067,42 @@ export interface operations {
             };
         };
     };
+    edit_segment_api_projects__project_id__segments__segment_id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                project_id: string;
+                segment_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SegmentEditRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentSegmentSchema"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     retranslate_segment_api_projects__project_id__segments__segment_id__retranslate_post: {
         parameters: {
             query?: never;
@@ -921,6 +1163,112 @@ export interface operations {
                     "application/json": {
                         [key: string]: string;
                     };
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    login_for_access_token_api_auth_token_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/x-www-form-urlencoded": components["schemas"]["Body_login_for_access_token_api_auth_token_post"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Token"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    read_users_me_api_users_me_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserResponse"];
+                };
+            };
+        };
+    };
+    read_users_api_users_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserResponse"][];
+                };
+            };
+        };
+    };
+    create_user_api_users_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UserCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserResponse"];
                 };
             };
             /** @description Validation Error */

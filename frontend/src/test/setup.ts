@@ -25,6 +25,21 @@ globalThis.ResizeObserver ??= class {
   disconnect() {}
 };
 
+// Mock the auth context for all tests
+vi.mock("../contexts/AuthContext", async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual as any,
+    useAuth: () => ({
+      user: { id: "123", email: "admin@rotpunkt.de", role: "admin", is_active: true },
+      token: "fake-token",
+      isLoading: false,
+      login: vi.fn(),
+      logout: vi.fn(),
+    })
+  };
+});
+
 afterEach(() => {
   cleanup();
   vi.restoreAllMocks();

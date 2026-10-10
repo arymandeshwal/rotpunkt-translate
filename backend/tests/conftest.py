@@ -14,10 +14,10 @@ _dev_url = make_url(Settings().database_url)
 TEST_DATABASE_URL = with_database(_dev_url, f"{_dev_url.database}_test")
 os.environ["DATABASE_URL"] = render(TEST_DATABASE_URL)
 
+from app.api.dependencies import get_current_user  # noqa: E402
 from app.db import engine, get_session  # noqa: E402
 from app.main import app  # noqa: E402
-from app.api.dependencies import get_current_user  # noqa: E402
-from app.models.user import User, Role  # noqa: E402
+from app.models.user import Role, User  # noqa: E402
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -47,6 +47,7 @@ async def db_session() -> AsyncIterator[AsyncSession]:
 def current_user_override():
     """Provides a default admin user for tests that don't need specific auth testing."""
     return User(email="test@example.com", role=Role.ADMIN, is_active=True, hashed_password="fake")
+
 
 @pytest.fixture
 async def client(db_session: AsyncSession, current_user_override) -> AsyncIterator[AsyncClient]:

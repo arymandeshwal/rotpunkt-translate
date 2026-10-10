@@ -3,11 +3,11 @@ from typing import Annotated, Any
 from fastapi import APIRouter, Depends, HTTPException, Query, Response, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.db import get_session
 from app.api.dependencies import get_current_user, require_role
-from app.models.user import User, Role
+from app.db import get_session
 from app.languages import DEFAULT_SOURCE_LANGUAGE, LANGUAGES, LanguageCode
 from app.models import GlossaryCategory
+from app.models.user import Role, User
 from app.schemas.glossary import (
     DuplicateTermsResponse,
     GlossaryEntryCreate,
@@ -49,7 +49,9 @@ def _invalid(exc: service.InvalidEntryError) -> HTTPException:
 
 
 @router.get("/languages", response_model=list[LanguageOut])
-async def list_languages(current_user: Annotated[User, Depends(get_current_user)]) -> list[LanguageOut]:
+async def list_languages(
+    current_user: Annotated[User, Depends(get_current_user)],
+) -> list[LanguageOut]:
     return [LanguageOut(code=code, name=name) for code, name in LANGUAGES.items()]
 
 
@@ -90,7 +92,9 @@ async def list_glossary_entries(
 
 
 @router.get("/glossary/{entry_id}", response_model=GlossaryEntryOut, responses=NOT_FOUND)
-async def get_glossary_entry(entry_id: int, session: Session, current_user: Annotated[User, Depends(get_current_user)]) -> GlossaryEntryOut:
+async def get_glossary_entry(
+    entry_id: int, session: Session, current_user: Annotated[User, Depends(get_current_user)]
+) -> GlossaryEntryOut:
     try:
         entry = await service.get_entry(session, entry_id)
     except service.EntryNotFoundError:
@@ -104,7 +108,13 @@ async def get_glossary_entry(entry_id: int, session: Session, current_user: Anno
     status_code=status.HTTP_201_CREATED,
     responses=CONFLICT,
 )
-async def create_glossary_entry(data: GlossaryEntryCreate, session: Session, current_user: Annotated[User, Depends(require_role([Role.ADMIN, Role.REVIEWER, Role.TRANSLATOR]))]) -> GlossaryEntryOut:
+async def create_glossary_entry(
+    data: GlossaryEntryCreate,
+    session: Session,
+    current_user: Annotated[
+        User, Depends(require_role([Role.ADMIN, Role.REVIEWER, Role.TRANSLATOR]))
+    ],
+) -> GlossaryEntryOut:
     try:
         entry = await service.create_entry(session, data)
     except service.DuplicateTermsError as exc:
@@ -118,7 +128,12 @@ async def create_glossary_entry(data: GlossaryEntryCreate, session: Session, cur
     responses={**NOT_FOUND, **CONFLICT},
 )
 async def update_glossary_entry(
-    entry_id: int, data: GlossaryEntryUpdate, session: Session, current_user: Annotated[User, Depends(require_role([Role.ADMIN, Role.REVIEWER, Role.TRANSLATOR]))]
+    entry_id: int,
+    data: GlossaryEntryUpdate,
+    session: Session,
+    current_user: Annotated[
+        User, Depends(require_role([Role.ADMIN, Role.REVIEWER, Role.TRANSLATOR]))
+    ],
 ) -> GlossaryEntryOut:
     try:
         entry = await service.update_entry(session, entry_id, data)
@@ -132,7 +147,11 @@ async def update_glossary_entry(
 
 
 @router.delete("/glossary/{entry_id}", status_code=status.HTTP_204_NO_CONTENT, responses=NOT_FOUND)
-async def delete_glossary_entry(entry_id: int, session: Session, current_user: Annotated[User, Depends(require_role([Role.ADMIN, Role.REVIEWER]))]) -> Response:
+async def delete_glossary_entry(
+    entry_id: int,
+    session: Session,
+    current_user: Annotated[User, Depends(require_role([Role.ADMIN, Role.REVIEWER]))],
+) -> Response:
     try:
         await service.delete_entry(session, entry_id)
     except service.EntryNotFoundError:

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router";
 import { ProjectEditorPage } from "../../pages/ProjectEditorPage";
-import { useProject, useRetranslateSegment } from "../../hooks/useProjects";
+import { useProject, useRetranslateSegment, useEditSegment } from "../../hooks/useProjects";
 import { vi } from "vitest";
 
 vi.mock("../../hooks/useProjects");
@@ -43,6 +43,7 @@ describe("ProjectEditorPage", () => {
 
   it("renders segments", () => {
     vi.mocked(useRetranslateSegment).mockReturnValue({ isPending: false, mutate: vi.fn() } as any);
+    vi.mocked(useEditSegment).mockReturnValue({ isPending: false, mutate: vi.fn() } as any);
     vi.mocked(useProject).mockReturnValue({
       isLoading: false,
       data: {

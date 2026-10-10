@@ -5,19 +5,20 @@ from typing import Annotated
 from fastapi import APIRouter, BackgroundTasks, Depends, File, HTTPException, UploadFile, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.api.dependencies import get_current_user
-from app.models.user import User
 from sqlalchemy.orm import selectinload
 
+from app.api.dependencies import get_current_user
 from app.config import get_settings
 from app.db import get_session
 from app.languages import DEFAULT_SOURCE_LANGUAGE
 from app.models.project import Document, DocumentPage, DocumentSegment, Project
+from app.models.user import User
 from app.parsers.pdf import PdfError, parse_pdf
 from app.schemas.project import (
     DocumentSegmentSchema,
     ProjectResponse,
     ProjectUpdateRequest,
+    SegmentEditRequest,
     TranslateRequest,
 )
 from app.services.language_detection import detect_primary_language, is_translatable
@@ -195,6 +196,96 @@ async def update_project(
     await db_session.commit()
     # Refresh to ensure we return the latest state
     return ProjectResponse.model_validate(await _get_project_or_404(project_id, db_session))
+
+
+@router.patch(
+    "/{project_id}/segments/{segment_id}",
+    response_model=DocumentSegmentSchema,
+    status_code=status.HTTP_200_OK,
+)
+async def edit_segment(
+    project_id: uuid.UUID,
+    segment_id: uuid.UUID,
+    payload: SegmentEditRequest,
+    db_session: Annotated[AsyncSession, Depends(get_session)],
+    current_user: Annotated[User, Depends(get_current_user)],
+) -> DocumentSegment:
+    """
+    Manually edit the translation for a single document segment.
+
+    Args:
+        project_id: The UUID of the project.
+        segment_id: The UUID of the segment to edit.
+        payload: SegmentEditRequest containing target language and new text.
+        db_session: The active asynchronous database session.
+        current_user: The authenticated user.
+
+    Returns:
+        The updated DocumentSegment object.
+
+    Raises:
+        HTTPException: 404 if the project or segment is not found.
+    """
+    from app.services.highlighting import compute_deterministic_annotations
+    from app.services.jev_annotator import compute_ai_annotations
+    from app.services.qa_checks import compute_qa_issues
+    from app.services.translation_service import get_glossary_for_languages
+
+    # 1. Fetch the project and document
+    project = await _get_project_or_404(project_id, db_session)
+    if not project.documents:
+        raise HTTPException(status_code=400, detail="Project has no documents.")
+
+    document = project.documents[0]
+
+    # 2. Fetch the specific segment
+    segment = None
+    for seg in document.segments:
+        if seg.id == segment_id:
+            segment = seg
+            break
+
+    if not segment:
+        raise HTTPException(status_code=404, detail="Segment not found.")
+
+    target_lang = payload.target_language
+    new_text = payload.new_text
+
+    # 3. Fetch glossary
+    glossary_infos = await get_glossary_for_languages(
+        db_session, document.source_language or "de", target_lang
+    )
+
+    # 4. Compute annotations
+    ai_annotations_batch = await compute_ai_annotations([new_text])
+    ai_annotations = ai_annotations_batch[0]
+    det_annotations = compute_deterministic_annotations(new_text, glossary_infos)
+
+    new_annotations = det_annotations + ai_annotations
+    new_annotations.sort(key=lambda x: x["start"])
+
+    # 5. Compute QA issues
+    issues = compute_qa_issues(
+        segment.text, new_text, glossary_infos, segment.is_translatable or False
+    )
+
+    # 6. Update DB
+    # We must explicitly create new dicts so SQLAlchemy detects the mutation on the JSON column
+    current_translations = dict(segment.translations or {})
+    current_translations[target_lang] = new_text
+    segment.translations = current_translations
+
+    current_annotations = dict(segment.annotations or {})
+    current_annotations[target_lang] = new_annotations
+    segment.annotations = current_annotations
+
+    current_issues = dict(segment.issues or {})
+    current_issues[target_lang] = issues
+    segment.issues = current_issues
+
+    await db_session.commit()
+
+    return segment
 
 
 @router.post(

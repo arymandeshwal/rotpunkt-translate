@@ -1,9 +1,11 @@
-import { useProject, useRetranslateSegment } from "../hooks/useProjects";
+import { useProject, useRetranslateSegment, useEditSegment } from "../hooks/useProjects";
 import { useParams } from "react-router";
-import { Loader2, RefreshCw, AlertTriangle } from "lucide-react";
+import { Loader2, RefreshCw, AlertTriangle, Check, X, Pencil } from "lucide-react";
 import { HighlightedText, type Annotation } from "../components/HighlightedText";
 import { Button } from "../components/ui/button";
 import { toast } from "sonner";
+import { useState } from "react";
+import { Textarea } from "../components/ui/textarea";
 
 export function ProjectEditorPage() {
   const { id } = useParams<{ id: string }>();
@@ -11,6 +13,10 @@ export function ProjectEditorPage() {
   // Poll every 3 seconds if status is "translating", otherwise stop polling
   const { data: project, isLoading, error } = useProject(id!, 3000);
   const retranslateMutation = useRetranslateSegment();
+  const editMutation = useEditSegment();
+  
+  const [editingSegmentId, setEditingSegmentId] = useState<string | null>(null);
+  const [draftText, setDraftText] = useState<string>("");
 
   if (isLoading || !project) {
     return (
@@ -69,8 +75,10 @@ export function ProjectEditorPage() {
               const annotations = targetLanguage ? (segment.annotations as Record<string, Annotation[]>)?.[targetLanguage] || [] : [];
               const issues = targetLanguage ? (segment.issues as Record<string, {type: string; message: string; term?: string; expected?: string}[]>)?.[targetLanguage] || [] : [];
               
+              const isEditing = editingSegmentId === segment.id;
+
               return (
-                <div key={segment.id} className="grid grid-cols-2 gap-4 p-4 hover:bg-muted/50 transition-colors group">
+                <div key={segment.id} className={`grid grid-cols-2 gap-4 p-4 transition-colors group ${isEditing ? 'bg-muted/30 shadow-sm' : 'hover:bg-muted/50'}`}>
                   <div className="text-sm">
                     {segment.text}
                   </div>
@@ -78,9 +86,68 @@ export function ProjectEditorPage() {
                     <div className="flex-1 flex flex-col gap-2">
                       {!segment.is_translatable ? (
                         <span className="text-muted-foreground italic">Skipped (Not in source language)</span>
+                      ) : isEditing ? (
+                        <div className="flex flex-col gap-2 relative">
+                          <Textarea
+                            className="min-h-[100px] text-sm leading-relaxed pr-24 resize-none"
+                            value={draftText}
+                            onChange={(e) => setDraftText(e.target.value)}
+                            autoFocus
+                          />
+                          <div className="absolute bottom-2 right-2 flex gap-1">
+                            <Button 
+                              size="sm" 
+                              variant="outline" 
+                              className="h-7 px-2"
+                              onClick={() => {
+                                setEditingSegmentId(null);
+                                setDraftText("");
+                              }}
+                            >
+                              <X className="h-3.5 w-3.5" />
+                            </Button>
+                            <Button 
+                              size="sm" 
+                              className="h-7 px-2"
+                              disabled={editMutation.isPending && editMutation.variables?.segmentId === segment.id}
+                              onClick={() => {
+                                if (!targetLanguage) return;
+                                editMutation.mutate(
+                                  { projectId: project.id, segmentId: segment.id, targetLanguage, newText: draftText },
+                                  {
+                                    onSuccess: () => {
+                                      setEditingSegmentId(null);
+                                      setDraftText("");
+                                    },
+                                    onError: (err) => {
+                                      toast.error("Failed to save edit", { description: err.message });
+                                    }
+                                  }
+                                );
+                              }}
+                            >
+                              {editMutation.isPending && editMutation.variables?.segmentId === segment.id ? (
+                                <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                              ) : (
+                                <Check className="h-3.5 w-3.5" />
+                              )}
+                            </Button>
+                          </div>
+                        </div>
                       ) : translation ? (
                         <>
-                          <HighlightedText text={translation} annotations={annotations} />
+                          <div 
+                            className="cursor-text hover:bg-muted/50 p-1 -m-1 rounded transition-colors group/text relative"
+                            onClick={() => {
+                              setDraftText(translation);
+                              setEditingSegmentId(segment.id);
+                            }}
+                          >
+                            <HighlightedText text={translation} annotations={annotations} />
+                            <div className="absolute right-2 top-2 opacity-0 group-hover/text:opacity-100 transition-opacity bg-background border shadow-sm rounded p-1 text-muted-foreground pointer-events-none">
+                              <Pencil className="h-3.5 w-3.5" />
+                            </div>
+                          </div>
                           {issues.length > 0 && (
                             <div className="flex flex-col gap-1 mt-2">
                               {issues.map((issue, idx) => (
