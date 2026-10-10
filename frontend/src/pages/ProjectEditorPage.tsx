@@ -7,6 +7,91 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { Textarea } from "../components/ui/textarea";
 
+import { Popover, PopoverContent, PopoverTrigger } from "../components/ui/popover";
+import { Label } from "../components/ui/label";
+import { Input } from "../components/ui/input";
+import { useCreateEntry } from "../hooks/useGlossary";
+
+function GlossaryQuickAddForm({
+  sourceText,
+  sourceLang,
+  targetLang,
+  onClose
+}: {
+  sourceText: string;
+  sourceLang: components["schemas"]["LanguageCode"];
+  targetLang: components["schemas"]["LanguageCode"];
+  onClose: () => void;
+}) {
+  const createMutation = useCreateEntry();
+  const [sourceTerm, setSourceTerm] = useState(sourceText);
+  const [targetTerm, setTargetTerm] = useState("");
+
+  const handleSave = () => {
+    if (!sourceTerm.trim() || !targetTerm.trim()) {
+      toast.error("Both terms are required");
+      return;
+    }
+    createMutation.mutate(
+      {
+        category: "General",
+        description: null,
+        is_dnt: false,
+        is_case_sensitive: false,
+        terms: [
+          { language: sourceLang, text: sourceTerm.trim() },
+          { language: targetLang, text: targetTerm.trim() },
+        ],
+      },
+      {
+        onSuccess: () => {
+          toast.success(`Added "${sourceTerm}" to glossary`);
+          onClose();
+        },
+        onError: (err) => toast.error("Failed to add to glossary", { description: err.message }),
+      }
+    );
+  };
+
+  return (
+    <div className="grid gap-3 p-1">
+      <div className="space-y-1.5">
+        <h4 className="font-medium leading-none">Add to Glossary</h4>
+        <p className="text-xs text-muted-foreground">Instantly creates a new dictionary rule.</p>
+      </div>
+      <div className="grid gap-2">
+        <div className="grid grid-cols-4 items-center gap-2">
+          <Label className="text-right text-xs uppercase">{sourceLang}</Label>
+          <Input 
+            value={sourceTerm} 
+            onChange={(e) => setSourceTerm(e.target.value)} 
+            className="col-span-3 h-8 text-xs" 
+          />
+        </div>
+        <div className="grid grid-cols-4 items-center gap-2">
+          <Label className="text-right text-xs uppercase">{targetLang}</Label>
+          <Input 
+            value={targetTerm} 
+            onChange={(e) => setTargetTerm(e.target.value)} 
+            className="col-span-3 h-8 text-xs" 
+            autoFocus 
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleSave();
+            }}
+          />
+        </div>
+      </div>
+      <div className="flex justify-end gap-2 mt-1">
+        <Button variant="ghost" size="sm" className="h-7 text-xs" onClick={onClose}>Cancel</Button>
+        <Button size="sm" className="h-7 text-xs" onClick={handleSave} disabled={createMutation.isPending}>
+          {createMutation.isPending && <Loader2 className="mr-1 h-3 w-3 animate-spin" />}
+          Save
+        </Button>
+      </div>
+    </div>
+  );
+}
+
 export function ProjectEditorPage() {
   const { id } = useParams<{ id: string }>();
 
@@ -17,6 +102,34 @@ export function ProjectEditorPage() {
   
   const [editingSegmentId, setEditingSegmentId] = useState<string | null>(null);
   const [draftText, setDraftText] = useState<string>("");
+
+  const [glossaryPopState, setGlossaryPopState] = useState<{
+    segmentId: string | null;
+    sourceText: string;
+    sourceLang: components["schemas"]["LanguageCode"];
+    targetLang: components["schemas"]["LanguageCode"];
+  }>({
+    segmentId: null,
+    sourceText: "",
+    sourceLang: "de",
+    targetLang: "en"
+  });
+
+  const handleDoubleClick = (e: React.MouseEvent, segmentId: string, lang: "source" | "target") => {
+    if (editingSegmentId || (e.target as HTMLElement).tagName === 'TEXTAREA') return;
+    
+    const selection = window.getSelection();
+    const text = selection?.toString().trim();
+    if (text && text.length > 0) {
+      setGlossaryPopState({
+        segmentId,
+        sourceText: text,
+        sourceLang: lang === "source" ? ((doc?.source_language as components["schemas"]["LanguageCode"]) || "de") : ((targetLanguage as components["schemas"]["LanguageCode"]) || "en"),
+        targetLang: lang === "source" ? ((targetLanguage as components["schemas"]["LanguageCode"]) || "en") : ((doc?.source_language as components["schemas"]["LanguageCode"]) || "de"),
+      });
+      selection?.removeAllRanges();
+    }
+  };
 
   if (isLoading || !project) {
     return (
@@ -78,11 +191,23 @@ export function ProjectEditorPage() {
               const isEditing = editingSegmentId === segment.id;
 
               return (
-                <div key={segment.id} className={`grid grid-cols-2 gap-4 p-4 transition-colors group ${isEditing ? 'bg-muted/30 shadow-sm' : 'hover:bg-muted/50'}`}>
-                  <div className="text-sm">
-                    {segment.text}
-                  </div>
-                  <div className="text-sm flex items-start justify-between gap-4">
+                <Popover 
+                  key={`popover-${segment.id}`} 
+                  open={glossaryPopState.segmentId === segment.id} 
+                  onOpenChange={(open) => { if (!open) setGlossaryPopState(prev => ({ ...prev, segmentId: null })) }}
+                >
+                  <PopoverTrigger asChild>
+                    <div className={`grid grid-cols-2 gap-4 p-4 transition-colors group relative ${isEditing ? 'bg-muted/30 shadow-sm' : 'hover:bg-muted/50'}`}>
+                      <div 
+                        className="text-sm selection:bg-primary/20"
+                        onDoubleClick={(e) => handleDoubleClick(e, segment.id, "source")}
+                      >
+                        {segment.text}
+                      </div>
+                      <div 
+                        className="text-sm flex items-start justify-between gap-4 selection:bg-primary/20"
+                        onDoubleClick={(e) => handleDoubleClick(e, segment.id, "target")}
+                      >
                     <div className="flex-1 flex flex-col gap-2">
                       {!segment.is_translatable ? (
                         <span className="text-muted-foreground italic">Skipped (Not in source language)</span>
@@ -208,6 +333,16 @@ export function ProjectEditorPage() {
                     )}
                   </div>
                 </div>
+                </PopoverTrigger>
+                <PopoverContent side="left" align="start" sideOffset={16} className="w-80 p-0 overflow-hidden shadow-lg border-primary/20">
+                  <GlossaryQuickAddForm 
+                    sourceText={glossaryPopState.sourceText}
+                    sourceLang={glossaryPopState.sourceLang}
+                    targetLang={glossaryPopState.targetLang}
+                    onClose={() => setGlossaryPopState(prev => ({ ...prev, segmentId: null }))}
+                  />
+                </PopoverContent>
+              </Popover>
               );
             })}
           </div>

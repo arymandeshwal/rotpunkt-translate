@@ -3,13 +3,30 @@ import { MemoryRouter, Route, Routes } from "react-router";
 import { ProjectEditorPage } from "../../pages/ProjectEditorPage";
 import { useProject, useRetranslateSegment, useEditSegment } from "../../hooks/useProjects";
 import { vi } from "vitest";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 vi.mock("../../hooks/useProjects");
 
 describe("ProjectEditorPage", () => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
+
+  const renderWithClient = (ui: React.ReactElement) => {
+    return render(
+      <QueryClientProvider client={queryClient}>
+        {ui}
+      </QueryClientProvider>
+    );
+  };
+
   it("renders loading state", () => {
     vi.mocked(useProject).mockReturnValue({ isLoading: true } as any);
-    const { container } = render(
+    const { container } = renderWithClient(
       <MemoryRouter initialEntries={["/projects/test-id"]}>
         <Routes>
           <Route path="/projects/:id" element={<ProjectEditorPage />} />
@@ -30,7 +47,7 @@ describe("ProjectEditorPage", () => {
       }
     } as any);
 
-    render(
+    renderWithClient(
       <MemoryRouter initialEntries={["/projects/test-id"]}>
         <Routes>
           <Route path="/projects/:id" element={<ProjectEditorPage />} />
@@ -69,7 +86,7 @@ describe("ProjectEditorPage", () => {
       }
     } as any);
 
-    render(
+    renderWithClient(
       <MemoryRouter initialEntries={["/projects/test-id"]}>
         <Routes>
           <Route path="/projects/:id" element={<ProjectEditorPage />} />
